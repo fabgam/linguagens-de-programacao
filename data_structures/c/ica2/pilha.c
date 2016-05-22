@@ -61,19 +61,13 @@ Pilha *pop(Pilha *p)
 //FUNÇÃO QUE RETORNA O TOPO DA PILHA
 No *topo(Pilha *p)
 {
-    if(pilhaVazia(p))
-        return NULL;
-    else
-        return p->inicio;
+    return (pilhaVazia(p)) ? NULL : p->inicio;
 }
 
 //FUNÇÃO PARA VERIFICAR SE A PILHA ESTÁ VAZIA
 int pilhaVazia(Pilha *p)
 {
-    if(p->inicio == NULL)
-        return 1;
-    else
-        return 0;
+    return (p->inicio == NULL) ? 1 : 0;
 }
 
 //FUNÇÃO PARA PROCURAR A PILHA EM QUE O ELEMENTO ESTÁ INSERIDO
