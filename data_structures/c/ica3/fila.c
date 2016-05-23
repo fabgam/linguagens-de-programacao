@@ -3,6 +3,7 @@
 #include "fila.h"
 #include <string.h>
 
+//Função para criar uma fila
 Queue *create_queue()
 {
     Queue *q = (Queue*)malloc(sizeof(Queue));
@@ -10,6 +11,26 @@ Queue *create_queue()
     return q;
 }
 
+//Função para inicializar o vetor de filas
+Queue *initialize_queue(Queue *q[], int n)
+{
+    int i;
+
+    for(i = 0; i < n; i++)
+        q[i] = create_queue();
+
+    return q;
+}
+
+//Função para liberar o vetor de filas
+void *dequeue(Queue *q[], int n_lanes)
+{
+    int i;
+    for(i = 0; i < n_lanes; i++)
+        free(q[i]);
+}
+
+//Função para inserir um elemento na fila
 Queue *push(Queue *q, char id[])
 {
     Node *n = (Node*)malloc(sizeof(Node));
@@ -26,6 +47,7 @@ Queue *push(Queue *q, char id[])
     return q;
 }
 
+//Função para remover um elemento da fila
 Queue *pop(Queue *q)
 {
     if(is_Empty(q))
@@ -44,21 +66,25 @@ Queue *pop(Queue *q)
     return q;
 }
 
+//Função para verificar se a fila está vazia
 int is_Empty(Queue *q)
 {
     return ((q->first == NULL) ? 1 : 0);
 }
 
+//Função para retornar o primeiro elemento
 Node *first_node(Queue *q)
 {
     return ((is_Empty(q)) ? NULL : q->first);
 }
 
+//Função para retornar o último elemento
 Node *last_node(Queue *q)
 {
     return ((is_Empty(q)) ? NULL : q->last);
 }
 
+//Função para contar a quantidade de elementos de uma fila
 int count_elements(Queue *q)
 {
     Node *aux = q->first;
@@ -71,6 +97,7 @@ int count_elements(Queue *q)
     return count;
 }
 
+//Função para gerar uma ID aleatória
 char *gen_id()
 {
     int n_random, aux, i;
@@ -93,37 +120,59 @@ char *gen_id()
 
     return id;
 }
-Queue *initialize_lanes(int n_lanes)
+
+//Função para retornar um número aleatório entre o intervalo de min_n - max_n
+int random_n(int min_n, int max_n)
 {
-    int i;
-    Queue *q_lanes[n_lanes];
+    int n_random;
 
-    for(i = 0; i < n_lanes; i++)
-        q_lanes[i] = create_queue();
-
-    return q_lanes;
+    return n_random = (min_n + rand() % (max_n - min_n));
 }
 
-Queue *initialize_fingers(int n_fingers)
+//Função para inserir os elementos no vetor de fila
+Queue *insert_elements(Queue *q[], int n_lanes, int n)
 {
-    int i;
-    Queue *q_fingers[n_fingers];
-
-    for(i = 0; i < n_fingers; i++)
-        q_fingers[i] = create_queue();
-
-    return q_fingers;
-}
-
-void print_queue(Queue *q)
-{
-    Node *aux = q->first;
-    while(aux != NULL)
+    int i = 0, count_n = 0;
+    char id[6];
+    while(count_n != n)
     {
-        printf("%s -> ", aux->id);
-        aux = aux->next;
+        strcpy(id, gen_id());
+        if(i == n_lanes)
+            i = 0;
+
+        printf("\nInserindo aeronave %s na fila da pista %d", id, i);
+        push(q[i], id);
+        count_n++;
+        i++;
     }
-    printf("\n");
+    return q;
+}
+//Função para imprimir um vetor de filas.
+void print_queue(Queue *q[], int n, int display)
+{
+    int i;
+    for(i = 0; i < n; i++)
+    {
+        Node *aux = q[i]->first;
+
+        if(display == 1)
+            printf("Pista %d: ", i);
+        else
+            printf("Finger %d: ", i);
+
+        while(aux != NULL)
+        {
+            printf("%s -> ", aux->id);
+            aux = aux->next;
+        }
+        printf("\n");
+    }
 }
 
-
+//Função para liberar os vetores de filas utilizados
+void end_execution(Queue *q_la[], Queue *q_lo[], Queue *q_fingers[], int n_lanes, int n_fingers)
+{
+    dequeue(q_la, n_lanes);
+    dequeue(q_lo, n_lanes);
+    dequeue(q_fingers, n_fingers);
+}

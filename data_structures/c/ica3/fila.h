@@ -16,15 +16,18 @@ typedef struct q
 } Queue;
 
 Queue *create_queue();
+Queue *initialize_queue(Queue*[], int);
+void *dequeue(Queue*[], int);
 Queue *push(Queue*, char[]);
 Queue *pop(Queue*);
 int is_Empty(Queue*);
-Queue *first(Queue*);
-Queue *last(Queue*);
+Node *first(Queue*);
+Node *last(Queue*);
 int count_elements(Queue*);
 char *gen_id();
-Queue *initialize_lanes(int);
-Queue *initialize_fingers(int);
-void print_elements(Queue*);
+int random_n(int, int);
+Queue *insert_elements(Queue*[], int, int);
+void print_queue(Queue*[], int, int);
+void end_execution(Queue*[], Queue*[], Queue*[], int, int);
 
 #endif // FILA_H_INCLUDED
