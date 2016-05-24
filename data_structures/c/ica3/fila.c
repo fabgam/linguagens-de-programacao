@@ -12,7 +12,7 @@ Queue *create_queue()
 }
 
 //Função para inicializar o vetor de filas
-Queue *initialize_queue(Queue *q[], int n)
+Queue *initialize_vqueue(Queue *q[], int n)
 {
     int i;
 
@@ -30,19 +30,30 @@ void *dequeue(Queue *q[], int n_lanes)
         free(q[i]);
 }
 
-//Função para inserir um elemento na fila
-Queue *push(Queue *q, char id[])
+//Função para criar um número inteiro para representar a ordem de entrada no vetor de filas
+int *create_sequence()
 {
-    Node *n = (Node*)malloc(sizeof(Node));
-    strcpy(n->id, id);
-    n->next = NULL;
+    int *num = (int*)malloc(sizeof(int));
+    num = 0;
+    return num;
+}
+
+//Função para inserir um elemento na fila
+Queue *push(Queue *q, char id[], int entry_sequence)
+{
+    int n = entry_sequence;
+    Node *node = (Node*)malloc(sizeof(Node));
+
+    strcpy(node->id, id);
+    node->next = NULL;
+    node->sequence_entry = n + 1;
 
     if(is_Empty(q))
-        q->first = q->last = n;
+        q->first = q->last = node;
     else
     {
-        q->last->next = n;
-        q->last = n;
+        q->last->next = node;
+        q->last = node;
     }
     return q;
 }
@@ -130,10 +141,11 @@ int random_n(int min_n, int max_n)
 }
 
 //Função para inserir os elementos no vetor de fila
-Queue *insert_elements(Queue *q[], int n_lanes, int n)
+Queue *insert_elements(Queue *q[], int n_lanes, int n, int entry_sequence)
 {
     int i = 0, count_n = 0;
     char id[6];
+
     while(count_n != n)
     {
         strcpy(id, gen_id());
@@ -141,12 +153,36 @@ Queue *insert_elements(Queue *q[], int n_lanes, int n)
             i = 0;
 
         printf("\nInserindo aeronave %s na fila da pista %d", id, i);
-        push(q[i], id);
+        push(q[i], id, entry_sequence);
+        entry_sequence++;
         count_n++;
         i++;
     }
     return q;
 }
+
+//Função para buscar a sequência de entrada
+/*int search_entry(Queue *q[], int n)
+{
+    int x, entry = 0;
+
+    for(x = 0; x < n; x++)
+    {
+        if(!is_Empty(q[x]))
+        {
+            Node *aux = first_node(q[x]);
+            while(aux != NULL)
+            {
+                if(aux->sequence_entry > entry)
+                    entry = aux->sequence_entry;
+
+                aux = aux->next;
+            }
+        }
+    }
+    return entry;
+}*/
+
 //Função para imprimir um vetor de filas.
 void print_queue(Queue *q[], int n, int display)
 {
@@ -162,7 +198,7 @@ void print_queue(Queue *q[], int n, int display)
 
         while(aux != NULL)
         {
-            printf("%s -> ", aux->id);
+            printf("#%d %s -> ", aux->sequence_entry, aux->id);
             aux = aux->next;
         }
         printf("\n");
