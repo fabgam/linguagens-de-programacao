@@ -41,12 +41,11 @@ int *create_sequence()
 //Função para inserir um elemento na fila
 Queue *push(Queue *q, char id[], int entry_sequence)
 {
-    int n = entry_sequence;
     Node *node = (Node*)malloc(sizeof(Node));
 
     strcpy(node->id, id);
     node->next = NULL;
-    node->sequence_entry = n + 1;
+    node->sequence_entry = entry_sequence + 1;
 
     if(is_Empty(q))
         q->first = q->last = node;
