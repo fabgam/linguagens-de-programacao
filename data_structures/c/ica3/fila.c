@@ -142,17 +142,21 @@ int random_n(int min_n, int max_n)
 //Função para inserir os elementos no vetor de fila
 Queue *insert_elements(Queue *q[], int n_lanes, int n, int entry_sequence)
 {
-    int i = 0, count_n = 0;
+    int i = search_entry(q, n_lanes), count_n = 0;
     char id[6];
+
+    printf("\ni: %d\n", i);
 
     while(count_n != n)
     {
-        strcpy(id, gen_id());
         if(i == n_lanes)
             i = 0;
 
+        strcpy(id, gen_id());
+
         printf("\nInserindo aeronave %s na fila da pista %d", id, i);
         push(q[i], id, entry_sequence);
+
         entry_sequence++;
         count_n++;
         i++;
@@ -160,27 +164,32 @@ Queue *insert_elements(Queue *q[], int n_lanes, int n, int entry_sequence)
     return q;
 }
 
-//Função para buscar a sequência de entrada
-/*int search_entry(Queue *q[], int n)
+//Função para buscar em que fila a sequência de entrada foi inserida
+int search_entry(Queue *q[], int n_lanes)
 {
-    int x, entry = 0;
+    int i, p = 0, x = 0;
 
-    for(x = 0; x < n; x++)
+    for(i = 0; i < n_lanes; i++)
     {
-        if(!is_Empty(q[x]))
+        if(!is_Empty(q[i]))
         {
-            Node *aux = first_node(q[x]);
+            Node *aux = first_node(q[i]);
+
             while(aux != NULL)
             {
-                if(aux->sequence_entry > entry)
-                    entry = aux->sequence_entry;
+
+                if(aux->sequence_entry > x)
+                {
+                    x = aux->sequence_entry;
+                    p = i;
+                }
 
                 aux = aux->next;
             }
         }
     }
-    return entry;
-}*/
+    return p;
+}
 
 //Função para imprimir um vetor de filas.
 void print_queue(Queue *q[], int n, int display)
