@@ -26,16 +26,9 @@ Queue *initialize_vqueue(Queue *q[], int n)
 void *dequeue(Queue *q[], int n_lanes)
 {
     int i;
+
     for(i = 0; i < n_lanes; i++)
         free(q[i]);
-}
-
-//Função para criar um número inteiro para representar a ordem de entrada no vetor de filas
-int *create_sequence()
-{
-    int *num = (int*)malloc(sizeof(int));
-    num = 0;
-    return num;
 }
 
 //Função para inserir um elemento na fila
@@ -97,8 +90,10 @@ Node *last_node(Queue *q)
 //Função para contar a quantidade de elementos de uma fila
 int count_elements(Queue *q)
 {
-    Node *aux = q->first;
     int count = 0;
+
+    Node *aux = q->first;
+
     while(aux != NULL)
     {
         count++;
@@ -119,6 +114,7 @@ char *gen_id()
         n_random = rand() % 10;
         num[i] = n_random + '0';
     }
+
     for(i = 0; i < 2; i++)
     {
         aux = (65 + rand() % (91-65));
@@ -140,12 +136,10 @@ int random_n(int min_n, int max_n)
 }
 
 //Função para inserir os elementos no vetor de fila
-Queue *insert_elements(Queue *q[], int n_lanes, int n, int entry_sequence)
+Queue *insert_elements(Queue *q[], int n_lanes, int n)
 {
     int i = search_entry(q, n_lanes), count_n = 0;
     char id[6];
-
-    printf("\ni: %d\n", i);
 
     while(count_n != n)
     {
@@ -155,42 +149,56 @@ Queue *insert_elements(Queue *q[], int n_lanes, int n, int entry_sequence)
         strcpy(id, gen_id());
 
         printf("\nInserindo aeronave %s na fila da pista %d", id, i);
-        push(q[i], id, entry_sequence);
+        push(q[i], id, highest_entry(q, n_lanes));
 
-        entry_sequence++;
         count_n++;
         i++;
     }
     return q;
 }
 
-//Função para buscar em que fila a sequência de entrada foi inserida
-int search_entry(Queue *q[], int n_lanes)
+//Função para procurar o maior número de entrada inserido
+int highest_entry(Queue *q[], int n_lanes)
 {
-    int i, p = 0, x = 0;
+    int i, x = 0;
 
     for(i = 0; i < n_lanes; i++)
     {
         if(!is_Empty(q[i]))
         {
-            Node *aux = first_node(q[i]);
+            Node *aux = q[i]->first;
 
             while(aux != NULL)
             {
-
                 if(aux->sequence_entry > x)
-                {
                     x = aux->sequence_entry;
-                    p = i;
-                }
 
                 aux = aux->next;
             }
         }
     }
-    return p;
+    return x;
 }
 
+//Função para procurar a fila com menos elementos inseridos
+int search_entry(Queue *q[], int n_lanes)
+{
+    int i, p, x = 0, y = 999999;
+
+    for(i = 0; i < n_lanes; i++)
+    {
+        if(is_Empty(q[i]))
+            return i;
+
+        if(q[i]->last->sequence_entry < y)
+        {
+            y = q[i]->last->sequence_entry;
+            p = i;
+        }
+
+    }
+    return p;
+}
 //Função para imprimir um vetor de filas.
 void print_queue(Queue *q[], int n, int display)
 {
