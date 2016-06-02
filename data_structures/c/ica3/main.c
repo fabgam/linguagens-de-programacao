@@ -3,20 +3,23 @@
 #include "fila.h"
 #include <time.h>
 
+//Protótipos das funções utilizadas
 void config_menu();
 void initialize_config(int, int, int, int, int, int);
-void land_menu(Queue*[], Queue*[], Queue*[], int, int, int, int, int, int);
-void liftOff_menu(Queue*[], Queue*[], Queue*[], int, int, int, int, int, int);
-void before_menu(Queue*[], Queue*[], Queue*[], int, int, int, int, int, int);
-void waiting_menu(Queue*[], Queue*[], Queue*[], int, int, int, int, int, int);
-void after_menu(Queue*[], Queue*[], Queue*[], int, int, int, int, int, int);
-void end_menu(Queue*[], Queue*[], Queue*[], int, int, int, int, int, int);
+void land_menu(Queue*[], Queue*[], Queue*[], Queue*, int, int, int, int, int, int);
+void liftOff_menu(Queue*[], Queue*[], Queue*[], Queue*, int, int, int, int, int, int);
+void before_menu(Queue*[], Queue*[], Queue*[], Queue*, int, int, int, int, int, int);
+void waiting_menu(Queue*[], Queue*[], Queue*[], Queue*, int, int, int, int, int, int);
+void lo_la_menu(Queue*[], Queue*[], Queue*[], Queue*, int, int, int, int, int, int);
+void after_menu(Queue*[], Queue*[], Queue*[], Queue*, int, int, int, int, int, int);
+void end_menu(Queue*[], Queue*[], Queue*[], Queue*, int, int, int, int, int, int);
 
 void main()
 {
     //Semente utilizada para a geração de strings e números aleatórios
     srand(time(NULL));
 
+    //Chamada para o menu de configuração do sistema
     config_menu();
 }
 
@@ -98,16 +101,17 @@ void initialize_config(int n_lanes, int n_fingers, int min_lo_airplanes, int max
     Queue *q_fingers[n_fingers];
     q_fingers[n_fingers] = initialize_vqueue(q_fingers, n_fingers);
 
-    land_menu(q_la, q_lo, q_fingers, n_lanes, n_fingers, min_lo_airplanes,
+    Queue *q_wfingers = create_queue();
+
+    land_menu(q_la, q_lo, q_fingers, q_wfingers, n_lanes, n_fingers, min_lo_airplanes,
               max_lo_airplanes, min_la_airplanes, max_la_airplanes);
 
 }
 
 //Menu de aterrissagem
-void land_menu(Queue *q_la[], Queue *q_lo[], Queue *q_fingers[], int n_lanes, int n_fingers, int min_lo_airplanes,
-               int max_lo_airplanes, int min_la_airplanes, int max_la_airplanes)
+void land_menu(Queue *q_la[], Queue *q_lo[], Queue *q_fingers[], Queue *q_wfingers, int n_lanes, int n_fingers,
+               int min_lo_airplanes, int max_lo_airplanes, int min_la_airplanes, int max_la_airplanes)
 {
-
     /* BREVE DESCRIÇÃO DAS VARIÁVEIS UTILIZADAS
 
     key = Será utilizada para capturar a tecla enter do teclado.
@@ -134,14 +138,14 @@ void land_menu(Queue *q_la[], Queue *q_lo[], Queue *q_fingers[], int n_lanes, in
         key = getchar();
 
         if(key == 10)
-            liftOff_menu(q_la, q_lo, q_fingers, n_lanes, n_fingers, min_lo_airplanes,
+            liftOff_menu(q_la, q_lo, q_fingers, q_wfingers, n_lanes, n_fingers, min_lo_airplanes,
                          max_lo_airplanes, min_la_airplanes, max_la_airplanes);
     }
 }
 
 //Menu de decolagem
-void liftOff_menu(Queue *q_la[], Queue *q_lo[], Queue *q_fingers[], int n_lanes, int n_fingers, int min_lo_airplanes,
-                  int max_lo_airplanes, int min_la_airplanes, int max_la_airplanes)
+void liftOff_menu(Queue *q_la[], Queue *q_lo[], Queue *q_fingers[], Queue *q_wfingers, int n_lanes, int n_fingers,
+                  int min_lo_airplanes, int max_lo_airplanes, int min_la_airplanes, int max_la_airplanes)
 {
 
     /* BREVE DESCRIÇÃO DAS VARIÁVEIS UTILIZADAS
@@ -171,13 +175,13 @@ void liftOff_menu(Queue *q_la[], Queue *q_lo[], Queue *q_fingers[], int n_lanes,
         key = getchar();
 
         if(key == 10)
-            before_menu(q_la, q_lo, q_fingers, n_lanes, n_fingers, min_lo_airplanes,
+            before_menu(q_la, q_lo, q_fingers, q_wfingers, n_lanes, n_fingers, min_lo_airplanes,
                         max_lo_airplanes, min_la_airplanes, max_la_airplanes);
     }
 }
 
 //Menu de pré decolagem e aterrissagem
-void before_menu(Queue *q_la[], Queue *q_lo[], Queue *q_fingers[], int n_lanes, int n_fingers,
+void before_menu(Queue *q_la[], Queue *q_lo[], Queue *q_fingers[], Queue *q_wfingers, int n_lanes, int n_fingers,
                  int min_lo_airplanes, int max_lo_airplanes, int min_la_airplanes, int max_la_airplanes)
 {
     int key = 0;
@@ -199,18 +203,21 @@ void before_menu(Queue *q_la[], Queue *q_lo[], Queue *q_fingers[], int n_lanes, 
         key = getchar();
 
         if(key == 10)
-            waiting_menu(q_la, q_lo, q_fingers, n_lanes, n_fingers, min_lo_airplanes,
+            waiting_menu(q_la, q_lo, q_fingers, q_wfingers, n_lanes, n_fingers, min_lo_airplanes,
                          max_lo_airplanes, min_la_airplanes, max_la_airplanes);
     }
 }
 
 //Menu de espera
-void waiting_menu(Queue *q_la[], Queue *q_lo[], Queue *q_fingers[], int n_lanes, int n_fingers, int min_lo_airplanes,
-                  int max_lo_airplanes, int min_la_airplanes, int max_la_airplanes)
+void waiting_menu(Queue *q_la[], Queue *q_lo[], Queue *q_fingers[], Queue *q_wfingers, int n_lanes, int n_fingers,
+                  int min_lo_airplanes, int max_lo_airplanes, int min_la_airplanes, int max_la_airplanes)
 {
-    int key = 0;
+    int key = 0, n;
 
-    printf("\nSAÍDA DA FILA DE ESPERA");
+    //n = random_n(min_lo_airplanes, max_lo_airplanes);
+
+    printf("\nSAÍDA DA FILA DE ESPERA\n");
+    //printf("Saíram da fila de decolagem %d aeronaves", n);
 
     printf("\nPressione ENTER para continuar...");
     while(key != 10)
@@ -218,14 +225,53 @@ void waiting_menu(Queue *q_la[], Queue *q_lo[], Queue *q_fingers[], int n_lanes,
         key = getchar();
 
         if(key == 10)
-            after_menu(q_la, q_lo, q_fingers, n_lanes, n_fingers, min_lo_airplanes,
+            lo_la_menu(q_la, q_lo, q_fingers, q_wfingers, n_lanes, n_fingers, min_lo_airplanes,
+                       max_lo_airplanes, min_la_airplanes, max_la_airplanes);
+    }
+}
+
+//Menu de aterrissagens e decolagens
+void lo_la_menu(Queue *q_la[], Queue *q_lo[], Queue *q_fingers[], Queue *q_wfingers, int n_lanes, int n_fingers,
+                int min_lo_airplanes, int max_lo_airplanes, int min_la_airplanes, int max_la_airplanes)
+{
+    int key = 0, x, y;
+
+    x = random_n(min_la_airplanes, max_la_airplanes);
+    y = random_n(min_lo_airplanes, max_lo_airplanes);
+
+    if(x > n_lanes || x > count_elements(q_la, n_lanes))
+        x = count_elements(q_la, n_lanes);
+
+    if(y > n_lanes || y > count_elements(q_lo, n_lanes))
+        y = count_elements(q_lo, n_lanes);
+
+    printf("\nATERRISSAGENS:\n");
+    printf("Aterrissaram %d aeronaves\n", x);
+
+    if(x > 0)
+        land(q_la, q_fingers, q_wfingers, n_lanes, n_fingers, x);
+
+
+    printf("\n\nDECOLAGENS:\n");
+    printf("Decolaram %d aeronaves", y);
+
+    if(y > 0)
+        lift_off(q_lo, n_lanes, y);
+
+    printf("\nPressione ENTER para continuar...");
+    while(key != 10)
+    {
+        key = getchar();
+
+        if(key == 10)
+            after_menu(q_la, q_lo, q_fingers, q_wfingers, n_lanes, n_fingers, min_lo_airplanes,
                        max_lo_airplanes, min_la_airplanes, max_la_airplanes);
     }
 }
 
 //Menu PÓS decolagem e aterrissagem
-void after_menu(Queue *q_la[], Queue *q_lo[], Queue *q_fingers[], int n_lanes, int n_fingers, int min_lo_airplanes,
-                int max_lo_airplanes, int min_la_airplanes, int max_la_airplanes)
+void after_menu(Queue *q_la[], Queue *q_lo[], Queue *q_fingers[], Queue *q_wfingers, int n_lanes, int n_fingers,
+                int min_lo_airplanes, int max_lo_airplanes, int min_la_airplanes, int max_la_airplanes)
 {
     printf("\nESTADO PÓS DECOLAGEM/ATERRISSAGEM\n");
 
@@ -239,36 +285,33 @@ void after_menu(Queue *q_la[], Queue *q_lo[], Queue *q_fingers[], int n_lanes, i
     print_queue(q_fingers, n_fingers, 2);
 
     printf("\nDeseja continuar a simulação? (0 - Não  1 - Sim): ");
-    end_menu(q_la, q_lo, q_fingers, n_lanes, n_fingers, min_lo_airplanes,
+    end_menu(q_la, q_lo, q_fingers, q_wfingers, n_lanes, n_fingers, min_lo_airplanes,
              max_lo_airplanes, min_la_airplanes, max_la_airplanes);
 }
 
 //Menu final, onde ser decidido se o usuário prossegue a simulação ou se a encerra.
-void end_menu(Queue *q_la[], Queue *q_lo[], Queue *q_fingers[], int n_lanes, int n_fingers, int min_lo_airplanes,
-              int max_lo_airplanes, int min_la_airplanes, int max_la_airplanes)
+void end_menu(Queue *q_la[], Queue *q_lo[], Queue *q_fingers[], Queue *q_wfingers, int n_lanes, int n_fingers,
+              int min_lo_airplanes, int max_lo_airplanes, int min_la_airplanes, int max_la_airplanes)
 {
     int op;
 
     scanf("%d", &op);
-    int i;
-    for(i = 0; i < n_lanes; i++)
-    {
-        printf("\n%d count_elements: %d\n", i, count_elements(q_la[i]));
-    }
 
     switch(op)
     {
     case 0:
         end_execution(q_la, q_lo, q_fingers, n_lanes, n_fingers);
+        free(q_wfingers);
         exit(0);
         break;
     case 1:
-        land_menu(q_la, q_lo, q_fingers, n_lanes, n_fingers, min_lo_airplanes,
+        update_shift(q_fingers, q_wfingers, n_fingers);
+        land_menu(q_la, q_lo, q_fingers, q_wfingers, n_lanes, n_fingers, min_lo_airplanes,
                   max_lo_airplanes, min_la_airplanes, max_la_airplanes);
         break;
     default:
         printf("\nOpção inválida.\n");
-        end_menu(q_la, q_lo, q_fingers, n_lanes, n_fingers, min_lo_airplanes,
+        end_menu(q_la, q_lo, q_fingers, q_wfingers, n_lanes, n_fingers, min_lo_airplanes,
                  max_lo_airplanes, min_la_airplanes, max_la_airplanes);
         break;
     }
