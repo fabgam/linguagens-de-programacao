@@ -1,3 +1,8 @@
+/*  Ambiente de desenvolvimento:
+    OS: Ubuntu 16.04 LTS
+    IDE: CodeBlocks 16.01
+    GCC: 5.3.1*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "fila.h"
@@ -5,7 +10,7 @@
 
 //Protótipos das funções utilizadas
 void config_menu();
-void initialize_config(int, int, int, int, int, int);
+void initialize_config(int, int, int, int, int, int, int);
 void land_menu(Queue*[], Queue*[], Queue*[], Queue*, int, int, int, int, int, int);
 void liftOff_menu(Queue*[], Queue*[], Queue*[], Queue*, int, int, int, int, int, int);
 void before_menu(Queue*[], Queue*[], Queue*[], Queue*, int, int, int, int, int, int);
@@ -77,13 +82,13 @@ void config_menu()
 
         if(key == 10)
             initialize_config(n_lanes, n_fingers, min_lo_airplanes, max_lo_airplanes,
-                              min_la_airplanes, max_la_airplanes);
+                              min_la_airplanes, max_la_airplanes, parked_airplanes);
     }
 }
 
 //Função para inicializar os vetores de filas que serão manipulados
 void initialize_config(int n_lanes, int n_fingers, int min_lo_airplanes, int max_lo_airplanes,
-                       int min_la_airplanes, int max_la_airplanes)
+                       int min_la_airplanes, int max_la_airplanes, int parked_airplanes)
 {
 
     /* BREVE DESCRIÇÃO DAS VARIÁVEIS UTILIZADAS
@@ -93,13 +98,13 @@ void initialize_config(int n_lanes, int n_fingers, int min_lo_airplanes, int max
     q_fingers = Filas para fingers. */
 
     Queue *q_lo[n_lanes];
-    q_lo[n_lanes] = initialize_vqueue(q_lo, n_lanes);
+    q_lo[n_lanes] = initialize_vqueue(q_lo, n_lanes, 0);
 
     Queue *q_la[n_lanes];
-    q_la[n_lanes] = initialize_vqueue(q_la, n_lanes);
+    q_la[n_lanes] = initialize_vqueue(q_la, n_lanes, 0);
 
     Queue *q_fingers[n_fingers];
-    q_fingers[n_fingers] = initialize_vqueue(q_fingers, n_fingers);
+    q_fingers[n_fingers] = initialize_vqueue(q_fingers, n_fingers, parked_airplanes);
 
     Queue *q_wfingers = create_queue();
 
@@ -165,7 +170,19 @@ void liftOff_menu(Queue *q_la[], Queue *q_lo[], Queue *q_fingers[], Queue *q_wfi
     if(n > 0)
     {
         printf("\n\nTAXIAMENTO DE AERONAVES");
-        insert_elements(q_lo, n_lanes, n);
+
+        /*PRECISA SER CORRIGIDO*/
+
+        if(n <= count_qelements(q_fingers, n_fingers))
+            f_qlo(q_lo, q_fingers, n_lanes, n_fingers, n);
+
+        else if(n > count_qelements(q_fingers, n_fingers))
+        {
+            f_qlo(q_lo, q_fingers, n_lanes, n_fingers, count_qelements(q_fingers, n_fingers));
+        }
+
+        else if(count_free_finger(q_fingers, n_fingers) == n_fingers)
+            insert_elements(q_lo, n_lanes, n);
     }
 
     //Caso contrário o sistema será direcionado a próxima tela.
@@ -214,10 +231,13 @@ void waiting_menu(Queue *q_la[], Queue *q_lo[], Queue *q_fingers[], Queue *q_wfi
 {
     int key = 0, n;
 
-    //n = random_n(min_lo_airplanes, max_lo_airplanes);
+    if(is_Empty(q_wfingers))
+        n = 0;
+    else
+        n = random_n(min_lo_airplanes, max_lo_airplanes);
 
     printf("\nSAÍDA DA FILA DE ESPERA\n");
-    //printf("Saíram da fila de decolagem %d aeronaves", n);
+    printf("Saíram da fila de espera %d aeronaves", n);
 
     printf("\nPressione ENTER para continuar...");
     while(key != 10)
@@ -236,23 +256,36 @@ void lo_la_menu(Queue *q_la[], Queue *q_lo[], Queue *q_fingers[], Queue *q_wfing
 {
     int key = 0, x, y;
 
-    x = random_n(min_la_airplanes, max_la_airplanes);
-    y = random_n(min_lo_airplanes, max_lo_airplanes);
-
-    if(x > n_lanes || x > count_elements(q_la, n_lanes))
-        x = count_elements(q_la, n_lanes);
-
-    if(y > n_lanes || y > count_elements(q_lo, n_lanes))
-        y = count_elements(q_lo, n_lanes);
+    x = random_n(min_la_airplanes, n_lanes);
+    y = random_n(min_lo_airplanes, n_lanes);
 
     printf("\nATERRISSAGENS:\n");
+
+    if(x > count_qelements(q_la, n_lanes))
+        x = count_qelements(q_la, n_lanes);
+
     printf("Aterrissaram %d aeronaves\n", x);
 
     if(x > 0)
-        land(q_la, q_fingers, q_wfingers, n_lanes, n_fingers, x);
+    {
+        if(count_free_finger(q_fingers, n_fingers) == 0)
+            land_wq(q_la, q_wfingers, n_lanes, x);
 
+        else if(x <= count_free_finger(q_fingers, n_fingers))
+            land(q_la, q_fingers, n_lanes, n_fingers, x);
+
+        else if(x > count_free_finger(q_fingers, n_fingers))
+        {
+            land(q_la, q_fingers, n_lanes, n_fingers, count_free_finger(q_fingers, n_fingers));
+            land_wq(q_la, q_wfingers, n_lanes, (x - count_free_finger(q_fingers, n_fingers)));
+        }
+    }
 
     printf("\n\nDECOLAGENS:\n");
+
+    if(y > count_qelements(q_lo, n_lanes))
+        y = count_qelements(q_lo, n_lanes);
+
     printf("Decolaram %d aeronaves", y);
 
     if(y > 0)

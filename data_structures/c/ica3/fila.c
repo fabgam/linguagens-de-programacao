@@ -1,3 +1,8 @@
+/*  Ambiente de desenvolvimento:
+    OS: Ubuntu 16.04 LTS
+    IDE: CodeBlocks 16.01
+    GCC: 5.3.1*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "fila.h"
@@ -12,13 +17,31 @@ Queue *create_queue()
 }
 
 //Função para inicializar o vetor de filas
-Queue *initialize_vqueue(Queue *q[], int n)
+Queue *initialize_vqueue(Queue *q[], int n, int x)
 {
-    int i;
+    int i, count_n = 0;
+    char id[8];
 
     for(i = 0; i < n; i++)
         q[i] = create_queue();
 
+    if(x > 0)
+    {
+        i = 0;
+
+        while(count_n != x)
+        {
+            strcpy(id, gen_id());
+
+            push(q[i], id, 0);
+
+            count_n++;
+            i++;
+
+            if(i == n)
+                i = 0;
+        }
+    }
     return q;
 }
 
@@ -43,6 +66,7 @@ Queue *push(Queue *q, char id[], int entry_sequence)
 
     if(is_Empty(q))
         q->first = q->last = node;
+
     else
     {
         q->last->next = node;
@@ -56,17 +80,20 @@ Queue *pop(Queue *q)
 {
     if(is_Empty(q))
         return NULL;
+
     else if(q->first == q->last)
     {
         free(q->first);
         q->first = q->last = NULL;
     }
+
     else
     {
         Node *aux = q->first->next;
         free(q->first);
         q->first = aux;
     }
+
     return q;
 }
 
@@ -74,23 +101,6 @@ Queue *pop(Queue *q)
 int is_Empty(Queue *q)
 {
     return ((q->first == NULL) ? 1 : 0);
-}
-
-//Função para verificar se um vetor de fila está vazio
-int q_empty(Queue *q[], int n)
-{
-    int i, count = 0;
-
-    for(i = 0; i < n; i++)
-    {
-        if(is_Empty(q[i]))
-            count++;
-    }
-
-    if(count == n)
-        return 1;
-    else
-        return 0;
 }
 
 //Função para retornar o primeiro elemento
@@ -106,7 +116,7 @@ Node *last_node(Queue *q)
 }
 
 //Função para contar a quantidade de elementos de uma fila
-int count_elements(Queue *q, int n)
+int count_elements(Queue *q)
 {
     int count = 0;
 
@@ -123,14 +133,25 @@ int count_elements(Queue *q, int n)
     return count;
 }
 
-//Função para retornar a quantidade de fingers em uso
+//Função para contar a quantidade de elementos em um vetor de fila
+int count_qelements(Queue *q[], int n)
+{
+    int i, total = 0;
+
+    for(i = 0; i < n; i++)
+        total = total + count_elements(q[i]);
+
+    return total;
+}
+
+//Função para retornar a quantidade de fingers livres
 int count_free_finger(Queue *q[], int n)
 {
     int i, count = 0;
 
     for(i = 0; i < n; i++)
     {
-        if(!is_Empty(q[i]))
+        if(is_Empty(q[i]))
             count++;
     }
     return count;
@@ -193,9 +214,6 @@ void insert_elements(Queue *q[], int n_lanes, int n)
 
     while(count_n != n)
     {
-        if(i == n_lanes)
-            i = 0;
-
         strcpy(id, gen_id());
 
         printf("\nInserindo aeronave %s na fila da pista %d", id, i);
@@ -203,7 +221,59 @@ void insert_elements(Queue *q[], int n_lanes, int n)
 
         count_n++;
         i++;
+
+        if(i == n_lanes)
+            i = 0;
     }
+}
+
+/*PRECISA SER CORRIGIDO*/
+
+//Função para movimentar as aeronaves dos fingers para a pista de decolagem
+void f_qlo(Queue *q[], Queue *q_fingers[], int n_lanes, int n_fingers, int n)
+{
+    int i = search_entry(q, n_lanes), x = 0, count_n = 0;
+    char id[8];
+
+    while(count_n != n)
+    {
+        if(!is_Empty(q_fingers[x]))
+        {
+            Node *aux = q_fingers[x]->first;
+
+            printf("\nInserindo aeronave %s na fila da pista %d", aux->id, i);
+            push(q[i], aux->id, (highest_entry(q, n_lanes) + 1));
+            pop(q_fingers[x]);
+            count_n++;
+        }
+        x++;
+
+        if(x == n_fingers)
+            x = 0;
+
+        i++;
+
+        if(i == n_lanes)
+            i = 0;
+    }
+}
+
+//Função para retornar o maior turno registrado
+int highest_shift(Queue *q[], int n_finger)
+{
+    int i, x = 0;
+
+    for(i = 0; i < n_finger; i++)
+    {
+        if(!is_Empty(q[i]))
+        {
+            Node *aux = q[i]->first;
+
+            if(aux->c_shift > x)
+                x = aux->c_shift;
+        }
+    }
+    return x;
 }
 
 //Função para procurar o maior número de entrada inserido
@@ -255,9 +325,9 @@ int search_entry(Queue *q[], int n_lanes)
 
     for(i = 0; i < n_lanes; i++)
     {
-        if(< y)
+        if(count_elements(q[i]) < y)
         {
-            y = q[i]->last->sequence_entry;
+            y = count_elements(q[i]);
             p = i;
         }
     }
@@ -265,51 +335,51 @@ int search_entry(Queue *q[], int n_lanes)
 }
 
 //Função para atualizar as filas de aterrissagens e fingers
-void land(Queue *q[], Queue *q_fingers[], Queue *q_wfingers, int n_lanes, int n_fingers, int n)
+void land(Queue *q[], Queue *q_fingers[], int n_lanes, int n_fingers, int n)
 {
-    int x, y, count_n = 0, p;
+    int i, count_n = 0, x;
 
-    for(x = 0; x < n_lanes; x++)
+    while(count_n < n)
     {
-        if(!is_Empty(q[x]))
-        {
-            Node *aux = q[x]->first;
+        i = smaller_entry(q, n_lanes);
+        x = free_finger(q_fingers, n_fingers);
+        Node *aux = q[i]->first;
 
-            for(y = 0; y < n_fingers; y++)
-            {
-                if(is_Empty(q_fingers[y]))
-                {
-                    printf("\nAeronave %s aterrissou na Pista %d e estacionou no Finger %d", aux->id, x, y);
-                    push(q_fingers[y], aux->id, highest_entry(q_fingers, n_fingers));
-                    pop(q[x]);
-                    p = x;
-                    count_n++;
-                    break;
-                }
-            }
+        if(is_Empty(q_fingers[x]))
+        {
+            printf("\nAeronave %s aterrissou na Pista %d e estacionou no Finger %d", aux->id, i, x);
+            push(q_fingers[x], aux->id, highest_entry(q_fingers, n_fingers));
+            pop(q[i]);
+            count_n++;
         }
+        i++;
+
+        if(i == n_lanes)
+            i = 0;
     }
-    /*if(count_n < n)
-        land_wq(q, q_fingers, n_lanes, (n - count_n), p);*/
 }
 
-void land_wq(Queue *q[], Queue *q_wfingers, int n_lanes, int n, int p)
+//Função de manipulação da lista de espera por um finger livre
+void land_wq(Queue *q[], Queue *q_wfingers, int n_lanes, int n)
 {
-    int x, y;
+    int i, count_n = 0;
 
-    for(x = 0; x < n; x++)
+    while(count_n < n)
     {
-        for(y = p; y < n_lanes; y++)
-        {
-            if(!is_Empty(q[y]))
-            {
-                Node *aux = q[y]->first;
+        i = smaller_entry(q, n_lanes);
 
-                printf("\nAeronave %s aterrissou na Pista %d e foi para a fila de espera", aux->id, y);
-                push(q_wfingers, aux->id, q_wfingers->last->sequence_entry + 1);
-                pop(q[y]);
-            }
+        if(!is_Empty(q[i]))
+        {
+            Node *aux = q[i]->first;
+            printf("\nAeronave %s aterrissou na Pista %d e foi para a fila de espera", aux->id, i);
+            push(q_wfingers, aux->id, 0);
+            pop(q[i]);
+            count_n++;
         }
+        i++;
+
+        if(i == n_lanes)
+            i = 0;
     }
 }
 
@@ -320,9 +390,6 @@ void lift_off(Queue *q[], int n_lanes, int n)
 
     while(count_n < n)
     {
-        if(i == n_lanes)
-            i = 0;
-
         if(!is_Empty(q[i]))
         {
             Node *aux = q[i]->first;
@@ -332,7 +399,11 @@ void lift_off(Queue *q[], int n_lanes, int n)
 
             count_n++;
         }
+
         i++;
+
+        if(i == n_lanes)
+            i = 0;
     }
 }
 
@@ -347,15 +418,17 @@ void print_queue(Queue *q[], int n, int display)
 
         if(display == 1)
             printf("Pista %d: ", i);
-        else if(display == 2)
+        else
             printf("Finger %d: ", i);
 
         if(!is_Empty(q[i]))
         {
             while(aux != NULL)
             {
-                printf("#%d %s -> ", aux->sequence_entry, aux->id);
-
+                if(display == 1)
+                    printf("#%d %s -> ", aux->sequence_entry, aux->id);
+                else
+                    printf("#%d %s -> ", aux->c_shift, aux->id);
                 aux = aux->next;
             }
         }
