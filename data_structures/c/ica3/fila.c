@@ -103,18 +103,6 @@ int is_Empty(Queue *q)
     return ((q->first == NULL) ? 1 : 0);
 }
 
-//Função para retornar o primeiro elemento
-Node *first_node(Queue *q)
-{
-    return ((is_Empty(q)) ? NULL : q->first);
-}
-
-//Função para retornar o último elemento
-Node *last_node(Queue *q)
-{
-    return ((is_Empty(q)) ? NULL : q->last);
-}
-
 //Função para contar a quantidade de elementos de uma fila
 int count_elements(Queue *q)
 {
@@ -177,8 +165,8 @@ int free_finger(Queue *q[], int n)
 char *gen_id()
 {
     int n_random, aux, i;
-    char *id = (char*)malloc(6 * sizeof(char));
-    char *num = (char*)malloc(6 * sizeof(char));
+    char *id = (char*)malloc(8 * sizeof(char));
+    char *num = (char*)malloc(8 * sizeof(char));
 
     for(i = 0; i < 4; i++)
     {
@@ -206,62 +194,10 @@ int random_n(int min_n, int max_n)
     return n_random = (min_n + rand() % (max_n - min_n));
 }
 
-//Função para inserir os elementos no vetor de fila
-void insert_elements(Queue *q[], int n_lanes, int n)
-{
-    int i = search_entry(q, n_lanes), count_n = 0;
-    char id[8];
-
-    while(count_n != n)
-    {
-        strcpy(id, gen_id());
-
-        printf("\nInserindo aeronave %s na fila da pista %d", id, i);
-        push(q[i], id, (highest_entry(q, n_lanes) + 1));
-
-        count_n++;
-        i++;
-
-        if(i == n_lanes)
-            i = 0;
-    }
-}
-
-/*PRECISA SER CORRIGIDO*/
-
-//Função para movimentar as aeronaves dos fingers para a pista de decolagem
-void f_qlo(Queue *q[], Queue *q_fingers[], int n_lanes, int n_fingers, int n)
-{
-    int i = search_entry(q, n_lanes), x = 0, count_n = 0;
-    char id[8];
-
-    while(count_n != n)
-    {
-        if(!is_Empty(q_fingers[x]))
-        {
-            Node *aux = q_fingers[x]->first;
-
-            printf("\nInserindo aeronave %s na fila da pista %d", aux->id, i);
-            push(q[i], aux->id, (highest_entry(q, n_lanes) + 1));
-            pop(q_fingers[x]);
-            count_n++;
-        }
-        x++;
-
-        if(x == n_fingers)
-            x = 0;
-
-        i++;
-
-        if(i == n_lanes)
-            i = 0;
-    }
-}
-
 //Função para retornar o maior turno registrado
 int highest_shift(Queue *q[], int n_finger)
 {
-    int i, x = 0;
+    int i, x = 0, p;
 
     for(i = 0; i < n_finger; i++)
     {
@@ -270,10 +206,13 @@ int highest_shift(Queue *q[], int n_finger)
             Node *aux = q[i]->first;
 
             if(aux->c_shift > x)
+            {
                 x = aux->c_shift;
+                p = i;
+            }
         }
     }
-    return x;
+    return p;
 }
 
 //Função para procurar o maior número de entrada inserido
@@ -325,13 +264,32 @@ int search_entry(Queue *q[], int n_lanes)
 
     for(i = 0; i < n_lanes; i++)
     {
-        if(count_elements(q[i]) < y)
+        if(y > count_elements(q[i]))
         {
             y = count_elements(q[i]);
             p = i;
         }
     }
     return p;
+}
+
+//Função para inserir os elementos no vetor de fila
+void insert_elements(Queue *q[], int n_lanes, int n)
+{
+    int i, count_n = 0;
+    char id[8];
+
+    while(count_n < n)
+    {
+        i = search_entry(q, n_lanes);
+
+        strcpy(id, gen_id());
+
+        printf("\nInserindo aeronave %s na fila da pista %d", id, i);
+        push(q[i], id, (highest_entry(q, n_lanes) + 1));
+
+        count_n++;
+    }
 }
 
 //Função para atualizar as filas de aterrissagens e fingers
@@ -352,10 +310,6 @@ void land(Queue *q[], Queue *q_fingers[], int n_lanes, int n_fingers, int n)
             pop(q[i]);
             count_n++;
         }
-        i++;
-
-        if(i == n_lanes)
-            i = 0;
     }
 }
 
@@ -371,39 +325,78 @@ void land_wq(Queue *q[], Queue *q_wfingers, int n_lanes, int n)
         if(!is_Empty(q[i]))
         {
             Node *aux = q[i]->first;
+
             printf("\nAeronave %s aterrissou na Pista %d e foi para a fila de espera", aux->id, i);
             push(q_wfingers, aux->id, 0);
             pop(q[i]);
             count_n++;
         }
-        i++;
-
-        if(i == n_lanes)
-            i = 0;
     }
 }
 
 //Função para atualizar as decolagens de aeronaves
 void lift_off(Queue *q[], int n_lanes, int n)
 {
-    int i = smaller_entry(q, n_lanes), count_n = 0;
+    int i, count_n = 0;
 
     while(count_n < n)
     {
+        i = smaller_entry(q, n_lanes);
+
         if(!is_Empty(q[i]))
         {
             Node *aux = q[i]->first;
 
             printf("\nAeronave %s decolou da Pista %d", aux->id, i);
             pop(q[i]);
-
             count_n++;
         }
+    }
+}
 
-        i++;
+//Função para movimentar as aeronaves dos fingers para a pista de decolagem
+void f_qlo(Queue *q[], Queue *q_fingers[], int n_lanes, int n_fingers, int n)
+{
+    int i, x = 0, count_n = 0;
+    char id[8];
 
-        if(i == n_lanes)
-            i = 0;
+    while(count_n < n)
+    {
+        i = search_entry(q, n_lanes);
+
+        if(!is_Empty(q_fingers[x]))
+        {
+            Node *aux = q_fingers[x]->first;
+
+            printf("\nInserindo aeronave %s na fila da pista %d", aux->id, i);
+            push(q[i], aux->id, (highest_entry(q, n_lanes) + 1));
+            pop(q_fingers[x]);
+            count_n++;
+        }
+        x++;
+
+        if(x == n_fingers)
+            x = n_fingers;
+    }
+}
+
+//Função para movimentar as aeronaves da lista de espera para os fingers livres
+void w_fingers(Queue *q[], Queue *q_wfingers, int n_fingers, int n)
+{
+    int i = 0, count_n = 0;
+
+    while(count_n < n)
+    {
+        i = free_finger(q, n_fingers);
+
+        if(is_Empty(q[i]) && !is_Empty(q_wfingers))
+        {
+            Node *aux = q_wfingers->first;
+            printf("\nAeronave %s deixou a fila de espera e estacionou no Finger %d", aux->id, i);
+            push(q[i], aux->id, 0);
+            pop(q_wfingers);
+            count_n++;
+        }
     }
 }
 
@@ -425,10 +418,7 @@ void print_queue(Queue *q[], int n, int display)
         {
             while(aux != NULL)
             {
-                if(display == 1)
-                    printf("#%d %s -> ", aux->sequence_entry, aux->id);
-                else
-                    printf("#%d %s -> ", aux->c_shift, aux->id);
+                printf("%s -> ", aux->id);
                 aux = aux->next;
             }
         }
