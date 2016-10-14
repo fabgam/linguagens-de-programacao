@@ -68,7 +68,7 @@ public class PessoaDAO implements IDAO {
             DBUtil.closeConnections(ps, con);
             DBUtil.closeConnections(rs);
         }
-        return maiorID + 1;
+        return maiorID;
     }
 
     @Override

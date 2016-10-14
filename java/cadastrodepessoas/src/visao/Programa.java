@@ -9,17 +9,14 @@ import modelo.Pessoa;
 
 public class Programa {
 
+    private final PessoaDAO dao = new PessoaDAO();
     private final Scanner input = new Scanner(System.in);
 
     public Programa() {
-    }
-
-    public void inicializarConfiguracao() {
         Database.create();
     }
 
     public void menuInicial() {
-        int op;
         System.out.println("Escolha uma opção no menu:");
         System.out.println("1 - Cadastrar");
         System.out.println("2 - Excluir por ID");
@@ -42,7 +39,6 @@ public class Programa {
     }
 
     public void menuExcluirPorID() {
-        PessoaDAO dao = new PessoaDAO();
         System.err.println("Exclusão por ID");
         System.out.println("Digite o ID da pessoa: ");
         int id = input.nextInt();
@@ -50,7 +46,6 @@ public class Programa {
     }
 
     public void menuExibirDadosPorID() {
-        PessoaDAO dao = new PessoaDAO();
         System.err.println("Exibir por ID");
         System.out.println("Digite a ID da pessoa: ");
         int id = input.nextInt();
@@ -59,7 +54,6 @@ public class Programa {
     }
 
     public void menuAlterarDados() {
-        PessoaDAO dao = new PessoaDAO();
         System.err.println("Alteração");
         System.err.println("Digite o ID da pessoa");
         int id = input.nextInt();
@@ -73,7 +67,6 @@ public class Programa {
     }
 
     public void menuExibirTodos() {
-        PessoaDAO dao = new PessoaDAO();
         List<Pessoa> pessoas = new ArrayList<>();
         pessoas.addAll(dao.getAll());
         System.err.println("Exibir todos");
@@ -81,6 +74,10 @@ public class Programa {
         for (int i = 0; i < pessoas.size(); i++) {
             System.out.println(pessoas.get(i).toString());
         }
+    }
+
+    public boolean isDatabasePopulate() {
+        return PessoaDAO.maiorIDInserida() != 0;
     }
 
     public void controle() {
@@ -91,28 +88,43 @@ public class Programa {
                 menuCadastrar();
                 break;
             case 2:
-                menuExcluirPorID();
+                if (!isDatabasePopulate()) {
+                    System.err.println("Nenhum registro encontrado.");
+                } else {
+                    menuExcluirPorID();
+                }
                 break;
             case 3:
-                menuExibirDadosPorID();
+                if (!isDatabasePopulate()) {
+                    System.err.println("Nenhum registro encontrado.");
+                } else {
+                    menuExibirDadosPorID();
+                }
                 break;
             case 4:
-                menuAlterarDados();
+                if (!isDatabasePopulate()) {
+                    System.err.println("Nenhum registro encontrado.");
+                } else {
+                    menuAlterarDados();
+                }
                 break;
             case 5:
-                menuExibirTodos();
+                if (!isDatabasePopulate()) {
+                    System.err.println("Nenhum registro encontrado.");
+                } else {
+                    menuExibirTodos();
+                }
                 break;
             case 0:
                 System.exit(0);
             default:
-                System.out.println("Opção inválida.");
+                System.err.println("Opção inválida.");
                 break;
         }
     }
 
     public static void main(String[] args) {
         Programa p = new Programa();
-        p.inicializarConfiguracao();
         for (;;) {
             p.menuInicial();
             p.controle();
