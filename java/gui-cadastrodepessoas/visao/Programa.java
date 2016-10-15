@@ -2,6 +2,7 @@ package visao;
 
 import dao.PessoaDAO;
 import factory.Database;
+import java.awt.event.KeyEvent;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
@@ -9,7 +10,6 @@ import java.util.logging.Logger;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import modelo.Pessoa;
-import modelo.PessoaTableModel;
 import org.jdesktop.swingx.JXTextField;
 
 public class Programa extends javax.swing.JFrame {
@@ -270,6 +270,11 @@ public class Programa extends javax.swing.JFrame {
                 jxSearchFieldBuscaIDActionPerformed(evt);
             }
         });
+        jxSearchFieldBuscaID.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jxSearchFieldBuscaIDKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jxPanelListaCadastrosLayout = new javax.swing.GroupLayout(jxPanelListaCadastros);
         jxPanelListaCadastros.setLayout(jxPanelListaCadastrosLayout);
@@ -430,6 +435,29 @@ public class Programa extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jxButtonEditarActionPerformed
 
+    private void jxSearchFieldBuscaIDKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jxSearchFieldBuscaIDKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            PessoaDAO dao = new PessoaDAO();
+            try {
+                int searchFieldID = Integer.parseInt(jxSearchFieldBuscaID.getText().trim());
+                Pessoa p = dao.get(searchFieldID);
+                limpajxTableListaCadastros();
+                DefaultTableModel model = (DefaultTableModel) jxTableListaCadastros.getModel();
+                model.addRow(new Object[0]);
+                jxTableListaCadastros.getModel().setValueAt(p.getId_pessoa(), 0, 0);
+                jxTableListaCadastros.getModel().setValueAt(p.getNome(), 0, 1);
+                jxTableListaCadastros.getModel().setValueAt(p.getCpf(), 0, 2);
+                jxTableListaCadastros.getModel().setValueAt(p.getRg(), 0, 3);
+                jxTableListaCadastros.getModel().setValueAt(p.getTelResidencial(), 0, 4);
+                jxTableListaCadastros.getModel().setValueAt(p.getTelCelular(), 0, 5);
+                jxTableListaCadastros.getModel().setValueAt(p.getEmail(), 0, 6);
+                jxTableListaCadastros.getModel().setValueAt(p.getWhatsApp(), 0, 7);
+            } catch (NumberFormatException exception) {
+
+            }
+        }
+    }//GEN-LAST:event_jxSearchFieldBuscaIDKeyPressed
+
     public static void main(String args[]) {
 
         try {
@@ -458,7 +486,6 @@ public class Programa extends javax.swing.JFrame {
         });
     }
 
-    private PessoaTableModel tableModel;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanelContato;
     private javax.swing.JPanel jPanelIdentificacao;
