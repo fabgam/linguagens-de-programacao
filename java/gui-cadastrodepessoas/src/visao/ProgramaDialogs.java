@@ -9,7 +9,7 @@ public class ProgramaDialogs extends Thread {
     public ProgramaDialogs(int op) {
         this.op = op;
     }
-    
+
     public int getOp() {
         return this.op;
     }
@@ -31,6 +31,9 @@ public class ProgramaDialogs extends Thread {
                 break;
             case 5:
                 textFieldsVazios();
+                break;
+            case 6:
+                searchFieldIDInexistente();
                 break;
             default:
                 throw new RuntimeException("Dialog index out of bounds");
@@ -55,5 +58,9 @@ public class ProgramaDialogs extends Thread {
 
     public void searchFieldIDVazio() {
         JOptionPane.showMessageDialog(null, "Digite um número inteiro.");
+    }
+
+    private void searchFieldIDInexistente() {
+        JOptionPane.showMessageDialog(null, "Cadastro inexistente.");
     }
 }

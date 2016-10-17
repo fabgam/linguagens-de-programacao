@@ -11,17 +11,16 @@ import modelo.Pessoa;
 import modelo.PessoaTableModel;
 
 public class Programa extends javax.swing.JFrame {
-
+    
     private final PessoaTableModel model = new PessoaTableModel();
     private final PessoaDAO dao = new PessoaDAO();
-
+    
     public Programa() throws SQLException {
         initComponents();
         Database.create();
         jxTextFieldCOD.setText(Integer.toString(dao.maiorIDInserida()));
-        
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -35,6 +34,7 @@ public class Programa extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jxTableListaCadastros = new org.jdesktop.swingx.JXTable();
         jxSearchFieldBuscaID = new org.jdesktop.swingx.JXSearchField();
+        jXButtonAtualizarLista = new org.jdesktop.swingx.JXButton();
         jPanel1 = new javax.swing.JPanel();
         jxTextFieldWhatsApp = new org.jdesktop.swingx.JXTextField();
         jxLabelCOD = new org.jdesktop.swingx.JXLabel();
@@ -159,6 +159,17 @@ public class Programa extends javax.swing.JFrame {
             }
         });
 
+        jXButtonAtualizarLista.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/arrow_refresh.png"))); // NOI18N
+        jXButtonAtualizarLista.setText("Atualizar");
+        jXButtonAtualizarLista.setMaximumSize(new java.awt.Dimension(110, 25));
+        jXButtonAtualizarLista.setMinimumSize(new java.awt.Dimension(110, 25));
+        jXButtonAtualizarLista.setPreferredSize(new java.awt.Dimension(110, 25));
+        jXButtonAtualizarLista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jXButtonAtualizarListaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jxPanelListaCadastrosLayout = new javax.swing.GroupLayout(jxPanelListaCadastros);
         jxPanelListaCadastros.setLayout(jxPanelListaCadastrosLayout);
         jxPanelListaCadastrosLayout.setHorizontalGroup(
@@ -166,17 +177,20 @@ public class Programa extends javax.swing.JFrame {
             .addGroup(jxPanelListaCadastrosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jxPanelListaCadastrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 684, Short.MAX_VALUE)
                     .addGroup(jxPanelListaCadastrosLayout.createSequentialGroup()
                         .addComponent(jxSearchFieldBuscaID, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jXButtonAtualizarLista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jxPanelListaCadastrosLayout.setVerticalGroup(
             jxPanelListaCadastrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jxPanelListaCadastrosLayout.createSequentialGroup()
                 .addGap(1, 1, 1)
-                .addComponent(jxSearchFieldBuscaID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jxPanelListaCadastrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jxSearchFieldBuscaID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jXButtonAtualizarLista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
                 .addContainerGap())
@@ -207,7 +221,7 @@ public class Programa extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(19, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jxLabelEmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -271,22 +285,29 @@ public class Programa extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jxButtonCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jxButtonLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jxPanelListaCadastros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jxButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(6, 6, 6)
-                        .addComponent(jxButtonRemover, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 391, Short.MAX_VALUE)
-                        .addComponent(jxButtonSair, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jxPanelListaCadastros, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(5, 5, 5))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jxButtonCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jxButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jxButtonRemover, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(jxButtonLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jxButtonSair, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -311,45 +332,11 @@ public class Programa extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jxButtonLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jxButtonLimparActionPerformed
-        if (evt.getSource().equals(jxButtonLimpar)) {
-            model.limparCamposDeCadastro(jxTableListaCadastros, jxTextFieldNome, jxTextFieldCPF,
-                    jxTextFieldRG, jxTextFieldTelResidencial, jxTextFieldTelCelular, jxTextFieldEmail, jxTextFieldWhatsApp);
-        }
-    }//GEN-LAST:event_jxButtonLimparActionPerformed
-
     private void jxButtonSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jxButtonSairActionPerformed
         if (evt.getSource().equals(jxButtonSair)) {
             System.exit(0);
         }
     }//GEN-LAST:event_jxButtonSairActionPerformed
-
-    private void jxButtonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jxButtonCadastrarActionPerformed
-        if (evt.getSource().equals(jxButtonCadastrar)) {
-            if (model.validaCampos(
-                    jxTextFieldNome, jxTextFieldCPF, jxTextFieldRG,
-                    jxTextFieldTelResidencial, jxTextFieldTelCelular,
-                    jxTextFieldEmail, jxTextFieldWhatsApp)) {
-
-                dao.insert(new Pessoa(Integer.parseInt(
-                        jxTextFieldCOD.getText()), jxTextFieldNome.getText(),
-                        jxTextFieldCPF.getText(), jxTextFieldRG.getText(),
-                        jxTextFieldTelResidencial.getText(), jxTextFieldTelCelular.getText(),
-                        jxTextFieldEmail.getText(), jxTextFieldWhatsApp.getText()));
-
-                model.limparCamposDeCadastro(
-                        jxTableListaCadastros, jxTextFieldNome, jxTextFieldCPF,
-                        jxTextFieldRG, jxTextFieldTelResidencial, jxTextFieldTelCelular,
-                        jxTextFieldEmail, jxTextFieldWhatsApp);
-
-                jxTextFieldCOD.setText(Integer.toString(dao.maiorIDInserida()));
-                model.addListaDePessoas(jxTableListaCadastros);
-                new ProgramaDialogs(1).start();
-            } else {
-                new ProgramaDialogs(5).start();
-            }
-        }
-    }//GEN-LAST:event_jxButtonCadastrarActionPerformed
 
     private void jxButtonRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jxButtonRemoverActionPerformed
         if (evt.getSource().equals(jxButtonRemover)) {
@@ -357,31 +344,76 @@ public class Programa extends javax.swing.JFrame {
             model.limparListaDePessoas(jxTableListaCadastros);
             model.addListaDePessoas(jxTableListaCadastros);
             jxSearchFieldBuscaID.setText("");
-            new ProgramaDialogs(2).start();
+            model.criaDialogs(2);
         }
     }//GEN-LAST:event_jxButtonRemoverActionPerformed
 
     private void jxButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jxButtonEditarActionPerformed
         if (evt.getSource().equals(jxButtonEditar)) {
-
+            
         }
     }//GEN-LAST:event_jxButtonEditarActionPerformed
 
     private void jxSearchFieldBuscaIDKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jxSearchFieldBuscaIDKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             if ("".equals(jxSearchFieldBuscaID.getText().trim())) {
-                new ProgramaDialogs(4).start();
+                model.criaDialogs(4);
+            } else if (dao.persist(Integer.parseInt(jxSearchFieldBuscaID.getText().trim())) == false) {
+                model.criaDialogs(6);
             } else {
                 try {
                     int searchFieldID = Integer.parseInt(jxSearchFieldBuscaID.getText().trim());
                     model.addPessoa(jxTableListaCadastros, searchFieldID);
+                    jxSearchFieldBuscaID.setText("");
                 } catch (NumberFormatException exception) {
-
+                    
                 }
             }
         }
     }//GEN-LAST:event_jxSearchFieldBuscaIDKeyPressed
 
+    private void jxButtonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jxButtonCadastrarActionPerformed
+        if (evt.getSource().equals(jxButtonCadastrar)) {
+            if (model.validaCampos(
+                    jxTextFieldNome, jxTextFieldCPF, jxTextFieldRG,
+                    jxTextFieldTelResidencial, jxTextFieldTelCelular,
+                    jxTextFieldEmail, jxTextFieldWhatsApp)) {
+                
+                dao.insert(new Pessoa(Integer.parseInt(
+                        jxTextFieldCOD.getText()), jxTextFieldNome.getText(),
+                        jxTextFieldCPF.getText(), jxTextFieldRG.getText(),
+                        jxTextFieldTelResidencial.getText(), jxTextFieldTelCelular.getText(),
+                        jxTextFieldEmail.getText(), jxTextFieldWhatsApp.getText()));
+                
+                model.limparCamposDeCadastro(
+                        jxTableListaCadastros, jxTextFieldNome, jxTextFieldCPF,
+                        jxTextFieldRG, jxTextFieldTelResidencial, jxTextFieldTelCelular,
+                        jxTextFieldEmail, jxTextFieldWhatsApp);
+                
+                jxTextFieldCOD.setText(Integer.toString(dao.maiorIDInserida()));
+                model.addListaDePessoas(jxTableListaCadastros);
+                model.criaDialogs(1);
+            } else {
+                model.criaDialogs(5);
+            }
+        }
+    }//GEN-LAST:event_jxButtonCadastrarActionPerformed
+
+    private void jxButtonLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jxButtonLimparActionPerformed
+        if (evt.getSource().equals(jxButtonLimpar)) {
+            model.limparCamposDeCadastro(jxTableListaCadastros, jxTextFieldNome, jxTextFieldCPF,
+                    jxTextFieldRG, jxTextFieldTelResidencial, jxTextFieldTelCelular, jxTextFieldEmail, jxTextFieldWhatsApp);
+        }
+    }//GEN-LAST:event_jxButtonLimparActionPerformed
+
+    private void jXButtonAtualizarListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jXButtonAtualizarListaActionPerformed
+        if (evt.getSource().equals(jXButtonAtualizarLista)) {
+            jxSearchFieldBuscaID.setText("");
+            model.limparListaDePessoas(jxTableListaCadastros);
+            model.addListaDePessoas(jxTableListaCadastros);
+        }
+    }//GEN-LAST:event_jXButtonAtualizarListaActionPerformed
+    
     public static void main(String args[]) {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -399,7 +431,7 @@ public class Programa extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Programa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-
+        
         java.awt.EventQueue.invokeLater(() -> {
             try {
                 new Programa().setVisible(true);
@@ -412,6 +444,7 @@ public class Programa extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
+    private org.jdesktop.swingx.JXButton jXButtonAtualizarLista;
     private org.jdesktop.swingx.JXButton jxButtonCadastrar;
     private org.jdesktop.swingx.JXButton jxButtonEditar;
     private org.jdesktop.swingx.JXButton jxButtonLimpar;

@@ -83,7 +83,32 @@ public class PessoaDAO implements IDAO {
     }
 
     @Override
-    public void persist(Pessoa p) {
+    public boolean persist(int id_pessoa) {
+
+        con = (Connection) ConnectionFactory.getConnection();
+        int count = 0;
+
+        try {
+            ps = con.prepareStatement("SELECT count(*) FROM pessoa WHERE id_pessoa = ?;");
+            ps.setInt(1, id_pessoa);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                count = rs.getInt(1);
+            }
+        } catch (SQLException exception) {
+            try {
+                con.rollback();
+            } catch (SQLException exception1) {
+
+            }
+            throw new RuntimeException();
+        } finally {
+            DBUtil.closeConnections(ps, con);
+            DBUtil.closeConnections(rs);
+        }
+
+        return count == 1;
     }
 
     @Override
@@ -122,8 +147,17 @@ public class PessoaDAO implements IDAO {
 
         con = (Connection) ConnectionFactory.getConnection();
 
-        /*try {
-            
+        try {
+            ps = con.prepareStatement("USE POO2ICA2;");
+            ps.execute();
+
+            ps = con.prepareStatement("UPDATE pessoa SET nome = ?, cpf = ?, rg = ? WHERE id_pessoa = ?;");
+            ps.setString(1, p.getNome());
+            ps.setString(2, p.getCpf());
+            ps.setString(3, p.getRg());
+            ps.setInt(4, p.getId_pessoa());
+            ps.executeUpdate();
+            con.commit();
 
         } catch (SQLException exception) {
             try {
@@ -134,7 +168,7 @@ public class PessoaDAO implements IDAO {
             throw new RuntimeException();
         } finally {
             DBUtil.closeConnections(ps, con);
-        }*/
+        }
     }
 
     @Override
@@ -177,7 +211,7 @@ public class PessoaDAO implements IDAO {
 
         con = (Connection) ConnectionFactory.getConnection();
         List<Pessoa> pessoas = new ArrayList<>();
-        
+
         try {
             ps = con.prepareStatement("SELECT * FROM POO2ICA2.pessoa INNER JOIN POO2ICA2.contato WHERE id_pessoa = pessoa_id;");
             rs = ps.executeQuery();

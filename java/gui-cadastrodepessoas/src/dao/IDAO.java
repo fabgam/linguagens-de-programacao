@@ -5,7 +5,7 @@ import modelo.Pessoa;
 
 public interface IDAO {
 
-    public void persist(Pessoa p);
+    public boolean persist(int id_pessoa);
 
     public void delete(int id_pessoa);
 

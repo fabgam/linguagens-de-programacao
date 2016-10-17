@@ -16,7 +16,7 @@ public class PessoaDAO implements IDAO {
     private static PreparedStatement ps;
     private static ResultSet rs;
 
-    public static void insert(Pessoa p) {
+    public void insert(Pessoa p) {
 
         con = (Connection) ConnectionFactory.getConnection();
 
@@ -44,7 +44,7 @@ public class PessoaDAO implements IDAO {
         }
     }
 
-    public static int maiorIDInserida() {
+    public int maiorIDInserida() {
 
         con = (Connection) ConnectionFactory.getConnection();
         int maiorID = 0;
@@ -72,7 +72,31 @@ public class PessoaDAO implements IDAO {
     }
 
     @Override
-    public void persist(Pessoa p) {
+    public boolean persist(int id_pessoa) {
+
+        con = (Connection) ConnectionFactory.getConnection();
+        int count = 0;
+
+        try {
+            ps = con.prepareStatement("SELECT count(*) FROM pessoa WHERE id_pessoa = ?;");
+            ps.setInt(1, id_pessoa);
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                count = rs.getInt(1);
+            }
+        } catch (SQLException exception) {
+            try {
+                con.rollback();
+            } catch (SQLException exception1) {
+
+            }
+            throw new RuntimeException();
+        } finally {
+            DBUtil.closeConnections(ps, con);
+            DBUtil.closeConnections(rs);
+        }
+        return count == 1;
     }
 
     @Override

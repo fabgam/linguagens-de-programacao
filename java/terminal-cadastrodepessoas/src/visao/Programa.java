@@ -35,35 +35,48 @@ public class Programa {
         String cpf = input.nextLine();
         System.out.println("Digite o RG da pessoa: ");
         String rg = input.nextLine();
-        PessoaDAO.insert(new Pessoa(PessoaDAO.maiorIDInserida(), nome, cpf, rg));
+        dao.insert(new Pessoa(dao.maiorIDInserida() + 1, nome, cpf, rg));
     }
 
     public void menuExcluirPorID() {
         System.err.println("Exclusão por ID");
         System.out.println("Digite o ID da pessoa: ");
         int id = input.nextInt();
-        dao.delete(id);
+        if (dao.persist(id)) {
+            dao.delete(id);
+        } else {
+            System.err.println("Cadastro inexistente.");
+        }
     }
 
     public void menuExibirDadosPorID() {
         System.err.println("Exibir por ID");
         System.out.println("Digite a ID da pessoa: ");
         int id = input.nextInt();
-        Pessoa p = dao.get(id);
-        System.out.println(p.toString());
+        if (dao.persist(id)) {
+            Pessoa p = dao.get(id);
+            System.out.println(p.toString());
+        } else {
+            System.err.println("Cadastro inexistente.");
+        }
     }
 
     public void menuAlterarDados() {
         System.err.println("Alteração");
         System.err.println("Digite o ID da pessoa");
         int id = input.nextInt();
-        System.err.println("Digite o nome da pessoa para alterar: ");
-        String nome = input.nextLine();
-        System.err.println("Digite o CPF da pessoa para alterar: ");
-        String cpf = input.nextLine();
-        System.err.println("Digite o RG da pessoa para alterar: ");
-        String rg = input.nextLine();
-        dao.update(new Pessoa(id, nome, cpf, rg));
+        if (dao.persist(id)) {
+            System.err.println("Digite o nome da pessoa para alterar: ");
+            input.nextLine();
+            String nome = input.nextLine();
+            System.err.println("Digite o CPF da pessoa para alterar: ");
+            String cpf = input.nextLine();
+            System.err.println("Digite o RG da pessoa para alterar: ");
+            String rg = input.nextLine();
+            dao.update(new Pessoa(id, nome, cpf, rg));
+        } else {
+            System.err.println("Cadastro inexistente.");
+        }
     }
 
     public void menuExibirTodos() {
@@ -77,7 +90,7 @@ public class Programa {
     }
 
     public boolean isDatabasePopulate() {
-        return PessoaDAO.maiorIDInserida() != 0;
+        return dao.maiorIDInserida() != 0;
     }
 
     public void controle() {

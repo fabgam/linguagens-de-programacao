@@ -7,6 +7,7 @@ import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 import org.jdesktop.swingx.JXTable;
 import org.jdesktop.swingx.JXTextField;
+import visao.ProgramaDialogs;
 
 public class PessoaTableModel extends AbstractTableModel {
 
@@ -134,5 +135,11 @@ public class PessoaTableModel extends AbstractTableModel {
                 && "".equals(jxTextFieldRG.getText()) && "".equals(jxTextFieldTelResidencial.getText())
                 && "".equals(jxTextFieldTelCelular.getText()) && "".equals(jxTextFieldEmail.getText())
                 && "".equals(jxTextFieldWhatsApp.getText()));
+    }
+    
+    public void criaDialogs(int op){
+        ProgramaDialogs pg = new ProgramaDialogs(op);
+        Thread t = new Thread(pg);
+        t.start();
     }
 }
