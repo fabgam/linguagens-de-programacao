@@ -17,7 +17,7 @@ public class PessoaDAO implements IDAO {
     private static PreparedStatement ps;
     private static ResultSet rs;
 
-    public static void insert(Pessoa p) {
+    public void insert(Pessoa p) {
 
         con = (Connection) ConnectionFactory.getConnection();
 
@@ -55,7 +55,7 @@ public class PessoaDAO implements IDAO {
         }
     }
 
-    public static int maiorIDInserida() {
+    public int maiorIDInserida() {
 
         con = (Connection) ConnectionFactory.getConnection();
         int maiorID = 0;

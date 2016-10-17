@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.9" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
     <Property name="title" type="java.lang.String" value="Cadastro de pessoas"/>
@@ -24,258 +24,54 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
+          <Group type="102" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jxPanelListaCadastros" max="32767" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="jxButtonEditar" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jxButtonRemover" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jxButtonSair" min="-2" max="-2" attributes="0"/>
-                  </Group>
                   <Group type="102" attributes="0">
                       <Component id="jxButtonCadastrar" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jxButtonLimpar" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="jPanelIdentificacao" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jPanelContato" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Component id="jxButtonEditar" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                      <Component id="jxButtonRemover" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="391" max="32767" attributes="0"/>
+                      <Component id="jxButtonSair" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                      <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jxPanelListaCadastros" alignment="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jPanelIdentificacao" min="-2" max="-2" attributes="0"/>
-                  <Component id="jPanelContato" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
+          <Group type="102" attributes="0">
+              <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
+              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jxButtonCadastrar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jxButtonLimpar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
               <Component id="jxPanelListaCadastros" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jxButtonEditar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jxButtonRemover" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jxButtonSair" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jxButtonEditar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="0" pref="19" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="javax.swing.JPanel" name="jPanelIdentificacao">
-      <Properties>
-        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-          <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder title="Identifica&#xe7;&#xe3;o"/>
-          </Border>
-        </Property>
-      </Properties>
-
-      <Layout>
-        <DimensionLayout dim="0">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="jxLabelCPF" min="-2" max="-2" attributes="0"/>
-                              <Component id="jxLabelNome" min="-2" max="-2" attributes="0"/>
-                              <Component id="jxLabelRG" alignment="1" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jxTextFieldNome" pref="200" max="32767" attributes="0"/>
-                              <Component id="jxTextFieldCPF" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jxTextFieldRG" alignment="0" max="32767" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jxLabelCOD" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jxTextFieldCOD" min="-2" pref="199" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <EmptySpace max="32767" attributes="0"/>
-              </Group>
-          </Group>
-        </DimensionLayout>
-        <DimensionLayout dim="1">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jxLabelCOD" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jxTextFieldCOD" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jxTextFieldNome" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jxLabelNome" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jxLabelCPF" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jxTextFieldCPF" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jxLabelRG" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jxTextFieldRG" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-              </Group>
-          </Group>
-        </DimensionLayout>
-      </Layout>
-      <SubComponents>
-        <Component class="org.jdesktop.swingx.JXLabel" name="jxLabelNome">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Nome:"/>
-          </Properties>
-        </Component>
-        <Component class="org.jdesktop.swingx.JXLabel" name="jxLabelRG">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="RG:"/>
-          </Properties>
-        </Component>
-        <Component class="org.jdesktop.swingx.JXTextField" name="jxTextFieldCOD">
-          <Properties>
-            <Property name="editable" type="boolean" value="false"/>
-          </Properties>
-        </Component>
-        <Component class="org.jdesktop.swingx.JXLabel" name="jxLabelCPF">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="CPF:"/>
-          </Properties>
-        </Component>
-        <Component class="org.jdesktop.swingx.JXLabel" name="jxLabelCOD">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="C&#xf3;digo:"/>
-          </Properties>
-        </Component>
-        <Component class="org.jdesktop.swingx.JXTextField" name="jxTextFieldCPF">
-        </Component>
-        <Component class="org.jdesktop.swingx.JXTextField" name="jxTextFieldRG">
-        </Component>
-        <Component class="org.jdesktop.swingx.JXTextField" name="jxTextFieldNome">
-        </Component>
-      </SubComponents>
-    </Container>
-    <Container class="javax.swing.JPanel" name="jPanelContato">
-      <Properties>
-        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-          <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder title="Contato"/>
-          </Border>
-        </Property>
-      </Properties>
-
-      <Layout>
-        <DimensionLayout dim="0">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
-                  <Group type="103" groupAlignment="1" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Component id="jxLabelEmail" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
-                              <Component id="jxLabelTelCelular" min="-2" max="-2" attributes="0"/>
-                              <Component id="jxLabelWhatsApp" min="-2" max="-2" attributes="0"/>
-                              <Component id="jxLabelTelResidencial" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jxTextFieldTelResidencial" max="32767" attributes="0"/>
-                      <Component id="jxTextFieldEmail" max="32767" attributes="0"/>
-                      <Component id="jxTextFieldTelCelular" max="32767" attributes="0"/>
-                      <Component id="jxTextFieldWhatsApp" pref="244" max="32767" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-              </Group>
-          </Group>
-        </DimensionLayout>
-        <DimensionLayout dim="1">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jxLabelTelResidencial" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jxTextFieldTelResidencial" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jxLabelTelCelular" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jxTextFieldTelCelular" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jxLabelEmail" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jxTextFieldEmail" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jxLabelWhatsApp" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jxTextFieldWhatsApp" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="32767" attributes="0"/>
-              </Group>
-          </Group>
-        </DimensionLayout>
-      </Layout>
-      <SubComponents>
-        <Component class="org.jdesktop.swingx.JXTextField" name="jxTextFieldEmail">
-        </Component>
-        <Component class="org.jdesktop.swingx.JXLabel" name="jxLabelEmail">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="E-mail:"/>
-          </Properties>
-        </Component>
-        <Component class="org.jdesktop.swingx.JXTextField" name="jxTextFieldTelCelular">
-        </Component>
-        <Component class="org.jdesktop.swingx.JXTextField" name="jxTextFieldTelResidencial">
-        </Component>
-        <Component class="org.jdesktop.swingx.JXLabel" name="jxLabelTelResidencial">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Tel. Residencial:"/>
-          </Properties>
-        </Component>
-        <Component class="org.jdesktop.swingx.JXLabel" name="jxLabelTelCelular">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Tel. Celular:"/>
-          </Properties>
-        </Component>
-        <Component class="org.jdesktop.swingx.JXLabel" name="jxLabelWhatsApp">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="WhatsApp:"/>
-          </Properties>
-        </Component>
-        <Component class="org.jdesktop.swingx.JXTextField" name="jxTextFieldWhatsApp">
-        </Component>
-      </SubComponents>
-    </Container>
     <Component class="org.jdesktop.swingx.JXButton" name="jxButtonCadastrar">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -396,7 +192,7 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane2" pref="660" max="32767" attributes="0"/>
+                      <Component id="jScrollPane2" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
                           <Component id="jxSearchFieldBuscaID" min="-2" pref="150" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -515,9 +311,157 @@
             <Property name="prompt" type="java.lang.String" value="Busca por ID"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jxSearchFieldBuscaIDActionPerformed"/>
             <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jxSearchFieldBuscaIDKeyPressed"/>
           </Events>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JPanel" name="jPanel1">
+      <Properties>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+            <TitledBorder title="Identifica&#xe7;&#xe3;o | Contato"/>
+          </Border>
+        </Property>
+      </Properties>
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace pref="19" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jxLabelEmail" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="jxLabelNome" min="-2" max="-2" attributes="0"/>
+                              <Component id="jxLabelCOD" min="-2" max="-2" attributes="0"/>
+                              <Component id="jxLabelCPF" alignment="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jxLabelRG" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jxTextFieldRG" min="-2" pref="200" max="-2" attributes="0"/>
+                              <Component id="jxTextFieldNome" min="-2" pref="200" max="-2" attributes="0"/>
+                              <Component id="jxTextFieldCOD" min="-2" pref="199" max="-2" attributes="0"/>
+                              <Component id="jxTextFieldCPF" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jxLabelTelResidencial" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jxLabelWhatsApp" alignment="1" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="jxLabelTelCelular" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="jxTextFieldTelCelular" alignment="0" min="-2" pref="244" max="-2" attributes="0"/>
+                      <Component id="jxTextFieldTelResidencial" alignment="0" min="-2" pref="244" max="-2" attributes="0"/>
+                      <Component id="jxTextFieldEmail" alignment="0" min="-2" pref="244" max="-2" attributes="0"/>
+                      <Component id="jxTextFieldWhatsApp" alignment="0" min="-2" pref="244" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jxLabelCOD" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jxTextFieldCOD" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jxLabelTelResidencial" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jxTextFieldTelResidencial" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jxLabelNome" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jxTextFieldNome" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jxTextFieldTelCelular" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jxLabelTelCelular" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jxLabelCPF" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jxTextFieldCPF" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jxTextFieldEmail" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jxLabelEmail" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jxLabelRG" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jxTextFieldRG" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jxTextFieldWhatsApp" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jxLabelWhatsApp" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="org.jdesktop.swingx.JXTextField" name="jxTextFieldWhatsApp">
+        </Component>
+        <Component class="org.jdesktop.swingx.JXLabel" name="jxLabelCOD">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="C&#xf3;digo:"/>
+          </Properties>
+        </Component>
+        <Component class="org.jdesktop.swingx.JXLabel" name="jxLabelTelResidencial">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Tel. Residencial:"/>
+          </Properties>
+        </Component>
+        <Component class="org.jdesktop.swingx.JXLabel" name="jxLabelCPF">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="CPF:"/>
+          </Properties>
+        </Component>
+        <Component class="org.jdesktop.swingx.JXLabel" name="jxLabelEmail">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="E-mail:"/>
+          </Properties>
+        </Component>
+        <Component class="org.jdesktop.swingx.JXLabel" name="jxLabelNome">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Nome:"/>
+          </Properties>
+        </Component>
+        <Component class="org.jdesktop.swingx.JXTextField" name="jxTextFieldCPF">
+        </Component>
+        <Component class="org.jdesktop.swingx.JXLabel" name="jxLabelTelCelular">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Tel. Celular:"/>
+          </Properties>
+        </Component>
+        <Component class="org.jdesktop.swingx.JXTextField" name="jxTextFieldRG">
+        </Component>
+        <Component class="org.jdesktop.swingx.JXLabel" name="jxLabelWhatsApp">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="WhatsApp:"/>
+          </Properties>
+        </Component>
+        <Component class="org.jdesktop.swingx.JXTextField" name="jxTextFieldEmail">
+        </Component>
+        <Component class="org.jdesktop.swingx.JXTextField" name="jxTextFieldTelCelular">
+        </Component>
+        <Component class="org.jdesktop.swingx.JXTextField" name="jxTextFieldNome">
+        </Component>
+        <Component class="org.jdesktop.swingx.JXLabel" name="jxLabelRG">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="RG:"/>
+          </Properties>
+        </Component>
+        <Component class="org.jdesktop.swingx.JXTextField" name="jxTextFieldTelResidencial">
+        </Component>
+        <Component class="org.jdesktop.swingx.JXTextField" name="jxTextFieldCOD">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>

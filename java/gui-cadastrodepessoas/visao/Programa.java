@@ -4,44 +4,28 @@ import dao.PessoaDAO;
 import factory.Database;
 import java.awt.event.KeyEvent;
 import java.sql.SQLException;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ListSelectionModel;
-import javax.swing.table.DefaultTableModel;
 import modelo.Pessoa;
-import org.jdesktop.swingx.JXTextField;
+import modelo.PessoaTableModel;
 
 public class Programa extends javax.swing.JFrame {
+
+    private final PessoaTableModel model = new PessoaTableModel();
+    private final PessoaDAO dao = new PessoaDAO();
 
     public Programa() throws SQLException {
         initComponents();
         Database.create();
-        jxTextFieldCOD.setText(Integer.toString(PessoaDAO.maiorIDInserida()));
+        jxTextFieldCOD.setText(Integer.toString(dao.maiorIDInserida()));
+        
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanelIdentificacao = new javax.swing.JPanel();
-        jxLabelNome = new org.jdesktop.swingx.JXLabel();
-        jxLabelRG = new org.jdesktop.swingx.JXLabel();
-        jxTextFieldCOD = new org.jdesktop.swingx.JXTextField();
-        jxLabelCPF = new org.jdesktop.swingx.JXLabel();
-        jxLabelCOD = new org.jdesktop.swingx.JXLabel();
-        jxTextFieldCPF = new org.jdesktop.swingx.JXTextField();
-        jxTextFieldRG = new org.jdesktop.swingx.JXTextField();
-        jxTextFieldNome = new org.jdesktop.swingx.JXTextField();
-        jPanelContato = new javax.swing.JPanel();
-        jxTextFieldEmail = new org.jdesktop.swingx.JXTextField();
-        jxLabelEmail = new org.jdesktop.swingx.JXLabel();
-        jxTextFieldTelCelular = new org.jdesktop.swingx.JXTextField();
-        jxTextFieldTelResidencial = new org.jdesktop.swingx.JXTextField();
-        jxLabelTelResidencial = new org.jdesktop.swingx.JXLabel();
-        jxLabelTelCelular = new org.jdesktop.swingx.JXLabel();
-        jxLabelWhatsApp = new org.jdesktop.swingx.JXLabel();
-        jxTextFieldWhatsApp = new org.jdesktop.swingx.JXTextField();
         jxButtonCadastrar = new org.jdesktop.swingx.JXButton();
         jxButtonLimpar = new org.jdesktop.swingx.JXButton();
         jxButtonEditar = new org.jdesktop.swingx.JXButton();
@@ -51,122 +35,26 @@ public class Programa extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jxTableListaCadastros = new org.jdesktop.swingx.JXTable();
         jxSearchFieldBuscaID = new org.jdesktop.swingx.JXSearchField();
+        jPanel1 = new javax.swing.JPanel();
+        jxTextFieldWhatsApp = new org.jdesktop.swingx.JXTextField();
+        jxLabelCOD = new org.jdesktop.swingx.JXLabel();
+        jxLabelTelResidencial = new org.jdesktop.swingx.JXLabel();
+        jxLabelCPF = new org.jdesktop.swingx.JXLabel();
+        jxLabelEmail = new org.jdesktop.swingx.JXLabel();
+        jxLabelNome = new org.jdesktop.swingx.JXLabel();
+        jxTextFieldCPF = new org.jdesktop.swingx.JXTextField();
+        jxLabelTelCelular = new org.jdesktop.swingx.JXLabel();
+        jxTextFieldRG = new org.jdesktop.swingx.JXTextField();
+        jxLabelWhatsApp = new org.jdesktop.swingx.JXLabel();
+        jxTextFieldEmail = new org.jdesktop.swingx.JXTextField();
+        jxTextFieldTelCelular = new org.jdesktop.swingx.JXTextField();
+        jxTextFieldNome = new org.jdesktop.swingx.JXTextField();
+        jxLabelRG = new org.jdesktop.swingx.JXLabel();
+        jxTextFieldTelResidencial = new org.jdesktop.swingx.JXTextField();
+        jxTextFieldCOD = new org.jdesktop.swingx.JXTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastro de pessoas");
-
-        jPanelIdentificacao.setBorder(javax.swing.BorderFactory.createTitledBorder("Identificação"));
-
-        jxLabelNome.setText("Nome:");
-
-        jxLabelRG.setText("RG:");
-
-        jxTextFieldCOD.setEditable(false);
-
-        jxLabelCPF.setText("CPF:");
-
-        jxLabelCOD.setText("Código:");
-
-        javax.swing.GroupLayout jPanelIdentificacaoLayout = new javax.swing.GroupLayout(jPanelIdentificacao);
-        jPanelIdentificacao.setLayout(jPanelIdentificacaoLayout);
-        jPanelIdentificacaoLayout.setHorizontalGroup(
-            jPanelIdentificacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelIdentificacaoLayout.createSequentialGroup()
-                .addGroup(jPanelIdentificacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelIdentificacaoLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanelIdentificacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jxLabelCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jxLabelNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jxLabelRG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanelIdentificacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jxTextFieldNome, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                            .addComponent(jxTextFieldCPF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jxTextFieldRG, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelIdentificacaoLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jxLabelCOD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jxTextFieldCOD, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanelIdentificacaoLayout.setVerticalGroup(
-            jPanelIdentificacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelIdentificacaoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelIdentificacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jxLabelCOD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jxTextFieldCOD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelIdentificacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jxTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jxLabelNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelIdentificacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jxLabelCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jxTextFieldCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelIdentificacaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jxLabelRG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jxTextFieldRG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
-
-        jPanelContato.setBorder(javax.swing.BorderFactory.createTitledBorder("Contato"));
-
-        jxLabelEmail.setText("E-mail:");
-
-        jxLabelTelResidencial.setText("Tel. Residencial:");
-
-        jxLabelTelCelular.setText("Tel. Celular:");
-
-        jxLabelWhatsApp.setText("WhatsApp:");
-
-        javax.swing.GroupLayout jPanelContatoLayout = new javax.swing.GroupLayout(jPanelContato);
-        jPanelContato.setLayout(jPanelContatoLayout);
-        jPanelContatoLayout.setHorizontalGroup(
-            jPanelContatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelContatoLayout.createSequentialGroup()
-                .addGroup(jPanelContatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanelContatoLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jxLabelEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanelContatoLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(jPanelContatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jxLabelTelCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jxLabelWhatsApp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jxLabelTelResidencial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelContatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jxTextFieldTelResidencial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jxTextFieldEmail, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jxTextFieldTelCelular, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jxTextFieldWhatsApp, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        jPanelContatoLayout.setVerticalGroup(
-            jPanelContatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelContatoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanelContatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jxLabelTelResidencial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jxTextFieldTelResidencial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelContatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jxLabelTelCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jxTextFieldTelCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelContatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jxLabelEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jxTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanelContatoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jxLabelWhatsApp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jxTextFieldWhatsApp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
 
         jxButtonCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/user_add.png"))); // NOI18N
         jxButtonCadastrar.setText("Cadastrar");
@@ -265,11 +153,6 @@ public class Programa extends javax.swing.JFrame {
         jxSearchFieldBuscaID.setName(""); // NOI18N
         jxSearchFieldBuscaID.setPreferredSize(new java.awt.Dimension(110, 25));
         jxSearchFieldBuscaID.setPrompt("Busca por ID");
-        jxSearchFieldBuscaID.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jxSearchFieldBuscaIDActionPerformed(evt);
-            }
-        });
         jxSearchFieldBuscaID.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jxSearchFieldBuscaIDKeyPressed(evt);
@@ -283,7 +166,7 @@ public class Programa extends javax.swing.JFrame {
             .addGroup(jxPanelListaCadastrosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jxPanelListaCadastrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 660, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2)
                     .addGroup(jxPanelListaCadastrosLayout.createSequentialGroup()
                         .addComponent(jxSearchFieldBuscaID, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -299,93 +182,139 @@ public class Programa extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Identificação | Contato"));
+
+        jxLabelCOD.setText("Código:");
+
+        jxLabelTelResidencial.setText("Tel. Residencial:");
+
+        jxLabelCPF.setText("CPF:");
+
+        jxLabelEmail.setText("E-mail:");
+
+        jxLabelNome.setText("Nome:");
+
+        jxLabelTelCelular.setText("Tel. Celular:");
+
+        jxLabelWhatsApp.setText("WhatsApp:");
+
+        jxLabelRG.setText("RG:");
+
+        jxTextFieldCOD.setEditable(false);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(19, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jxLabelEmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jxLabelNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jxLabelCOD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jxLabelCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jxLabelRG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jxTextFieldRG, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jxTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jxTextFieldCOD, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jxTextFieldCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(53, 53, 53)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jxLabelTelResidencial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jxLabelWhatsApp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jxLabelTelCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jxTextFieldTelCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jxTextFieldTelResidencial, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jxTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jxTextFieldWhatsApp, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jxLabelCOD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jxTextFieldCOD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jxLabelTelResidencial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jxTextFieldTelResidencial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jxLabelNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jxTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jxTextFieldTelCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jxLabelTelCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jxLabelCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jxTextFieldCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jxTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jxLabelEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jxLabelRG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jxTextFieldRG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jxTextFieldWhatsApp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jxLabelWhatsApp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jxPanelListaCadastros, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jxButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jxButtonRemover, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jxButtonSair, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jxButtonCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jxButtonLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(jxButtonLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanelIdentificacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanelContato, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(jxButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(6, 6, 6)
+                        .addComponent(jxButtonRemover, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 391, Short.MAX_VALUE)
+                        .addComponent(jxButtonSair, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jxPanelListaCadastros, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(5, 5, 5))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanelIdentificacao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanelContato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(12, 12, 12)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jxButtonCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jxButtonLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(6, 6, 6)
                 .addComponent(jxPanelListaCadastros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jxButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jxButtonRemover, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jxButtonSair, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 19, Short.MAX_VALUE))
+                    .addComponent(jxButtonSair, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jxButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void montajxTableListaCadastros() {
-        PessoaDAO dao = new PessoaDAO();
-        List<Pessoa> p = dao.getAll();
-        DefaultTableModel model = (DefaultTableModel) jxTableListaCadastros.getModel();
-        for (int i = 0; i < p.size(); i++) {
-            model.addRow(new Object[0]);
-            jxTableListaCadastros.getModel().setValueAt(p.get(i).getId_pessoa(), i, 0);
-            jxTableListaCadastros.getModel().setValueAt(p.get(i).getNome(), i, 1);
-            jxTableListaCadastros.getModel().setValueAt(p.get(i).getCpf(), i, 2);
-            jxTableListaCadastros.getModel().setValueAt(p.get(i).getRg(), i, 3);
-            jxTableListaCadastros.getModel().setValueAt(p.get(i).getTelResidencial(), i, 4);
-            jxTableListaCadastros.getModel().setValueAt(p.get(i).getTelCelular(), i, 5);
-            jxTableListaCadastros.getModel().setValueAt(p.get(i).getEmail(), i, 6);
-            jxTableListaCadastros.getModel().setValueAt(p.get(i).getWhatsApp(), i, 7);
-        }
-    }
-
-    private void limpajxTableListaCadastros() {
-        DefaultTableModel model = (DefaultTableModel) jxTableListaCadastros.getModel();
-        while (model.getRowCount() > 0) {
-            model.removeRow(0);
-        }
-    }
-
-    private void limparCamposDeCadastro() {
-        jxTextFieldNome.setText("");
-        jxTextFieldCPF.setText("");
-        jxTextFieldRG.setText("");
-        jxTextFieldTelResidencial.setText("");
-        jxTextFieldTelCelular.setText("");
-        jxTextFieldEmail.setText("");
-        jxTextFieldWhatsApp.setText("");
-    }
-
     private void jxButtonLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jxButtonLimparActionPerformed
         if (evt.getSource().equals(jxButtonLimpar)) {
-            limparCamposDeCadastro();
+            model.limparCamposDeCadastro(jxTableListaCadastros, jxTextFieldNome, jxTextFieldCPF,
+                    jxTextFieldRG, jxTextFieldTelResidencial, jxTextFieldTelCelular, jxTextFieldEmail, jxTextFieldWhatsApp);
         }
     }//GEN-LAST:event_jxButtonLimparActionPerformed
 
@@ -396,36 +325,39 @@ public class Programa extends javax.swing.JFrame {
     }//GEN-LAST:event_jxButtonSairActionPerformed
 
     private void jxButtonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jxButtonCadastrarActionPerformed
-        if (evt.getSource().equals(jxButtonCadastrar) && !validaCampos(jxTextFieldNome)
-                && !validaCampos(jxTextFieldCPF) && !validaCampos(jxTextFieldRG)
-                && !validaCampos(jxTextFieldTelResidencial) && !validaCampos(jxTextFieldTelCelular)
-                && !validaCampos(jxTextFieldEmail) && !validaCampos(jxTextFieldWhatsApp)) {
+        if (evt.getSource().equals(jxButtonCadastrar)) {
+            if (model.validaCampos(
+                    jxTextFieldNome, jxTextFieldCPF, jxTextFieldRG,
+                    jxTextFieldTelResidencial, jxTextFieldTelCelular,
+                    jxTextFieldEmail, jxTextFieldWhatsApp)) {
 
-            PessoaDAO.insert(new Pessoa(Integer.parseInt(jxTextFieldCOD.getText()), jxTextFieldNome.getText(), jxTextFieldCPF.getText(),
-                    jxTextFieldRG.getText(), jxTextFieldTelResidencial.getText(),
-                    jxTextFieldTelCelular.getText(), jxTextFieldEmail.getText(),
-                    jxTextFieldWhatsApp.getText()));
+                dao.insert(new Pessoa(Integer.parseInt(
+                        jxTextFieldCOD.getText()), jxTextFieldNome.getText(),
+                        jxTextFieldCPF.getText(), jxTextFieldRG.getText(),
+                        jxTextFieldTelResidencial.getText(), jxTextFieldTelCelular.getText(),
+                        jxTextFieldEmail.getText(), jxTextFieldWhatsApp.getText()));
 
-            limparCamposDeCadastro();
-            jxTextFieldCOD.setText(Integer.toString(PessoaDAO.maiorIDInserida()));
-            montajxTableListaCadastros();
+                model.limparCamposDeCadastro(
+                        jxTableListaCadastros, jxTextFieldNome, jxTextFieldCPF,
+                        jxTextFieldRG, jxTextFieldTelResidencial, jxTextFieldTelCelular,
+                        jxTextFieldEmail, jxTextFieldWhatsApp);
+
+                jxTextFieldCOD.setText(Integer.toString(dao.maiorIDInserida()));
+                model.addListaDePessoas(jxTableListaCadastros);
+                new ProgramaDialogs(1).start();
+            } else {
+                new ProgramaDialogs(5).start();
+            }
         }
     }//GEN-LAST:event_jxButtonCadastrarActionPerformed
 
-    private boolean validaCampos(JXTextField jxtf) {
-        return jxtf.getText().equals("") || jxtf.getText().equals(" ");
-    }
-
-    private void jxSearchFieldBuscaIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jxSearchFieldBuscaIDActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jxSearchFieldBuscaIDActionPerformed
-
     private void jxButtonRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jxButtonRemoverActionPerformed
         if (evt.getSource().equals(jxButtonRemover)) {
-            PessoaDAO dao = new PessoaDAO();
             dao.delete((int) jxTableListaCadastros.getValueAt(jxTableListaCadastros.getSelectedRow(), 0));
-            limpajxTableListaCadastros();
-            montajxTableListaCadastros();
+            model.limparListaDePessoas(jxTableListaCadastros);
+            model.addListaDePessoas(jxTableListaCadastros);
+            jxSearchFieldBuscaID.setText("");
+            new ProgramaDialogs(2).start();
         }
     }//GEN-LAST:event_jxButtonRemoverActionPerformed
 
@@ -437,29 +369,20 @@ public class Programa extends javax.swing.JFrame {
 
     private void jxSearchFieldBuscaIDKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jxSearchFieldBuscaIDKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            PessoaDAO dao = new PessoaDAO();
-            try {
-                int searchFieldID = Integer.parseInt(jxSearchFieldBuscaID.getText().trim());
-                Pessoa p = dao.get(searchFieldID);
-                limpajxTableListaCadastros();
-                DefaultTableModel model = (DefaultTableModel) jxTableListaCadastros.getModel();
-                model.addRow(new Object[0]);
-                jxTableListaCadastros.getModel().setValueAt(p.getId_pessoa(), 0, 0);
-                jxTableListaCadastros.getModel().setValueAt(p.getNome(), 0, 1);
-                jxTableListaCadastros.getModel().setValueAt(p.getCpf(), 0, 2);
-                jxTableListaCadastros.getModel().setValueAt(p.getRg(), 0, 3);
-                jxTableListaCadastros.getModel().setValueAt(p.getTelResidencial(), 0, 4);
-                jxTableListaCadastros.getModel().setValueAt(p.getTelCelular(), 0, 5);
-                jxTableListaCadastros.getModel().setValueAt(p.getEmail(), 0, 6);
-                jxTableListaCadastros.getModel().setValueAt(p.getWhatsApp(), 0, 7);
-            } catch (NumberFormatException exception) {
+            if ("".equals(jxSearchFieldBuscaID.getText().trim())) {
+                new ProgramaDialogs(4).start();
+            } else {
+                try {
+                    int searchFieldID = Integer.parseInt(jxSearchFieldBuscaID.getText().trim());
+                    model.addPessoa(jxTableListaCadastros, searchFieldID);
+                } catch (NumberFormatException exception) {
 
+                }
             }
         }
     }//GEN-LAST:event_jxSearchFieldBuscaIDKeyPressed
 
     public static void main(String args[]) {
-
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -487,8 +410,7 @@ public class Programa extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanelContato;
-    private javax.swing.JPanel jPanelIdentificacao;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private org.jdesktop.swingx.JXButton jxButtonCadastrar;
     private org.jdesktop.swingx.JXButton jxButtonEditar;
