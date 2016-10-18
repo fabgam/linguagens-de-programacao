@@ -6,9 +6,9 @@ import java.sql.SQLException;
 
 public class ConnectionFactory {
 
-    private static final String urlBD = "jdbc:mysql://localhost:3306/POO2ICA2?useSSL=true";
-    private static final String userBD = "";
-    private static final String passBD = "";
+    private static final String URLBD = "jdbc:mysql://localhost:3306/POO2ICA2?useSSL=true";
+    private static final String USERBD = ""; // Colocar entre as aspas o nome do usuário do banco de dados
+    private static final String PASSBD = ""; // Colocar entre as aspas a senha do banco de dados
 
     public static Connection getConnection() {
         Connection con;
@@ -19,7 +19,7 @@ public class ConnectionFactory {
             } catch (ClassNotFoundException ex) {
                 throw new RuntimeException(ex);
             }
-            con = DriverManager.getConnection(urlBD, userBD, passBD);
+            con = DriverManager.getConnection(URLBD, USERBD, PASSBD);
             con.setAutoCommit(false);
             return con;
         } catch (SQLException exception) {

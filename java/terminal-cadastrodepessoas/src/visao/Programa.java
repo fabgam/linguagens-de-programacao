@@ -6,11 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import modelo.Pessoa;
+import modelo.ProgramaModelo;
 
 public class Programa {
 
     private final PessoaDAO dao = new PessoaDAO();
     private final Scanner input = new Scanner(System.in);
+    private final ProgramaModelo model = new ProgramaModelo();
 
     public Programa() {
         Database.create();
@@ -27,117 +29,157 @@ public class Programa {
     }
 
     public void menuCadastrar() {
+
         System.err.println("Cadastro");
         System.out.println("Digite o nome da pessoa: ");
-        input.nextLine();
         String nome = input.nextLine();
         System.out.println("Digite o CPF da pessoa: ");
         String cpf = input.nextLine();
         System.out.println("Digite o RG da pessoa: ");
         String rg = input.nextLine();
-        dao.insert(new Pessoa(dao.maiorIDInserida() + 1, nome, cpf, rg));
+
+        if (model.isCadastroValido(nome, cpf, rg)) {
+            dao.insert(new Pessoa(dao.maiorIDInserida() + 1, nome, cpf, rg));
+            System.err.println("Cadastro realizado com sucesso.");
+        } else {
+            System.err.println("Cadastro não realizado.");
+            System.err.println("Preencha todos os campos.");
+        }
     }
 
     public void menuExcluirPorID() {
+
         System.err.println("Exclusão por ID");
         System.out.println("Digite o ID da pessoa: ");
-        int id = input.nextInt();
-        if (dao.persist(id)) {
-            dao.delete(id);
+        String str = input.nextLine();
+
+        if (model.isDigit(str)) {
+            if (dao.persist(model.strToInt(str))) {
+                dao.delete(model.strToInt(str));
+                System.err.println("Cadastro removido com sucesso.");
+            } else {
+                System.err.println("Cadastro inexistente.");
+            }
         } else {
-            System.err.println("Cadastro inexistente.");
+            System.err.println("Entrada inválida.");
         }
     }
 
     public void menuExibirDadosPorID() {
+
         System.err.println("Exibir por ID");
         System.out.println("Digite a ID da pessoa: ");
-        int id = input.nextInt();
-        if (dao.persist(id)) {
-            Pessoa p = dao.get(id);
-            System.out.println(p.toString());
+        String str = input.nextLine();
+
+        if (model.isDigit(str)) {
+            if (dao.persist(model.strToInt(str))) {
+                Pessoa p = dao.get((model.strToInt(str)));
+                System.out.println(p.toString());
+            } else {
+                System.err.println("Cadastro inexistente.");
+            }
         } else {
-            System.err.println("Cadastro inexistente.");
+            System.err.println("Entrada inválida.");
         }
     }
 
     public void menuAlterarDados() {
+
         System.err.println("Alteração");
         System.err.println("Digite o ID da pessoa");
-        int id = input.nextInt();
-        if (dao.persist(id)) {
-            System.err.println("Digite o nome da pessoa para alterar: ");
-            input.nextLine();
-            String nome = input.nextLine();
-            System.err.println("Digite o CPF da pessoa para alterar: ");
-            String cpf = input.nextLine();
-            System.err.println("Digite o RG da pessoa para alterar: ");
-            String rg = input.nextLine();
-            dao.update(new Pessoa(id, nome, cpf, rg));
+        String str = input.nextLine();
+
+        if (model.isDigit(str)) {
+            if (dao.persist(model.strToInt(str))) {
+
+                System.err.println("Digite o nome da pessoa para alterar: ");
+                String nome = input.nextLine();
+                System.err.println("Digite o CPF da pessoa para alterar: ");
+                String cpf = input.nextLine();
+                System.err.println("Digite o RG da pessoa para alterar: ");
+                String rg = input.nextLine();
+
+                if (model.isCadastroValido(nome, cpf, rg)) {
+                    dao.update(new Pessoa(model.strToInt(str), nome, cpf, rg));
+                    System.err.println("Alteração no cadastro realizada com sucesso.");
+                } else {
+                    System.err.println("Dados inválidos.");
+                    System.err.println("Alteração no cadastro não realizada.");
+                }
+            } else {
+                System.err.println("Cadastro inexistente.");
+            }
         } else {
-            System.err.println("Cadastro inexistente.");
+            System.err.println("Entrada inválida.");
         }
     }
 
     public void menuExibirTodos() {
+
         List<Pessoa> pessoas = new ArrayList<>();
         pessoas.addAll(dao.getAll());
+
         System.err.println("Exibir todos");
         System.err.println("Exibição de todos");
+
         for (int i = 0; i < pessoas.size(); i++) {
             System.out.println(pessoas.get(i).toString());
         }
     }
 
-    public boolean isDatabasePopulate() {
-        return dao.maiorIDInserida() != 0;
-    }
-
     public void controle() {
-        int op = input.nextInt();
 
-        switch (op) {
-            case 1:
-                menuCadastrar();
-                break;
-            case 2:
-                if (!isDatabasePopulate()) {
-                    System.err.println("Nenhum registro encontrado.");
-                } else {
-                    menuExcluirPorID();
-                }
-                break;
-            case 3:
-                if (!isDatabasePopulate()) {
-                    System.err.println("Nenhum registro encontrado.");
-                } else {
-                    menuExibirDadosPorID();
-                }
-                break;
-            case 4:
-                if (!isDatabasePopulate()) {
-                    System.err.println("Nenhum registro encontrado.");
-                } else {
-                    menuAlterarDados();
-                }
-                break;
-            case 5:
-                if (!isDatabasePopulate()) {
-                    System.err.println("Nenhum registro encontrado.");
-                } else {
-                    menuExibirTodos();
-                }
-                break;
-            case 0:
-                System.exit(0);
-            default:
-                System.err.println("Opção inválida.");
-                break;
+        String str = input.nextLine();
+
+        if (model.isDigit(str)) {
+
+            switch (model.strToInt(str)) {
+                case 1:
+                    menuCadastrar();
+                    break;
+                case 2:
+                    if (!model.isDatabasePopulate()) {
+                        System.err.println("Nenhum registro encontrado.");
+                    } else {
+                        menuExcluirPorID();
+                    }
+                    break;
+                case 3:
+                    if (!model.isDatabasePopulate()) {
+                        System.err.println("Nenhum registro encontrado.");
+                    } else {
+                        menuExibirDadosPorID();
+                    }
+                    break;
+                case 4:
+                    if (!model.isDatabasePopulate()) {
+                        System.err.println("Nenhum registro encontrado.");
+                    } else {
+                        menuAlterarDados();
+                    }
+                    break;
+                case 5:
+                    if (!model.isDatabasePopulate()) {
+                        System.err.println("Nenhum registro encontrado.");
+                    } else {
+                        menuExibirTodos();
+                    }
+                    break;
+                case 0:
+                    System.exit(0);
+                default:
+                    System.err.println("Opção inválida.");
+                    break;
+            }
+        } else {
+            System.err.println("Entrada inválida.");
+            System.err.println("Apenas números.");
         }
     }
 
     public static void main(String[] args) {
         Programa p = new Programa();
+
         for (;;) {
             p.menuInicial();
             p.controle();

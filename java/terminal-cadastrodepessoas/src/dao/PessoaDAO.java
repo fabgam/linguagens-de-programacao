@@ -170,7 +170,6 @@ public class PessoaDAO implements IDAO {
             if (rs.next()) {
                 return new Pessoa(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4));
             }
-
         } catch (SQLException exception) {
             try {
                 con.rollback();
