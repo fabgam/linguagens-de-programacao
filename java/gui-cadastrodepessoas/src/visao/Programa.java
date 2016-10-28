@@ -11,110 +11,54 @@ import modelo.Pessoa;
 import modelo.PessoaTableModel;
 
 public class Programa extends javax.swing.JFrame {
-    
+
     private final PessoaTableModel model = new PessoaTableModel();
     private final PessoaDAO dao = new PessoaDAO();
-    
+
     public Programa() throws SQLException {
         initComponents();
         Database.create();
         jxTextFieldCOD.setText(Integer.toString(dao.maiorIDInserida()));
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jxButtonCadastrar = new org.jdesktop.swingx.JXButton();
-        jxButtonLimpar = new org.jdesktop.swingx.JXButton();
-        jxButtonEditar = new org.jdesktop.swingx.JXButton();
-        jxButtonRemover = new org.jdesktop.swingx.JXButton();
-        jxButtonSair = new org.jdesktop.swingx.JXButton();
         jxPanelListaCadastros = new org.jdesktop.swingx.JXPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jxTableListaCadastros = new org.jdesktop.swingx.JXTable();
         jxSearchFieldBuscaID = new org.jdesktop.swingx.JXSearchField();
         jXButtonAtualizarLista = new org.jdesktop.swingx.JXButton();
-        jPanel1 = new javax.swing.JPanel();
-        jxTextFieldWhatsApp = new org.jdesktop.swingx.JXTextField();
-        jxLabelCOD = new org.jdesktop.swingx.JXLabel();
-        jxLabelTelResidencial = new org.jdesktop.swingx.JXLabel();
-        jxLabelCPF = new org.jdesktop.swingx.JXLabel();
-        jxLabelEmail = new org.jdesktop.swingx.JXLabel();
-        jxLabelNome = new org.jdesktop.swingx.JXLabel();
-        jxTextFieldCPF = new org.jdesktop.swingx.JXTextField();
-        jxLabelTelCelular = new org.jdesktop.swingx.JXLabel();
+        jXPanel3 = new org.jdesktop.swingx.JXPanel();
+        jXPanel1 = new org.jdesktop.swingx.JXPanel();
         jxTextFieldRG = new org.jdesktop.swingx.JXTextField();
-        jxLabelWhatsApp = new org.jdesktop.swingx.JXLabel();
-        jxTextFieldEmail = new org.jdesktop.swingx.JXTextField();
-        jxTextFieldTelCelular = new org.jdesktop.swingx.JXTextField();
-        jxTextFieldNome = new org.jdesktop.swingx.JXTextField();
         jxLabelRG = new org.jdesktop.swingx.JXLabel();
-        jxTextFieldTelResidencial = new org.jdesktop.swingx.JXTextField();
+        jxLabelCPF = new org.jdesktop.swingx.JXLabel();
+        jxLabelNome = new org.jdesktop.swingx.JXLabel();
         jxTextFieldCOD = new org.jdesktop.swingx.JXTextField();
+        jxLabelCOD = new org.jdesktop.swingx.JXLabel();
+        jxTextFieldCPF = new org.jdesktop.swingx.JXTextField();
+        jxTextFieldNome = new org.jdesktop.swingx.JXTextField();
+        jXPanel2 = new org.jdesktop.swingx.JXPanel();
+        jxTextFieldEmail = new org.jdesktop.swingx.JXTextField();
+        jxLabelWhatsApp = new org.jdesktop.swingx.JXLabel();
+        jxTextFieldTelCelular = new org.jdesktop.swingx.JXTextField();
+        jxLabelEmail = new org.jdesktop.swingx.JXLabel();
+        jxTextFieldTelResidencial = new org.jdesktop.swingx.JXTextField();
+        jxTextFieldWhatsApp = new org.jdesktop.swingx.JXTextField();
+        jxLabelTelResidencial = new org.jdesktop.swingx.JXLabel();
+        jxLabelTelCelular = new org.jdesktop.swingx.JXLabel();
+        jXPanel4 = new org.jdesktop.swingx.JXPanel();
+        jxButtonRemover = new org.jdesktop.swingx.JXButton();
+        jxButtonEditar = new org.jdesktop.swingx.JXButton();
+        jxButtonSair = new org.jdesktop.swingx.JXButton();
+        jXPanel5 = new org.jdesktop.swingx.JXPanel();
+        jxButtonCadastrar = new org.jdesktop.swingx.JXButton();
+        jxButtonLimpar = new org.jdesktop.swingx.JXButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastro de pessoas");
-
-        jxButtonCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/user_add.png"))); // NOI18N
-        jxButtonCadastrar.setText("Cadastrar");
-        jxButtonCadastrar.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jxButtonCadastrar.setMaximumSize(new java.awt.Dimension(110, 25));
-        jxButtonCadastrar.setMinimumSize(new java.awt.Dimension(110, 25));
-        jxButtonCadastrar.setPreferredSize(new java.awt.Dimension(110, 25));
-        jxButtonCadastrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jxButtonCadastrarActionPerformed(evt);
-            }
-        });
-
-        jxButtonLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/bin.png"))); // NOI18N
-        jxButtonLimpar.setText("Limpar");
-        jxButtonLimpar.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jxButtonLimpar.setMaximumSize(new java.awt.Dimension(110, 25));
-        jxButtonLimpar.setMinimumSize(new java.awt.Dimension(110, 25));
-        jxButtonLimpar.setPreferredSize(new java.awt.Dimension(110, 25));
-        jxButtonLimpar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jxButtonLimparActionPerformed(evt);
-            }
-        });
-
-        jxButtonEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/user_edit.png"))); // NOI18N
-        jxButtonEditar.setText("Editar");
-        jxButtonEditar.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jxButtonEditar.setMaximumSize(new java.awt.Dimension(110, 25));
-        jxButtonEditar.setMinimumSize(new java.awt.Dimension(110, 25));
-        jxButtonEditar.setPreferredSize(new java.awt.Dimension(110, 25));
-        jxButtonEditar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jxButtonEditarActionPerformed(evt);
-            }
-        });
-
-        jxButtonRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/user_delete.png"))); // NOI18N
-        jxButtonRemover.setText("Remover");
-        jxButtonRemover.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jxButtonRemover.setMaximumSize(new java.awt.Dimension(110, 25));
-        jxButtonRemover.setMinimumSize(new java.awt.Dimension(110, 25));
-        jxButtonRemover.setPreferredSize(new java.awt.Dimension(110, 25));
-        jxButtonRemover.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jxButtonRemoverActionPerformed(evt);
-            }
-        });
-
-        jxButtonSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/cancel.png"))); // NOI18N
-        jxButtonSair.setText("Sair");
-        jxButtonSair.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jxButtonSair.setMaximumSize(new java.awt.Dimension(110, 25));
-        jxButtonSair.setMinimumSize(new java.awt.Dimension(110, 25));
-        jxButtonSair.setPreferredSize(new java.awt.Dimension(110, 25));
-        jxButtonSair.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jxButtonSairActionPerformed(evt);
-            }
-        });
 
         jxPanelListaCadastros.setBorder(javax.swing.BorderFactory.createTitledBorder("Lista de cadastros"));
 
@@ -128,7 +72,7 @@ public class Programa extends javax.swing.JFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false, false, false, false
@@ -177,7 +121,7 @@ public class Programa extends javax.swing.JFrame {
             .addGroup(jxPanelListaCadastrosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jxPanelListaCadastrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 684, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2)
                     .addGroup(jxPanelListaCadastrosLayout.createSequentialGroup()
                         .addComponent(jxSearchFieldBuscaID, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -196,87 +140,238 @@ public class Programa extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Identificação | Contato"));
-
-        jxLabelCOD.setText("Código:");
-
-        jxLabelTelResidencial.setText("Tel. Residencial:");
-
-        jxLabelCPF.setText("CPF:");
-
-        jxLabelEmail.setText("E-mail:");
-
-        jxLabelNome.setText("Nome:");
-
-        jxLabelTelCelular.setText("Tel. Celular:");
-
-        jxLabelWhatsApp.setText("WhatsApp:");
+        jXPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Identificação | Contato"));
 
         jxLabelRG.setText("RG:");
 
+        jxLabelCPF.setText("CPF:");
+
+        jxLabelNome.setText("Nome:");
+
         jxTextFieldCOD.setEditable(false);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jxLabelEmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jxLabelNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jxLabelCOD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jxLabelCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jxLabelRG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jxTextFieldRG, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jxTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jxTextFieldCOD, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jxTextFieldCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(53, 53, 53)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jxLabelTelResidencial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jxLabelWhatsApp, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jxLabelTelCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jxTextFieldTelCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jxTextFieldTelResidencial, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jxTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jxTextFieldWhatsApp, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))
+        jxLabelCOD.setText("Código:");
+
+        javax.swing.GroupLayout jXPanel1Layout = new javax.swing.GroupLayout(jXPanel1);
+        jXPanel1.setLayout(jXPanel1Layout);
+        jXPanel1Layout.setHorizontalGroup(
+            jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jXPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jxLabelCOD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jxLabelCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jxLabelRG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jxLabelNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(8, 8, 8)
+                .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jxTextFieldRG, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jxTextFieldCOD, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jxTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jxTextFieldCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        jXPanel1Layout.setVerticalGroup(
+            jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jXPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jxLabelCOD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jxTextFieldCOD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jxLabelTelResidencial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jxTextFieldTelResidencial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jxTextFieldCOD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jxLabelNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jxTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jxTextFieldTelCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jxLabelTelCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jxTextFieldNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jxLabelCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jxTextFieldCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jxTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jxLabelEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jxTextFieldCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jXPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jxLabelRG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jxTextFieldRG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jxTextFieldWhatsApp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jxLabelWhatsApp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jxTextFieldRG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
+        jxLabelWhatsApp.setText("WhatsApp:");
+
+        jxLabelEmail.setText("E-mail:");
+
+        jxLabelTelResidencial.setText("Tel. Residencial:");
+
+        jxLabelTelCelular.setText("Tel. Celular:");
+
+        javax.swing.GroupLayout jXPanel2Layout = new javax.swing.GroupLayout(jXPanel2);
+        jXPanel2.setLayout(jXPanel2Layout);
+        jXPanel2Layout.setHorizontalGroup(
+            jXPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jXPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jXPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jXPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jXPanel2Layout.createSequentialGroup()
+                            .addComponent(jxLabelTelResidencial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jxTextFieldTelResidencial, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jXPanel2Layout.createSequentialGroup()
+                            .addGroup(jXPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jxLabelWhatsApp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jxLabelEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(jXPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jxTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jxTextFieldWhatsApp, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jXPanel2Layout.createSequentialGroup()
+                        .addComponent(jxLabelTelCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jxTextFieldTelCelular, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(71, Short.MAX_VALUE))
+        );
+        jXPanel2Layout.setVerticalGroup(
+            jXPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jXPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jXPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jxTextFieldTelResidencial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jxLabelTelResidencial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jXPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jxLabelTelCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jxTextFieldTelCelular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jXPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jxLabelEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jxTextFieldEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jXPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jxLabelWhatsApp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jxTextFieldWhatsApp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout jXPanel3Layout = new javax.swing.GroupLayout(jXPanel3);
+        jXPanel3.setLayout(jXPanel3Layout);
+        jXPanel3Layout.setHorizontalGroup(
+            jXPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jXPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jXPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jXPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jXPanel3Layout.setVerticalGroup(
+            jXPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jXPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jXPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jXPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jXPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
+        jxButtonRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/user_delete.png"))); // NOI18N
+        jxButtonRemover.setText("Remover");
+        jxButtonRemover.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jxButtonRemover.setMaximumSize(new java.awt.Dimension(110, 25));
+        jxButtonRemover.setMinimumSize(new java.awt.Dimension(110, 25));
+        jxButtonRemover.setPreferredSize(new java.awt.Dimension(110, 25));
+        jxButtonRemover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jxButtonRemoverActionPerformed(evt);
+            }
+        });
+
+        jxButtonEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/user_edit.png"))); // NOI18N
+        jxButtonEditar.setText("Editar");
+        jxButtonEditar.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jxButtonEditar.setMaximumSize(new java.awt.Dimension(110, 25));
+        jxButtonEditar.setMinimumSize(new java.awt.Dimension(110, 25));
+        jxButtonEditar.setPreferredSize(new java.awt.Dimension(110, 25));
+        jxButtonEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jxButtonEditarActionPerformed(evt);
+            }
+        });
+
+        jxButtonSair.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/cancel.png"))); // NOI18N
+        jxButtonSair.setText("Sair");
+        jxButtonSair.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jxButtonSair.setMaximumSize(new java.awt.Dimension(110, 25));
+        jxButtonSair.setMinimumSize(new java.awt.Dimension(110, 25));
+        jxButtonSair.setPreferredSize(new java.awt.Dimension(110, 25));
+        jxButtonSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jxButtonSairActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jXPanel4Layout = new javax.swing.GroupLayout(jXPanel4);
+        jXPanel4.setLayout(jXPanel4Layout);
+        jXPanel4Layout.setHorizontalGroup(
+            jXPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jXPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jxButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jxButtonRemover, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jxButtonSair, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jXPanel4Layout.setVerticalGroup(
+            jXPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jXPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jXPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jxButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jxButtonRemover, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jxButtonSair, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
+        jxButtonCadastrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/user_add.png"))); // NOI18N
+        jxButtonCadastrar.setText("Cadastrar");
+        jxButtonCadastrar.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jxButtonCadastrar.setMaximumSize(new java.awt.Dimension(110, 25));
+        jxButtonCadastrar.setMinimumSize(new java.awt.Dimension(110, 25));
+        jxButtonCadastrar.setPreferredSize(new java.awt.Dimension(110, 25));
+        jxButtonCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jxButtonCadastrarActionPerformed(evt);
+            }
+        });
+
+        jxButtonLimpar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/bin.png"))); // NOI18N
+        jxButtonLimpar.setText("Limpar");
+        jxButtonLimpar.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jxButtonLimpar.setMaximumSize(new java.awt.Dimension(110, 25));
+        jxButtonLimpar.setMinimumSize(new java.awt.Dimension(110, 25));
+        jxButtonLimpar.setPreferredSize(new java.awt.Dimension(110, 25));
+        jxButtonLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jxButtonLimparActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jXPanel5Layout = new javax.swing.GroupLayout(jXPanel5);
+        jXPanel5.setLayout(jXPanel5Layout);
+        jXPanel5Layout.setHorizontalGroup(
+            jXPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jXPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jxButtonCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jxButtonLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jXPanel5Layout.setVerticalGroup(
+            jXPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jXPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jXPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jxButtonCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jxButtonLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -287,45 +382,24 @@ public class Programa extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jxPanelListaCadastros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jxButtonCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jxButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jxButtonRemover, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addComponent(jxButtonLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jxButtonSair, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jXPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jXPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jxPanelListaCadastros, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jXPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(6, 6, 6)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jxButtonCadastrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jxButtonLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(6, 6, 6)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jXPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jXPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jxPanelListaCadastros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(6, 6, 6)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jxButtonRemover, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jxButtonSair, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jxButtonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jXPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -350,7 +424,8 @@ public class Programa extends javax.swing.JFrame {
 
     private void jxButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jxButtonEditarActionPerformed
         if (evt.getSource().equals(jxButtonEditar)) {
-            
+            JanelaEditCadastro janelaEditCadastro = new JanelaEditCadastro();
+            janelaEditCadastro.setVisible(true);
         }
     }//GEN-LAST:event_jxButtonEditarActionPerformed
 
@@ -361,37 +436,33 @@ public class Programa extends javax.swing.JFrame {
             } else if (dao.persist(Integer.parseInt(jxSearchFieldBuscaID.getText().trim())) == false) {
                 model.criaDialogs(6);
             } else {
-                try {
-                    int searchFieldID = Integer.parseInt(jxSearchFieldBuscaID.getText().trim());
-                    model.addPessoa(jxTableListaCadastros, searchFieldID);
-                    jxSearchFieldBuscaID.setText("");
-                } catch (NumberFormatException exception) {
-                    
-                }
+                int searchFieldID = Integer.parseInt(jxSearchFieldBuscaID.getText().trim());
+                model.addPessoa(jxTableListaCadastros, searchFieldID);
+                jxSearchFieldBuscaID.setText("");
             }
         }
     }//GEN-LAST:event_jxSearchFieldBuscaIDKeyPressed
 
     private void jxButtonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jxButtonCadastrarActionPerformed
         if (evt.getSource().equals(jxButtonCadastrar)) {
-            if (model.validaCampos(
-                    jxTextFieldNome, jxTextFieldCPF, jxTextFieldRG,
+            if (model.validaCampos(jxTextFieldNome, jxTextFieldCPF, jxTextFieldRG,
                     jxTextFieldTelResidencial, jxTextFieldTelCelular,
                     jxTextFieldEmail, jxTextFieldWhatsApp)) {
-                
+
                 dao.insert(new Pessoa(Integer.parseInt(
                         jxTextFieldCOD.getText()), jxTextFieldNome.getText(),
                         jxTextFieldCPF.getText(), jxTextFieldRG.getText(),
                         jxTextFieldTelResidencial.getText(), jxTextFieldTelCelular.getText(),
                         jxTextFieldEmail.getText(), jxTextFieldWhatsApp.getText()));
-                
+
                 model.limparCamposDeCadastro(
                         jxTableListaCadastros, jxTextFieldNome, jxTextFieldCPF,
                         jxTextFieldRG, jxTextFieldTelResidencial, jxTextFieldTelCelular,
                         jxTextFieldEmail, jxTextFieldWhatsApp);
-                
+
                 jxTextFieldCOD.setText(Integer.toString(dao.maiorIDInserida()));
                 model.addListaDePessoas(jxTableListaCadastros);
+                jxTableListaCadastros.addRowSelectionInterval(0, 0);
                 model.criaDialogs(1);
             } else {
                 model.criaDialogs(5);
@@ -413,7 +484,7 @@ public class Programa extends javax.swing.JFrame {
             model.addListaDePessoas(jxTableListaCadastros);
         }
     }//GEN-LAST:event_jXButtonAtualizarListaActionPerformed
-    
+
     public static void main(String args[]) {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -431,7 +502,7 @@ public class Programa extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Programa.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        
+
         java.awt.EventQueue.invokeLater(() -> {
             try {
                 new Programa().setVisible(true);
@@ -442,9 +513,13 @@ public class Programa extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private org.jdesktop.swingx.JXButton jXButtonAtualizarLista;
+    private org.jdesktop.swingx.JXPanel jXPanel1;
+    private org.jdesktop.swingx.JXPanel jXPanel2;
+    private org.jdesktop.swingx.JXPanel jXPanel3;
+    private org.jdesktop.swingx.JXPanel jXPanel4;
+    private org.jdesktop.swingx.JXPanel jXPanel5;
     private org.jdesktop.swingx.JXButton jxButtonCadastrar;
     private org.jdesktop.swingx.JXButton jxButtonEditar;
     private org.jdesktop.swingx.JXButton jxButtonLimpar;

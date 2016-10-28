@@ -24,7 +24,7 @@ public class ProgramaDialogs extends Thread {
                 cadastroRemovidoComSucesso();
                 break;
             case 3:
-                alteracaoSalvaComSucesso();
+                cadastroAtualizadoComSucesso();
                 break;
             case 4:
                 searchFieldIDVazio();
@@ -48,8 +48,8 @@ public class ProgramaDialogs extends Thread {
         JOptionPane.showMessageDialog(null, "Cadastro removido com sucesso.");
     }
 
-    public void alteracaoSalvaComSucesso() {
-        JOptionPane.showMessageDialog(null, "Alterações salvas com sucesso.");
+    public void cadastroAtualizadoComSucesso() {
+        JOptionPane.showMessageDialog(null, "Cadastro atualizado com sucesso.");
     }
 
     public void textFieldsVazios() {

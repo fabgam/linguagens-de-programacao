@@ -126,18 +126,28 @@ public class PessoaTableModel extends AbstractTableModel {
         jxTextFieldWhatsApp.setText("");
     }
 
-    public boolean validaCampos(JXTextField jxTextFieldNome, JXTextField jxTextFieldCPF,
-            JXTextField jxTextFieldRG, JXTextField jxTextFieldTelResidencial,
-            JXTextField jxTextFieldTelCelular, JXTextField jxTextFieldEmail,
-            JXTextField jxTextFieldWhatsApp) {
-
-        return !("".equals(jxTextFieldNome.getText()) && "".equals(jxTextFieldCPF.getText())
-                && "".equals(jxTextFieldRG.getText()) && "".equals(jxTextFieldTelResidencial.getText())
-                && "".equals(jxTextFieldTelCelular.getText()) && "".equals(jxTextFieldEmail.getText())
-                && "".equals(jxTextFieldWhatsApp.getText()));
+    public boolean validaCampos(JXTextField jxTextFieldNome, JXTextField jxTextFieldCPF, JXTextField jxTextFieldRG,
+            JXTextField jxTextFieldTelResidencial, JXTextField jxTextFieldTelCelular,
+            JXTextField jxTextFieldEmail, JXTextField jxTextFieldWhatsApp) {
+        if ("".equals(jxTextFieldNome.getText().trim())) {
+            return false;
+        } else if ("".equals(jxTextFieldCPF.getText().trim())) {
+            return false;
+        } else if ("".equals(jxTextFieldRG.getText().trim())) {
+            return false;
+        } else if ("".equals(jxTextFieldTelResidencial.getText().trim())) {
+            return false;
+        } else if ("".equals(jxTextFieldTelCelular.getText().trim())) {
+            return false;
+        } else if ("".equals(jxTextFieldEmail.getText().trim())) {
+            return false;
+        } else if ("".equals(jxTextFieldWhatsApp.getText().trim())) {
+            return false;
+        }
+        return true;
     }
-    
-    public void criaDialogs(int op){
+
+    public void criaDialogs(int op) {
         ProgramaDialogs pg = new ProgramaDialogs(op);
         Thread t = new Thread(pg);
         t.start();

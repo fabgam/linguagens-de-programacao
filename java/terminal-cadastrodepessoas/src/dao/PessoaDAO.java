@@ -16,19 +16,20 @@ public class PessoaDAO implements IDAO {
     private static PreparedStatement ps;
     private static ResultSet rs;
 
-    public void insert(Pessoa p) {
+    public void insert(Object p) {
 
         con = (Connection) ConnectionFactory.getConnection();
+        Pessoa pessoa = (Pessoa) p;
 
         try {
             ps = con.prepareStatement("USE POO2ICA2;");
             ps.execute();
 
             ps = con.prepareStatement("INSERT INTO pessoa (id_pessoa, nome, cpf, rg) VALUES (?, ?, ?, ?);");
-            ps.setInt(1, p.getId_pessoa());
-            ps.setString(2, p.getNome());
-            ps.setString(3, p.getCpf());
-            ps.setString(4, p.getRg());
+            ps.setInt(1, pessoa.getId_pessoa());
+            ps.setString(2, pessoa.getNome());
+            ps.setString(3, pessoa.getCpf());
+            ps.setString(4, pessoa.getRg());
             ps.executeUpdate();
             con.commit();
 
@@ -72,14 +73,14 @@ public class PessoaDAO implements IDAO {
     }
 
     @Override
-    public boolean persist(int id_pessoa) {
+    public boolean persist(Object id_pessoa) {
 
         con = (Connection) ConnectionFactory.getConnection();
         int count = 0;
 
         try {
             ps = con.prepareStatement("SELECT count(*) FROM pessoa WHERE id_pessoa = ?;");
-            ps.setInt(1, id_pessoa);
+            ps.setInt(1, (int) id_pessoa);
             rs = ps.executeQuery();
 
             if (rs.next()) {
@@ -100,7 +101,7 @@ public class PessoaDAO implements IDAO {
     }
 
     @Override
-    public void delete(int id_pessoa) {
+    public void delete(Object id_pessoa) {
 
         con = (Connection) ConnectionFactory.getConnection();
 
@@ -109,7 +110,7 @@ public class PessoaDAO implements IDAO {
             ps.execute();
 
             ps = con.prepareStatement("DELETE FROM pessoa WHERE id_pessoa = (?);");
-            ps.setInt(1, id_pessoa);
+            ps.setInt(1, (int) id_pessoa);
             ps.executeUpdate();
             con.commit();
 
@@ -126,19 +127,20 @@ public class PessoaDAO implements IDAO {
     }
 
     @Override
-    public void update(Pessoa p) {
+    public void update(Object p) {
 
         con = (Connection) ConnectionFactory.getConnection();
+        Pessoa pessoa = (Pessoa) p;
 
         try {
             ps = con.prepareStatement("USE POO2ICA2;");
             ps.execute();
 
             ps = con.prepareStatement("UPDATE pessoa SET nome = ?, cpf = ?, rg = ? WHERE id_pessoa = ?;");
-            ps.setString(1, p.getNome());
-            ps.setString(2, p.getCpf());
-            ps.setString(3, p.getRg());
-            ps.setInt(4, p.getId_pessoa());
+            ps.setString(1, pessoa.getNome());
+            ps.setString(2, pessoa.getCpf());
+            ps.setString(3, pessoa.getRg());
+            ps.setInt(4, pessoa.getId_pessoa());
             ps.executeUpdate();
             con.commit();
 
@@ -155,7 +157,7 @@ public class PessoaDAO implements IDAO {
     }
 
     @Override
-    public Pessoa get(int id_pessoa) {
+    public Pessoa get(Object id_pessoa) {
 
         con = (Connection) ConnectionFactory.getConnection();
 
@@ -164,7 +166,7 @@ public class PessoaDAO implements IDAO {
             ps.execute();
 
             ps = con.prepareStatement("SELECT * FROM pessoa WHERE id_pessoa = (?);");
-            ps.setInt(1, id_pessoa);
+            ps.setInt(1, (int) id_pessoa);
             rs = ps.executeQuery();
 
             if (rs.next()) {

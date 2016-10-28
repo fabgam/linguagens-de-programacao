@@ -81,16 +81,42 @@ public class PessoaDAO implements IDAO {
         }
         return maiorID + 1;
     }
+    public int qtdRegistros() {
+
+        con = (Connection) ConnectionFactory.getConnection();
+        int contRegistros = 0;
+
+        try {
+            ps = con.prepareStatement("USE POO2ICA2;");
+            ps.execute();
+            ps = con.prepareStatement("SELECT COUNT(*) FROM pessoa;");
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                contRegistros = rs.getInt(1);
+            }
+        } catch (SQLException exception) {
+            try {
+                con.rollback();
+            } catch (SQLException exception1) {
+
+            }
+        } finally {
+            DBUtil.closeConnections(ps, con);
+            DBUtil.closeConnections(rs);
+        }
+        return contRegistros;
+    }
 
     @Override
-    public boolean persist(int id_pessoa) {
+    public boolean persist(Object id_pessoa) {
 
         con = (Connection) ConnectionFactory.getConnection();
         int count = 0;
 
         try {
             ps = con.prepareStatement("SELECT count(*) FROM pessoa WHERE id_pessoa = ?;");
-            ps.setInt(1, id_pessoa);
+            ps.setInt(1, (int) id_pessoa);
             rs = ps.executeQuery();
 
             if (rs.next()) {
@@ -112,7 +138,7 @@ public class PessoaDAO implements IDAO {
     }
 
     @Override
-    public void delete(int id_pessoa) {
+    public void delete(Object id_pessoa) {
 
         con = (Connection) ConnectionFactory.getConnection();
 
@@ -121,12 +147,12 @@ public class PessoaDAO implements IDAO {
             ps.execute();
 
             ps = con.prepareStatement("DELETE FROM contato WHERE id_contato = (?);");
-            ps.setInt(1, id_pessoa);
+            ps.setInt(1, (int) id_pessoa);
             ps.executeUpdate();
             con.commit();
 
             ps = con.prepareStatement("DELETE FROM pessoa WHERE id_pessoa = (?);");
-            ps.setInt(1, id_pessoa);
+            ps.setInt(1, (int) id_pessoa);
             ps.executeUpdate();
             con.commit();
 
@@ -143,19 +169,20 @@ public class PessoaDAO implements IDAO {
     }
 
     @Override
-    public void update(Pessoa p) {
+    public void update(Object p) {
 
         con = (Connection) ConnectionFactory.getConnection();
+        Pessoa pessoa = (Pessoa) p;
 
         try {
             ps = con.prepareStatement("USE POO2ICA2;");
             ps.execute();
 
             ps = con.prepareStatement("UPDATE pessoa SET nome = ?, cpf = ?, rg = ? WHERE id_pessoa = ?;");
-            ps.setString(1, p.getNome());
-            ps.setString(2, p.getCpf());
-            ps.setString(3, p.getRg());
-            ps.setInt(4, p.getId_pessoa());
+            ps.setString(1, pessoa.getNome());
+            ps.setString(2, pessoa.getCpf());
+            ps.setString(3, pessoa.getRg());
+            ps.setInt(4, pessoa.getId_pessoa());
             ps.executeUpdate();
             con.commit();
 
@@ -172,7 +199,7 @@ public class PessoaDAO implements IDAO {
     }
 
     @Override
-    public Pessoa get(int id_pessoa) {
+    public Pessoa get(Object id_pessoa) {
 
         con = (Connection) ConnectionFactory.getConnection();
 
@@ -181,8 +208,8 @@ public class PessoaDAO implements IDAO {
             ps.execute();
 
             ps = con.prepareStatement("SELECT * FROM pessoa INNER JOIN contato WHERE id_pessoa = (?) AND id_contato = (?);");
-            ps.setInt(1, id_pessoa);
-            ps.setInt(2, id_pessoa);
+            ps.setInt(1, (int) id_pessoa);
+            ps.setInt(2, (int) id_pessoa);
             rs = ps.executeQuery();
 
             if (rs.next()) {
