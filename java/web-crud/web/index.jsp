@@ -1,3 +1,6 @@
+<%@page import="java.util.List"%>
+<%@page import="modelo.Pessoa"%>
+<%@page import="dao.PessoaDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -182,7 +185,7 @@
                 </div>
 
                 <div class="col-md-3"> 
-                    <button type="button" class="btn btn-primary pull-right h2" data-toggle="modal" data-target="#new-pessoa-modal">Novo cadastro</button>                    
+                    <button type="button" class="btn btn-primary pull-right h2" data-toggle="modal" data-target="#new-pessoa-modal"  >Novo cadastro</button>                    
                 </div>
             </div>  
 
@@ -197,19 +200,29 @@
                                 <th id="rg">RG</th>
                                 <th id="acoes" class="actions">Ações</th>
                             </tr>
-                        </thead> 
+                        </thead>
+                        <%
+                            PessoaDAO dao = new PessoaDAO();
+                            List<Pessoa> pessoas = dao.getAll();
+                        %>
                         <tbody>
-                            <tr>
-                                <td>1001</td>
-                                <td>Lorem ipsum dolor sit amet, consectetur adipiscing</td>
-                                <td>116</td>
-                                <td>2050</td>
+                            <%
+                                for (int i = 0; i < pessoas.size(); i++) {
+                            %>
+                            <tr>                                
+                                <td><%=pessoas.get(i).getId_pessoa()%></td>
+                                <td><%=pessoas.get(i).getNome()%></td>
+                                <td><%=pessoas.get(i).getCpf()%></td>
+                                <td><%=pessoas.get(i).getRg()%></td>
                                 <td class="actions">
                                     <button id="view" type="button" class="btn btn-success btn-xs" data-toggle="modal" data-target="#view-modal">Visualizar</button>
                                     <button id="edit" type="button" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#edit-modal">Editar</button>
                                     <button id="delete" type="button" class="btn btn-danger btn-xs"  data-toggle="modal" data-target="#delete-modal">Excluir</button>
                                 </td>
                             </tr>
+                            <%
+                                }
+                            %>
                         </tbody>
                     </table>
                 </div>
