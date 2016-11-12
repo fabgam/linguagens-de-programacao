@@ -1,5 +1,3 @@
-<%@page import="factory.Database"%>
-<%@page import="servlets.PessoaController"%>
 <%@page import="java.util.List"%>
 <%@page import="modelo.Pessoa"%>
 <%@page import="dao.PessoaDAO"%>
@@ -11,7 +9,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="WEB-APP/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <link href="WEB-APP/bootstrap/css/dataTables.bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="WEB-APP/datatables/css/datatables.min.css" rel="stylesheet" type="text/css"/>
         <title>POO2 ICA 3-4 - Home</title>        
     </head>
 
@@ -117,11 +115,9 @@
             </fieldset>
         </div>
 
-        <script src="WEB-APP/jquery/js/jquery.min.js" type="text/javascript"></script>
         <script src="WEB-APP/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>      
-        <script src="WEB-APP/jquery/js/jquery.dataTables.min.js" type="text/javascript"></script>
-        <script src="WEB-APP/bootstrap/js/dataTables.bootstrap.min.js" type="text/javascript"></script>
-        <script src="WEB-APP/bootstrap/js/list.js" type="text/javascript"></script>        
+        <script src="WEB-APP/datatables/js/datatables.min.js" type="text/javascript"></script>
+        <script src="WEB-APP/datatables/js/ptable.js" type="text/javascript"></script>
 
     </body>    
 </html>
