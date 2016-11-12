@@ -22,7 +22,7 @@ public class PessoaDAO implements IDAO {
         Pessoa pessoa = (Pessoa) p;
 
         try {
-       
+
             ps = con.prepareStatement("INSERT INTO cad.pessoa (id_pessoa, nome, cpf, rg) VALUES (?, ?, ?, ?);");
             ps.setInt(1, pessoa.getId_pessoa());
             ps.setString(2, pessoa.getNome());
@@ -101,7 +101,7 @@ public class PessoaDAO implements IDAO {
 
         con = (Connection) ConnectionFactory.getConnection();
 
-        try {            
+        try {
 
             ps = con.prepareStatement("DELETE FROM cad.pessoa WHERE id_pessoa = (?);");
             ps.setInt(1, (int) id_pessoa);
@@ -153,7 +153,7 @@ public class PessoaDAO implements IDAO {
 
         con = (Connection) ConnectionFactory.getConnection();
 
-        try {            
+        try {
 
             ps = con.prepareStatement("SELECT * FROM cad.pessoa WHERE id_pessoa = (?);");
             ps.setInt(1, (int) id_pessoa);
@@ -183,6 +183,7 @@ public class PessoaDAO implements IDAO {
         List<Pessoa> pessoas = new ArrayList<>();
 
         try {
+
             ps = con.prepareStatement("SELECT * FROM cad.pessoa;");
             rs = ps.executeQuery();
 

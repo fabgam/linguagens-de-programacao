@@ -9,13 +9,19 @@ public class Database {
 
     private static final Connection CON = ConnectionFactory.getConnection();
     private static PreparedStatement ps = null;
+    private static boolean isDatabaseCreate;
+
+    public static boolean isDatabaseCreate() {
+        return Database.isDatabaseCreate;
+    }
+
+    public static void setIsDatabaseCreate(boolean isDatabaseCreate) {
+        Database.isDatabaseCreate = isDatabaseCreate;
+    }
 
     public static void create() {
 
         try {
-            ps = CON.prepareStatement("DROP DATABASE IF EXISTS cad;");
-            ps.executeUpdate();
-            CON.commit();
 
             ps = CON.prepareStatement("CREATE DATABASE IF NOT EXISTS cad;");
             ps.executeUpdate();

@@ -4,21 +4,22 @@
 <%@page import="modelo.Pessoa"%>
 <%@page import="dao.PessoaDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
     <head> 
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href="WEB-APP/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <title>POO2 ICA 3-4 - Exibição de cadastros</title>
+        <title>POO2 ICA 3-4 - Edição de cadastro</title>
     </head>
-    <body>   
+    <body> 
 
         <!-- Menu Top -->
         <nav class="navbar navbar-default">
             <div class="container container-fluid">
                 <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" aria-expanded="false">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
@@ -34,7 +35,7 @@
                                 <span class="glyphicon glyphicon-home"></span> HOME
                                 <span class="sr-only">(current)</span>
                             </a>
-                        </li>                                           
+                        </li>                                              
                     </ul>                    
                 </div><!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
@@ -43,7 +44,7 @@
         <div class="container container-fluid" style="margin-top: 5px">
 
             <fieldset>
-                <legend>Exibição de dados cadastrais</legend>   
+                <legend>Edição de dados cadastrais</legend>
 
                 <div class="row">                
                     <div class="col-md-4"> 
@@ -51,8 +52,9 @@
                         <form action="PessoaController" method="post">
                             <div class="col-md-12">
                                 <div class="input-group input-group-sm h2">
-                                    <input name="data[search]" class="form-control" id="search" type="text" placeholder="Pesquisar">
-                                    <span class="input-group-btn ">
+                                    <input type="hidden" name="action" value="pesquisarEditar">
+                                    <input class="form-control" id="search" name="data[search]" type="text" placeholder="Pesquisar">
+                                    <span class="input-group-btn">
                                         <button class="btn btn-primary" type="submit">
                                             <span class="glyphicon glyphicon-search"></span>
                                         </button>
@@ -64,7 +66,7 @@
                     </div>
                 </div>
 
-                <form action="PessoaController" method="post">                    
+                <form action="PessoaController" method="post">  
 
                     <%
                         PessoaDAO dao = new PessoaDAO();
@@ -81,26 +83,28 @@
                     <div class="row">
                         <div class="form-group form-group-sm col-md-4">
                             <label for="nome">Nome *</label>
-                            <input type="text" class="form-control " value="<%=p.getNome()%>" id="nome" name="nome" readonly="readonly">
+                            <input type="text" class="form-control " value="<%=p.getNome()%>" id="nome" name="nome">
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="form-group form-group-sm col-md-4">
                             <label for="cpf">CPF *</label>
-                            <input type="text" class="form-control" value="<%=p.getCpf()%>" id="cpf" name="cpf" readonly="readonly">
+                            <input type="text" class="form-control" value="<%=p.getCpf()%>" id="cpf" name="cpf">
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="form-group form-group-sm col-md-4">
                             <label for="rg">RG *</label>
-                            <input type="text" class="form-control" value="<%=p.getRg()%>" id="rg" name="rg" readonly="readonly">
+                            <input type="text" class="form-control" value="<%=p.getRg()%>" id="rg" name="rg">
                             <sub>* Campos de preenchimento obrigatório</sub>                                    
                         </div>
-                    </div>                      
+                    </div>                                 
 
-                    <a href="index.jsp" class="btn btn-default btn-sm">Voltar</a>                    
+                    <input type="hidden" name="action" value="editar">
+                    <a href="index.jsp" class="btn btn-default btn-sm">Cancelar</a>
+                    <input type="submit" class="btn btn-primary btn-sm" value="Salvar">  
                 </form>
             </fieldset>
 

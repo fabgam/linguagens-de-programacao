@@ -1,10 +1,7 @@
 package servlets;
 
 import dao.PessoaDAO;
-import factory.Database;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,34 +13,35 @@ import modelo.Pessoa;
 public class PessoaController extends HttpServlet {
 
     private final PessoaDAO dao = new PessoaDAO();
-    private boolean isDatabaseCreate;
-
-    private void initConfig() {
-        Database.create();
-        setIsDatabaseCreate(true);
-    }
-
-    private boolean isDatabaseCreate() {
-        return isDatabaseCreate;
-    }
-
-    private void setIsDatabaseCreate(boolean isDatabaseCreate) {
-        this.isDatabaseCreate = isDatabaseCreate;
-    }
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if (request.getParameter("enviar").equals("Salvar")) {
-            insereCadastro(request, response);
+        switch (request.getParameter("action")) {
+            case "novo":
+                insereCadastro(request, response);
+                break;
+            case "editar":
+                editarCadastro(request, response);
+                break;
+            case "remover":
+                deleteCadastro(request, response);
+                break;
+            case "redirecionaExibir":
+                redirecionaExibirCadastro(request, response);
+                break;
+            case "redirecionaEditar":
+                redirecionaEditarCadastro(request, response);
+                break;
+            case "pesquisarEditar":
+                redirecionaEditarCadastro(request, response);
+                break;
+            default:
+                break;
         }
     }
 
     private void insereCadastro(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        if (!isDatabaseCreate()) {
-            initConfig();
-        }
 
         Pessoa p = new Pessoa();
         p.setId_pessoa(dao.maiorIDInserida());
@@ -51,32 +49,48 @@ public class PessoaController extends HttpServlet {
         p.setCpf(request.getParameter("cpf"));
         p.setRg(request.getParameter("rg"));
         dao.insert(p);
-        
+
         response.sendRedirect("index.jsp");
+    }
+
+    private void redirecionaEditarCadastro(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        request.getRequestDispatcher("editar.jsp").forward(request, response);
     }
 
     private void editarCadastro(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        Pessoa p = new Pessoa();
+        p.setId_pessoa(Integer.parseInt(request.getParameter("id")));
+        p.setNome(request.getParameter("nome"));
+        p.setCpf(request.getParameter("cpf"));
+        p.setRg(request.getParameter("rg"));
+        dao.update(p);
+
+        response.sendRedirect("index.jsp");
     }
 
-    private void listarCadastros(HttpServletRequest request, HttpServletResponse response)
+    private void redirecionaExibirCadastro(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        List<Pessoa> p = dao.getAll();
-
-        if (p.isEmpty()) {
-            try (PrintWriter out = response.getWriter()) {
-                out.println("</html>");
-            }
-        } else {
-
-        }
+        request.getRequestDispatcher("exibir.jsp").forward(request, response);
     }
 
     private void deleteCadastro(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        dao.delete(Integer.parseInt(request.getParameter("id")));
+        response.sendRedirect("index.jsp");
+    }
+
+    private void pesquisarCadastro(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        if (dao.persist(Integer.parseInt(request.getParameter("data[search]")))) {
+
+        }
     }
 
     @Override
@@ -93,6 +107,6 @@ public class PessoaController extends HttpServlet {
 
     @Override
     public String getServletInfo() {
-        return "Short description";
+        return "Pessoa controller servlet";
     }
 }
