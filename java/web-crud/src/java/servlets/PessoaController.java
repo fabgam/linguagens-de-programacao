@@ -26,14 +26,14 @@ public class PessoaController extends HttpServlet {
             case "remover":
                 deleteCadastro(request, response);
                 break;
-            case "redirecionaExibir":
-                redirecionaExibirCadastro(request, response);
+            case "redirecionaInfo":
+                redirecionaInfoCadastro(request, response);
                 break;
             case "redirecionaEditar":
                 redirecionaEditarCadastro(request, response);
                 break;
-            case "pesquisarEditar":
-                redirecionaEditarCadastro(request, response);
+            case "redirecionaExibir":
+                redirecionaExibirListagem(request, response);
                 break;
             default:
                 break;
@@ -42,55 +42,45 @@ public class PessoaController extends HttpServlet {
 
     private void insereCadastro(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         Pessoa p = new Pessoa();
         p.setId_pessoa(dao.maiorIDInserida());
         p.setNome(request.getParameter("nome"));
         p.setCpf(request.getParameter("cpf"));
         p.setRg(request.getParameter("rg"));
         dao.insert(p);
-
-        response.sendRedirect("index.jsp");
+        response.sendRedirect("exibir.jsp");
     }
 
     private void redirecionaEditarCadastro(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         request.getRequestDispatcher("editar.jsp").forward(request, response);
     }
 
     private void editarCadastro(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         Pessoa p = new Pessoa();
         p.setId_pessoa(Integer.parseInt(request.getParameter("id")));
         p.setNome(request.getParameter("nome"));
         p.setCpf(request.getParameter("cpf"));
         p.setRg(request.getParameter("rg"));
         dao.update(p);
-
-        response.sendRedirect("index.jsp");
+        response.sendRedirect("exibir.jsp");
     }
 
-    private void redirecionaExibirCadastro(HttpServletRequest request, HttpServletResponse response)
+    private void redirecionaInfoCadastro(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        request.getRequestDispatcher("exibir.jsp").forward(request, response);
+        request.getRequestDispatcher("info.jsp").forward(request, response);
     }
 
     private void deleteCadastro(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         dao.delete(Integer.parseInt(request.getParameter("id")));
-        response.sendRedirect("index.jsp");
+        response.sendRedirect("exibir.jsp");
     }
 
-    private void pesquisarCadastro(HttpServletRequest request, HttpServletResponse response)
+    private void redirecionaExibirListagem(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        if (dao.persist(Integer.parseInt(request.getParameter("data[search]")))) {
-
-        }
+        response.sendRedirect("exibir.jsp");
     }
 
     @Override

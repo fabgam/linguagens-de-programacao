@@ -1,27 +1,24 @@
 package factory;
 
+import dao.PessoaDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import modelo.Pessoa;
 import util.DBUtil;
 
 public class Database {
 
     private static final Connection CON = ConnectionFactory.getConnection();
     private static PreparedStatement ps = null;
-    private static boolean isDatabaseCreate;
-
-    public static boolean isDatabaseCreate() {
-        return Database.isDatabaseCreate;
-    }
-
-    public static void setIsDatabaseCreate(boolean isDatabaseCreate) {
-        Database.isDatabaseCreate = isDatabaseCreate;
-    }
 
     public static void create() {
 
         try {
+
+            ps = CON.prepareStatement("DROP DATABASE IF EXISTS cad;");
+            ps.executeUpdate();
+            CON.commit();
 
             ps = CON.prepareStatement("CREATE DATABASE IF NOT EXISTS cad;");
             ps.executeUpdate();
@@ -46,6 +43,20 @@ public class Database {
             throw new RuntimeException(exception);
         } finally {
             DBUtil.closeConnections(ps, CON);
+        }
+    }
+
+    public static void populate() {
+
+        PessoaDAO dao = new PessoaDAO();
+
+        for (int i = 0; i < 100; i++) {
+            Pessoa p = new Pessoa();
+            p.setId_pessoa(dao.maiorIDInserida());
+            p.setNome("Nome" + (i + 1));
+            p.setCpf("CPF" + (i + 1));
+            p.setRg("RG" + (i + 1));
+            dao.insert(p);
         }
     }
 }
