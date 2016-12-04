@@ -42,13 +42,19 @@ public class PessoaController extends HttpServlet {
 
     private void insereCadastro(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Pessoa p = new Pessoa();
-        p.setId_pessoa(dao.maiorIDInserida());
-        p.setNome(request.getParameter("nome"));
-        p.setCpf(request.getParameter("cpf"));
-        p.setRg(request.getParameter("rg"));
-        dao.insert(p);
-        response.sendRedirect("exibir.jsp");
+        if (!validaCadastro(request, response)) {
+            request.setAttribute("status", "erroCadastroCampoVazio");
+            request.getRequestDispatcher("exibir.jsp").forward(request, response);
+        } else {
+            Pessoa p = new Pessoa();
+            p.setId_pessoa(dao.maiorIDInserida());
+            p.setNome(request.getParameter("nome"));
+            p.setCpf(request.getParameter("cpf"));
+            p.setRg(request.getParameter("rg"));
+            dao.insert(p);
+            request.setAttribute("status", "inseridoComSucesso");
+            request.getRequestDispatcher("exibir.jsp").forward(request, response);
+        }
     }
 
     private void redirecionaEditarCadastro(HttpServletRequest request, HttpServletResponse response)
@@ -58,13 +64,19 @@ public class PessoaController extends HttpServlet {
 
     private void editarCadastro(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Pessoa p = new Pessoa();
-        p.setId_pessoa(Integer.parseInt(request.getParameter("id")));
-        p.setNome(request.getParameter("nome"));
-        p.setCpf(request.getParameter("cpf"));
-        p.setRg(request.getParameter("rg"));
-        dao.update(p);
-        response.sendRedirect("exibir.jsp");
+        if (!validaCadastro(request, response)) {
+            request.setAttribute("status", "erroAtualizacaoCampoVazio");
+            request.getRequestDispatcher("exibir.jsp").forward(request, response);
+        } else {
+            Pessoa p = new Pessoa();
+            p.setId_pessoa(Integer.parseInt(request.getParameter("id")));
+            p.setNome(request.getParameter("nome"));
+            p.setCpf(request.getParameter("cpf"));
+            p.setRg(request.getParameter("rg"));
+            dao.update(p);
+            request.setAttribute("status", "atualizadoComSucesso");
+            request.getRequestDispatcher("exibir.jsp").forward(request, response);
+        }
     }
 
     private void redirecionaInfoCadastro(HttpServletRequest request, HttpServletResponse response)
@@ -75,12 +87,20 @@ public class PessoaController extends HttpServlet {
     private void deleteCadastro(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         dao.delete(Integer.parseInt(request.getParameter("id")));
-        response.sendRedirect("exibir.jsp");
+        request.setAttribute("status", "deletadoComSucesso");
+        request.getRequestDispatcher("exibir.jsp").forward(request, response);
     }
 
     private void redirecionaExibirListagem(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.sendRedirect("exibir.jsp");
+    }
+
+    private boolean validaCadastro(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        return !(request.getParameter("nome").trim().equals("")
+                || request.getParameter("cpf").trim().equals("")
+                || request.getParameter("rg").trim().equals(""));
     }
 
     @Override

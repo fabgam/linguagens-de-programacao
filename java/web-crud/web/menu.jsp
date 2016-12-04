@@ -1,4 +1,3 @@
-<!-- Menu -->
 <nav class="navbar navbar-default">
     <div class="container container-fluid">
         <div class="navbar-header">
@@ -20,4 +19,4 @@
             </ul>                    
         </div>
     </div>
-</nav>    
+</nav> 
