@@ -1,11 +1,11 @@
-<div class="modal fade" id="cadastro-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
-    <div class="modal-dialog modal-sm" role="document">
+<div class="modal fade cadastro-modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">            
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Fechar"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="modalLabel">Novo cadastro</h4>
+                <h4 class="modal-title">Novo cadastro</h4>
             </div>
-            <form action="PessoaController" method="post">
+            <form action="novocadastro" method="post">
                 <div class="modal-body">                                                  
                     <div class="row">
                         <div class="form-group form-group-sm col-md-12">
@@ -27,9 +27,9 @@
                         </div>
                     </div>                        
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-primary btn-sm" name="action" value="novo">Salvar</button>  
+                <div class="modal-footer">                    
+                    <button type="submit" class="btn btn-primary btn-block" name="action" value="novo">Salvar</button>  
+                    <button type="button" class="btn btn-default btn-block" data-dismiss="modal">Cancelar</button>
                 </div>
             </form>
         </div>

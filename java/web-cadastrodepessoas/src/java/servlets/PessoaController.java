@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import modelo.Pessoa;
 
-@WebServlet(name = "PessoaController", urlPatterns = {"/PessoaController"})
+@WebServlet(name = "PessoaController", urlPatterns = {"/pessoa", "/novocadastro", "/editcadastro", "/infocadastro", "/deletecadastro"})
 public class PessoaController extends HttpServlet {
 
     private final PessoaDAO dao = new PessoaDAO();
@@ -51,7 +51,7 @@ public class PessoaController extends HttpServlet {
             p.setNome(request.getParameter("nome"));
             p.setCpf(request.getParameter("cpf"));
             p.setRg(request.getParameter("rg"));
-            dao.insert(p);
+            dao.persist(p);
             request.setAttribute("status", "inseridoComSucesso");
             request.getRequestDispatcher("exibir.jsp").forward(request, response);
         }
@@ -59,6 +59,7 @@ public class PessoaController extends HttpServlet {
 
     private void redirecionaEditarCadastro(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        preparaRequest(request);
         request.getRequestDispatcher("editar.jsp").forward(request, response);
     }
 
@@ -81,6 +82,7 @@ public class PessoaController extends HttpServlet {
 
     private void redirecionaInfoCadastro(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        preparaRequest(request);
         request.getRequestDispatcher("info.jsp").forward(request, response);
     }
 
@@ -94,6 +96,14 @@ public class PessoaController extends HttpServlet {
     private void redirecionaExibirListagem(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.sendRedirect("exibir.jsp");
+    }
+
+    private void preparaRequest(HttpServletRequest request) {
+        Pessoa p = dao.get(Integer.parseInt(request.getParameter("id")));
+        request.setAttribute("id", p.getId_pessoa());
+        request.setAttribute("nome", p.getNome());
+        request.setAttribute("cpf", p.getCpf());
+        request.setAttribute("rg", p.getRg());
     }
 
     private boolean validaCadastro(HttpServletRequest request, HttpServletResponse response)
