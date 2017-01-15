@@ -1,13 +1,16 @@
-package modelo;
+package br.com.java.terminal.cad.model;
 
 import java.util.Objects;
 
 public class Pessoa {
 
-    private final int id_pessoa;
-    private final String nome;
-    private final String cpf;
-    private final String rg;
+    private int id_pessoa;
+    private String nome;
+    private String cpf;
+    private String rg;
+
+    public Pessoa() {
+    }
 
     public Pessoa(int id_pessoa, String nome, String cpf, String rg) {
         this.id_pessoa = id_pessoa;
@@ -20,16 +23,32 @@ public class Pessoa {
         return id_pessoa;
     }
 
+    public void setId_pessoa(int id_pessoa) {
+        this.id_pessoa = id_pessoa;
+    }
+
     public String getNome() {
-        return this.nome;
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getCpf() {
-        return this.cpf;
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     public String getRg() {
-        return this.rg;
+        return rg;
+    }
+
+    public void setRg(String rg) {
+        this.rg = rg;
     }
 
     @Override

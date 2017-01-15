@@ -1,22 +1,22 @@
-package modelo;
+package br.com.java.terminal.cad.util;
 
-import dao.PessoaDAO;
+import br.com.java.terminal.cad.dao.PessoaDAO;
 
-public class ProgramaModelo {
+public class ProgramaUtil {
 
-    private final PessoaDAO dao = new PessoaDAO();
+    private PessoaDAO dao = new PessoaDAO();
 
     public boolean isDigit(String str) {
         return str.matches("[0-9]*");
     }
-    
-    public int strToInt(String str){
+
+    public int strToInt(String str) {
         int op = -1;
         try {
-                op = Integer.parseInt(str);
-            } catch (NumberFormatException exception) {
+            op = Integer.parseInt(str);
+        } catch (NumberFormatException exception) {
 
-            }
+        }
         return op;
     }
 

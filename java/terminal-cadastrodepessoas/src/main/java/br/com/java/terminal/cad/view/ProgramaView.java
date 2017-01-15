@@ -1,21 +1,22 @@
-package visao;
+package br.com.java.terminal.cad.view;
 
-import dao.PessoaDAO;
-import factory.Database;
+import br.com.java.terminal.cad.dao.PessoaDAO;
+import br.com.java.terminal.cad.factory.Database;
+import br.com.java.terminal.cad.model.Pessoa;
+import br.com.java.terminal.cad.util.ProgramaUtil;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import modelo.Pessoa;
-import modelo.ProgramaModelo;
 
-public class Programa {
+public class ProgramaView {
 
-    private final PessoaDAO dao = new PessoaDAO();
-    private final Scanner input = new Scanner(System.in);
-    private final ProgramaModelo model = new ProgramaModelo();
+    private PessoaDAO dao = new PessoaDAO();
+    private Scanner input = new Scanner(System.in);
+    private ProgramaUtil util = new ProgramaUtil();
 
-    public Programa() {
-        Database.create();
+    public ProgramaView() {
+        Database db = new Database();
+        db.create();
     }
 
     public void menuInicial() {
@@ -38,8 +39,13 @@ public class Programa {
         System.out.println("Digite o RG da pessoa: ");
         String rg = input.nextLine();
 
-        if (model.isCadastroValido(nome, cpf, rg)) {
-            dao.insert(new Pessoa(dao.maiorIDInserida() + 1, nome, cpf, rg));
+        if (util.isCadastroValido(nome, cpf, rg)) {
+            Pessoa p = new Pessoa();
+            p.setId_pessoa(dao.maiorIDInserida());
+            p.setNome(nome);
+            p.setCpf(cpf);
+            p.setRg(rg);
+            dao.persist(p);
             System.err.println("Cadastro realizado com sucesso.");
         } else {
             System.err.println("Cadastro não realizado.");
@@ -53,9 +59,9 @@ public class Programa {
         System.out.println("Digite o ID da pessoa: ");
         String str = input.nextLine();
 
-        if (model.isDigit(str)) {
-            if (dao.persist(model.strToInt(str))) {
-                dao.delete(model.strToInt(str));
+        if (util.isDigit(str)) {
+            if (dao.isIDExistente(util.strToInt(str))) {
+                dao.delete(util.strToInt(str));
                 System.err.println("Cadastro removido com sucesso.");
             } else {
                 System.err.println("Cadastro inexistente.");
@@ -71,9 +77,9 @@ public class Programa {
         System.out.println("Digite a ID da pessoa: ");
         String str = input.nextLine();
 
-        if (model.isDigit(str)) {
-            if (dao.persist(model.strToInt(str))) {
-                Pessoa p = dao.get((model.strToInt(str)));
+        if (util.isDigit(str)) {
+            if (dao.isIDExistente(util.strToInt(str))) {
+                Pessoa p = dao.get((util.strToInt(str)));
                 System.out.println(p.toString());
             } else {
                 System.err.println("Cadastro inexistente.");
@@ -89,8 +95,8 @@ public class Programa {
         System.err.println("Digite o ID da pessoa");
         String str = input.nextLine();
 
-        if (model.isDigit(str)) {
-            if (dao.persist(model.strToInt(str))) {
+        if (util.isDigit(str)) {
+            if (dao.isIDExistente(util.strToInt(str))) {
 
                 System.err.println("Digite o nome da pessoa para alterar: ");
                 String nome = input.nextLine();
@@ -99,8 +105,8 @@ public class Programa {
                 System.err.println("Digite o RG da pessoa para alterar: ");
                 String rg = input.nextLine();
 
-                if (model.isCadastroValido(nome, cpf, rg)) {
-                    dao.update(new Pessoa(model.strToInt(str), nome, cpf, rg));
+                if (util.isCadastroValido(nome, cpf, rg)) {
+                    dao.update(new Pessoa(util.strToInt(str), nome, cpf, rg));
                     System.err.println("Alteração no cadastro realizada com sucesso.");
                 } else {
                     System.err.println("Dados inválidos.");
@@ -131,35 +137,35 @@ public class Programa {
 
         String str = input.nextLine();
 
-        if (model.isDigit(str)) {
+        if (util.isDigit(str)) {
 
-            switch (model.strToInt(str)) {
+            switch (util.strToInt(str)) {
                 case 1:
                     menuCadastrar();
                     break;
                 case 2:
-                    if (!model.isDatabasePopulate()) {
+                    if (!util.isDatabasePopulate()) {
                         System.err.println("Nenhum registro encontrado.");
                     } else {
                         menuExcluirPorID();
                     }
                     break;
                 case 3:
-                    if (!model.isDatabasePopulate()) {
+                    if (!util.isDatabasePopulate()) {
                         System.err.println("Nenhum registro encontrado.");
                     } else {
                         menuExibirDadosPorID();
                     }
                     break;
                 case 4:
-                    if (!model.isDatabasePopulate()) {
+                    if (!util.isDatabasePopulate()) {
                         System.err.println("Nenhum registro encontrado.");
                     } else {
                         menuAlterarDados();
                     }
                     break;
                 case 5:
-                    if (!model.isDatabasePopulate()) {
+                    if (!util.isDatabasePopulate()) {
                         System.err.println("Nenhum registro encontrado.");
                     } else {
                         menuExibirTodos();
@@ -178,7 +184,7 @@ public class Programa {
     }
 
     public static void main(String[] args) {
-        Programa p = new Programa();
+        ProgramaView p = new ProgramaView();
 
         for (;;) {
             p.menuInicial();
