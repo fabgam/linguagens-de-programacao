@@ -1,4 +1,4 @@
-package Cronometro;
+package br.com.java.cronometro.controller;
 
 import org.jdesktop.swingx.JXLabel;
 import org.jdesktop.swingx.JXTextField;
@@ -31,9 +31,7 @@ public class Cronometro extends Thread {
                 }
 
                 jxtfCron.setText(formataCronometro(hr, min, seg));
-
                 seg++;
-
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
 
