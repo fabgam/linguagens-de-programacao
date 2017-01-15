@@ -1,31 +1,20 @@
-/*
-    AMBIENTE DE DESENVOLVIMENTO
-    OS: LINUX
-    DISTRIBUIÇÃO: FEDORA 23
-    GCC: 5.3.1
-    IDE: CODEBLOCKS 13.12
-*/
-
 #ifndef PILHA_H_INCLUDED
 #define PILHA_H_INCLUDED
 
-//DEFINIÇÃO DA STRUCT NO
 typedef struct no
 {
     int dado;
     struct No *prox;
 } No;
 
-//DEFINIÇÃO DA STRUCT PILHA
 typedef struct pilha
 {
     No *inicio;
 } Pilha;
 
-//CHAMADA DAS FUNÇÕES UTILIZADAS NA IMPLEMENTAÇÃO E MANIPULAÇÃO DA PILHA
 Pilha *novaPilha();
 Pilha *inicializaVetor(Pilha*[], int);
-Pilha *liberaVetor(Pilha*[], int);
+void liberaVetor(Pilha*[], int);
 Pilha *push(Pilha*, int);
 Pilha *pop(Pilha*);
 No *topo(Pilha*);

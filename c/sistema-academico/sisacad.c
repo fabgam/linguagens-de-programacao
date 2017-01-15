@@ -1,11 +1,3 @@
-/*
-    ** AMBIENTE DE DESENVOLVIMENTO **
-        OS: LINUX
-        DISTRIBUIÇÃO: FEDORA 23
-        IDE: CODEBLOCKS 13.12
-        GCC: 5.3.1
-*/
-
 // BIBLIOTECAS UTILIZADAS
 #include <stdio.h>
 #include <stdlib.h>

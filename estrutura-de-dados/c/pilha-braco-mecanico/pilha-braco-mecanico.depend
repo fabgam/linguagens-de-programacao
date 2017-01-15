@@ -1,0 +1,18 @@
+# depslib dependency file v1.0
+1484513693 source:/home/nomad/linguagens-de-programacao/estrutura-de-dados/c/pilha-braco-mecanico/pilha-braco-mecanico/main.c
+	<stdio.h>
+	<stdlib.h>
+
+1484519671 source:/home/nomad/linguagens-de-programacao/estrutura-de-dados/c/pilha-braco-mecanico/main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"pilha.h"
+
+1484515023 /home/nomad/linguagens-de-programacao/estrutura-de-dados/c/pilha-braco-mecanico/pilha.h
+
+1484518545 source:/home/nomad/linguagens-de-programacao/estrutura-de-dados/c/pilha-braco-mecanico/pilha.c
+	<stdio.h>
+	<stdlib.h>
+	"pilha.h"
+

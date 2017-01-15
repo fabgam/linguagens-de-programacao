@@ -1,85 +1,66 @@
-/*
-    AMBIENTE DE DESENVOLVIMENTO
-    OS: LINUX
-    DISTRIBUIÇÃO: FEDORA 23
-    GCC: 5.3.1
-    IDE: CODEBLOCKS 13.12
-*/
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "pilha.h"
 
-//CHAMADA DE FUNÇÃO
 void op(Pilha*[], int);
 
-void main()
+int main(int argc, char **argv)
 {
-    //VARIÁVEL RESPONSÁVEL PELA QUANTIDADE DE PILHAS
-    int qtd;
+    int qtdPilhas;
 
-    //LEITURA DA QUANTIDADE DE PILHAS QUE SERÃO TRABALHADAS
-    while(qtd < 1 || qtd > 24)
-        scanf("%d", &qtd);
+    while(qtdPilhas < 1 || qtdPilhas > 24)
+        scanf("%d", &qtdPilhas);
 
-    //CRIAÇÃO DO VETOR DE PILHAS
-    Pilha *p[qtd];
-    //INICIALIZAÇÃO DO VETOR DE PILHAS
-    p[qtd] = inicializaVetor(p, qtd);
+    Pilha *p[qtdPilhas];
+    p[qtdPilhas] = inicializaVetor(p, qtdPilhas);
 
-    //CHAMADA DA FUNÇÃO QUE EXECUTARÁ OS COMANDOS DIGITADOS
-    op(p, qtd);
+    op(p, qtdPilhas);
+    return 0;
 }
 
-//FUNÇÃO QUE FARA A LEITURA DA ENTRADA DO TECLADO E CHAMADA DAS FUNÇÕES DE MANIPULAÇÃO DAS PILHAS
-void op(Pilha *p[], int qtd)
+void op(Pilha *p[], int qtdPilhas)
 {
-    char str1[7], str2[2];
-    int n1, n2, x, y;
+    char comando1[7], comando2[2];
+    int num1, num2, pilhaOrigemNum1, pilhaOrigemNum2;
 
     for(;;)
     {
-        scanf("%s", str1);
+        scanf("%s", comando1);
 
-        /* QUANDO O USUÁRIO DIGITAR "FIM" ESSE BLOCO SERÁ EXECUTADO,
-        PRIMEIRO IRÁ INVERTER A PILHA, EM SEGUIDA É CHAMADA A FUNÇÃO PÁRA EXIBIR A PILHA,
-        AO FINAL O VETOR DE PILHAS É LIBERADO E O PROGRAMA TEM SUA EXECUÇÃO ENCERRADA. */
-        if(strcmp(str1, "fim") == 0)
+        if(strcmp(comando1, "fim") == 0)
         {
-            inverterPilha(p, qtd);
-            imprimePilha(p, qtd);
-            liberaVetor(p, qtd);
+            inverterPilha(p, qtdPilhas);
+            imprimePilha(p, qtdPilhas);
+            liberaVetor(p, qtdPilhas);
             exit(0);
         }
-        scanf("%d %s %d", &n1, str2, &n2);
+        scanf("%d %s %d", &num1, comando2, &num2);
 
-        x = buscaElemento(p, qtd, n1); // REPRESENTA A PILHA EM QUE N1 ESTÁ INSERIDO
-        y = buscaElemento(p, qtd, n2); // REPRESENTA A PILHA EM QUE N2 ESTÁ INSERIDO
+        pilhaOrigemNum1 = buscaElemento(p, qtdPilhas, num1);
+        pilhaOrigemNum2 = buscaElemento(p, qtdPilhas, num2);
 
-        if(n1 != n2 && n1 >= 0 && n1 < qtd && n2 >= 0 && n2 < qtd)
+        if(num1 != num2 && num1 >= 0 && num1 < qtdPilhas && num2 >= 0 && num2 < qtdPilhas)
         {
-            /* SE N1 E N2 FOREM NÚMEROS DIFERENTES E NÃO ESTIVEREM NA MESMA LISTA
-                E ESTIVEREM DENTRO DO INTERVALO PREVIAMENTE DETERMINADO, ESSE BLOCO É EXECUTADO */
-            if(x != y)
+            if(pilhaOrigemNum1 != pilhaOrigemNum2)
             {
-                if(strcmp(str1, "coloque") == 0)
+                if(strcmp(comando1, "coloque") == 0)
                 {
-                    if(strcmp(str2, "em") == 0)
-                        coloqueEm(p, n1, n2, x, y); // EXECUÇÃO DO COMANDO COLOQUE EM
-                    else if(strcmp(str2, "no") == 0)
-                        coloqueNo(p, n1, n2, x, y); // EXECUÇÃO DO COMANDO COLQQUE NO
+                    if(strcmp(comando2, "em") == 0)
+                        coloqueEm(p, num1, num2, pilhaOrigemNum1, pilhaOrigemNum2);
+                    else if(strcmp(comando2, "no") == 0)
+                        coloqueNo(p, num1, num2, pilhaOrigemNum1, pilhaOrigemNum2);
                 }
-                else if(strcmp(str1, "empilhe") == 0)
+                else if(strcmp(comando1, "empilhe") == 0)
                 {
-                    if(strcmp(str2, "em") == 0)
-                        empilhaEm(p, n1, n2, x, y); // EXECUÇÃO DO COMANDO EMPILHE EM
-                    else if(strcmp(str2, "no") == 0)
-                        empilhaNo(p, n1, n2, x, y); // EXECUÇÃO DO COMANDO EMPILHE NO
+                    if(strcmp(comando2, "em") == 0)
+                        empilhaEm(p, num1, num2, pilhaOrigemNum1, pilhaOrigemNum2);
+                    else if(strcmp(comando2, "no") == 0)
+                        empilhaNo(p, num1, num2, pilhaOrigemNum1, pilhaOrigemNum2);
                 }
             }
-            //PARA EXIBIR A PILHA A CADA COMANDO DIGITADO DESCOMENTE A LINHA ABAIXO
-            //imprimePilha(p, qtd);
+            /* PARA EXIBIR A PILHA A CADA COMANDO DIGITADO DESCOMENTE A LINHA ABAIXO
+            imprimePilha(p, qtd); */
         }
     }
 }
