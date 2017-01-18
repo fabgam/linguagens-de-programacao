@@ -1,19 +1,16 @@
-// BIBLIOTECAS UTILIZADAS
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
 
-// DEFINIÇÃO DE CONSTANTES PARA UTILIZAÇÃO NO CÓDIGO
-#define vAlunos_TAM 30 // CONSTANTE UTILIZADA PARA DEFINIR O TAMANHO MÁXIMO PARA CADASTRO DE ALUNOS
-#define sizeOfMatricula 8 // CONSTANTE UTILIZADA PARA DEFINIR O TAMANHO MÁXIMO DA MATRÍCULA DO ALUNO
-#define nome_TAM 15 // CONSTANTE UTILIZADA PARA O TAMANHO DE NOME E SOBRENOME
-#define ica_TAM 4 // CONSTANTE UTILIZADA PARA O VETOR QUE IRÁ GUARDAR AS NOTAS DOS ICAS
-#define testProva_TAM 2 // CONSTANTE UTILIZADA PARA DEFINIR O TAMANHO DO VETOR QUE IRÁ GUARDAR AS NOTAS DE TESTES E PROVAS
-#define media_TAM 3 // CONSTANTE UTILIZADA PARA DEFINIR O TAMANHO DO VETOR DAS MÉDIAS
-#define situacao_TAM 33 // CONSTANTE UTILIZADA PARA DEFINIR O TAMANHO DA STRING SITUAÇÃO
+#define vAlunos_TAM 30
+#define sizeOfMatricula 8
+#define nome_TAM 15
+#define ica_TAM 4
+#define testProva_TAM 2
+#define media_TAM 3
+#define situacao_TAM 33
 
-// STRUCT PARA O CADASTRO DE ALUNOS
 struct Aluno
 {
     int matricula;
@@ -27,42 +24,40 @@ struct Aluno
     char situacao[situacao_TAM];
 };
 
-// INICIALIZAÇÃO DO VETOR DE ALUNOS
 struct Aluno aluno[vAlunos_TAM];
 
-// PROTOTIPAÇÃO DAS FUNÇÕES UTILIZADAS
 void menuPrincipal();
 void menuCadastro();
 void menuFrequencia();
 void menuNotas();
 void menuRelatorio();
-void insereAluno(int);
-void alteraAluno();
-void excluiAluno();
-void insereFrequencia(int);
-void insereNotas(int);
-void calculaMedias(int);
-void atualizaSituacao(int);
-void zeraNotas(int);
-void exibeAlunos();
-void exibeSituacaoAlunos(int);
+void inserirAluno(int);
+void alterarAluno();
+void excluirAluno();
+void inserirFrequencia(int);
+void inserirNotas(int);
+void calcularMedias(int);
+void atualizarSituacao(int);
+void zerarNotas(int);
+void exibirAlunos();
+void exibirSituacaoAlunos(int);
 void iniResetaVetorAluno(int);
 int proximoVazio();
-int listaVazia();
-int verificaMatricula(int);
-int verificaMatriculaInt(char[]);
-int validaDados(char[]);
-int validaNotas(int, int);
-int validaNome(char[]);
+int isListaVazia();
+int isMatriculaExistente(int);
+int isMatriculaInt(char[]);
+int isDadosValidos(char[]);
+int isNotasValidas(int, int);
+int isNomeValido(char[]);
 
-// FUNÇÃO PRINCIPAL, SERÁ EXECUTADA ATÉ QUE O USUÁRIO DIGITE O NÚMERO 5 DO MENU PRINCIPÁL
-void main()
+int main(int argc, char **argv)
 {
     for (;;)
         menuPrincipal();
+
+    return 0;
 }
 
-// MENU PRINCIPAL
 void menuPrincipal()
 {
     char op[2];
@@ -76,7 +71,7 @@ void menuPrincipal()
     printf ("\nDigite a sua opção: ");
     scanf ("%s", op);
 
-    if (validaDados(op) == 0)
+    if (isDadosValidos(op) == 0)
     {
         switch (atoi(op))
         {
@@ -107,7 +102,6 @@ void menuPrincipal()
     }
 }
 
-// MENU CADASTRO
 void menuCadastro()
 {
     char op[2];
@@ -121,21 +115,21 @@ void menuCadastro()
     printf ("\nDigite a sua opção: ");
     scanf ("%s", op);
 
-    if (validaDados(op) == 0)
+    if (isDadosValidos(op) == 0)
     {
         switch (atoi(op))
         {
         case 1:
-            insereAluno(proximoVazio(aluno));
+            inserirAluno(proximoVazio(aluno));
             break;
         case 2:
-            alteraAluno();
+            alterarAluno();
             break;
         case 3:
-            excluiAluno();
+            excluirAluno();
             break;
         case 4:
-            exibeAlunos();
+            exibirAlunos();
             break;
         case 5:
             menuPrincipal();
@@ -153,7 +147,6 @@ void menuCadastro()
     }
 }
 
-// MENU FREQUÊNCIA
 void menuFrequencia()
 {
     char op[2];
@@ -165,15 +158,15 @@ void menuFrequencia()
     printf ("\nDigite a sua opção: ");
     scanf ("%s", op);
 
-    if (validaDados(op) == 0)
+    if (isDadosValidos(op) == 0)
     {
         switch (atoi(op))
         {
         case 1:
-            insereFrequencia(atoi(op));
+            inserirFrequencia(atoi(op));
             break;
         case 2:
-            insereFrequencia(atoi(op));
+            inserirFrequencia(atoi(op));
             break;
         case 3:
             menuPrincipal();
@@ -191,7 +184,6 @@ void menuFrequencia()
     }
 }
 
-// MENU NOTAS
 void menuNotas()
 {
     char op[2];
@@ -203,15 +195,15 @@ void menuNotas()
     printf ("\nDigite a sua opção: ");
     scanf ("%s", op);
 
-    if (validaDados(op) == 0)
+    if (isDadosValidos(op) == 0)
     {
         switch (atoi(op))
         {
         case 1:
-            insereNotas(atoi(op));
+            inserirNotas(atoi(op));
             break;
         case 2:
-            insereNotas(atoi(op));
+            inserirNotas(atoi(op));
             break;
         case 3:
             menuPrincipal();
@@ -229,7 +221,6 @@ void menuNotas()
     }
 }
 
-// MENU RELATÓRIO
 void menuRelatorio()
 {
     char op[2];
@@ -243,21 +234,21 @@ void menuRelatorio()
     printf ("\nDigite a sua opção: ");
     scanf ("%s", op);
 
-    if (validaDados(op) == 0)
+    if (isDadosValidos(op) == 0)
     {
         switch (atoi(op))
         {
         case 1:
-            exibeSituacaoAlunos(atoi(op));
+            exibirSituacaoAlunos(atoi(op));
             break;
         case 2:
-            exibeSituacaoAlunos(atoi(op));
+            exibirSituacaoAlunos(atoi(op));
             break;
         case 3:
-            exibeSituacaoAlunos(atoi(op));
+            exibirSituacaoAlunos(atoi(op));
             break;
         case 4:
-            exibeSituacaoAlunos(atoi(op));
+            exibirSituacaoAlunos(atoi(op));
             break;
         case 5:
             menuPrincipal();
@@ -275,72 +266,59 @@ void menuRelatorio()
     }
 }
 
-// FUNÇÃO PARA CADASTRO DE ALUNOS NO SISTEMA
-void insereAluno(int x)
+void inserirAluno(int x)
 {
     char matricula[sizeOfMatricula], nome[nome_TAM], sobrenome[nome_TAM];
 
-    if (x != -1) // CASO HAJA ALGUM ESPAÇO VAZIO NA LISTA, O ALUNO É CADASTRADO.
+    if (x != -1)
     {
         printf ("\nMatrícula: ");
         scanf ("%s", matricula);
 
-        if (verificaMatriculaInt(matricula) == 0 && atoi(matricula) > 0) // VERIFICA SE A MATRÍCULA É UM NÚMERO INTEIRO E POSITIVO
+        if (isMatriculaInt(matricula) == 0 && atoi(matricula) > 0)
         {
-            if (verificaMatricula(atoi(matricula)) == 0) // VERIFICA SE A MATRÍCULA DIGITADA JÁ EXISTE NO SISTEMA
-            {
-                printf ("\nMatrícula já cadastrada no sistema.\n"); // SE A MATRÍCULA EXISTIR É EXIBIDA UMA MSG
-                menuCadastro();
-            }
-            else // CASO A MATRÍCULA NÃO EXISTA O CADASTRO É EFETUADO
+            if (isMatriculaExistente(atoi(matricula)) == 0)
+                printf ("\nMatrícula já cadastrada no sistema.\n");
+            else
             {
                 printf ("Nome e sobrenome: ");
                 scanf ("%s %s", nome, sobrenome);
 
-                if (validaNome(nome) == 0 && validaNome(sobrenome) == 0)
+                if (isNomeValido(nome) == 0 && isNomeValido(sobrenome) == 0)
                 {
                     aluno[x].matricula = atoi(matricula);
                     strcpy (aluno[x].nome, nome);
                     strcpy (aluno[x].sobrenome, sobrenome);
                     strcpy (aluno[x].situacao, "Notas e frequência não inseridas.");
-                    zeraNotas(x);
+                    zerarNotas(x);
 
                     printf ("\nCadastro efetuado com sucesso.\n");
-                    menuCadastro();
                 }
                 else
-                {
                     printf ("\nDados inválidos.\n");
-                    menuCadastro();
-                }
             }
         }
-        else  // CASO A MATRÍCULA NÃO SEJA UM NÚMERO VÁLIDO É EXIBIDO UMA MSG
-        {
+        else
             printf ("\nMatrícula inválida.\n");
-            menuCadastro();
-        }
     }
-    else  // CASO A LISTA ESTEJA CHEIA É EXIBIDA UMA MSG NA TELA.
-    {
+    else
         printf ("\nLista cheia.\n");
-        menuCadastro();
-    }
+
+    menuCadastro();
 }
 
-// FUNÇÃO PARA ALTERAR DADOS DE UM ALUNO NO SISTEMA
-void alteraAluno()
+void alterarAluno()
 {
-    if (listaVazia(aluno) == 0)
+    if (isListaVazia(aluno) == 0)
     {
         char matricula[sizeOfMatricula];
 
         printf ("\nMatrícula: ");
         scanf ("%s", matricula);
 
-        if (verificaMatriculaInt(matricula) == 0 && atoi(matricula) > 0) // VERIFICA SE A MATRÍCULA É UM NÚMERO INTEIRO E POSITIVO
+        if (isMatriculaInt(matricula) == 0 && atoi(matricula) > 0)
         {
-            if (verificaMatricula(atoi(matricula)) == 0) // CASO A MATRICULA EXISTA OS DADOS PODERÃO SER ALTERADOS
+            if (isMatriculaExistente(atoi(matricula)) == 0)
             {
                 int i;
 
@@ -353,103 +331,94 @@ void alteraAluno()
                         printf ("Nome: ");
                         scanf ("%s %s", nome, sobrenome);
 
-                        if (validaNome(nome) == 0 && validaNome(sobrenome) == 0)
+                        if (isNomeValido(nome) == 0 && isNomeValido(sobrenome) == 0)
                         {
                             strcpy (aluno[i].nome, nome);
                             strcpy (aluno[i].sobrenome, sobrenome);
                             printf ("\nCadastro alterado com sucesso.\n");
                         }
                         else
-                        {
                             printf ("\nDados inválidos.\n");
-                            menuCadastro();
-                        }
                     }
                 }
-                menuCadastro();
             }
             else
-            {
-                printf ("\nMatrícula inexistente.\n"); // CASO A MATRÍCULA NÃO EXISTA É EXIBIDO UMA MSG
-                menuCadastro();
-            }
+                printf ("\nMatrícula inexistente.\n");
         }
         else
-        {
             printf ("\nMatrícula inválida.\n");
-            menuCadastro();
-        }
     }
     else
-    {
         printf ("\nNenhum aluno cadastrado no sistema.\n");
-        menuCadastro();
-    }
+
+    menuCadastro();
 }
 
-// FUNÇÃO PARA EXCLUIR UM ALUNO DO SISTEMA
-void excluiAluno()
+void excluirAluno()
 {
-    if (listaVazia(aluno) == 0)
+    if (isListaVazia(aluno) == 0)
     {
         char matricula[sizeOfMatricula];
 
         printf ("\nMatrícula: ");
         scanf ("%s", matricula);
 
-        if (verificaMatriculaInt(matricula) == 0 && atoi(matricula) > 0) // VERIFICA SE A MATRÍCULA É UM NÚMERO INTEIRO E POSITIVO
+        if (isMatriculaInt(matricula) == 0 && atoi(matricula) > 0)
         {
-            if (verificaMatricula(atoi(matricula)) == 0) // CASO A MATRICULA EXISTA O ALUNO SERÁ EXCLUÍDO DO SISTEMA
+            if (isMatriculaExistente(atoi(matricula)) == 0)
             {
-                int i;
+                printf("\nMatrícula: %d", aluno[atoi(matricula)-1].matricula);
+                printf("\nNome: %s %s\n", aluno[atoi(matricula)-1].nome, aluno[atoi(matricula)-1].sobrenome);
 
-                for (i = 0; i < vAlunos_TAM; i++)
+                int resposta;
+                printf("\nDeseja excluir a matrícula do sistema?");
+                printf("\n1 - Sim, 2 - Não\n");
+                scanf("%d", &resposta);
+
+                if(resposta == 1)
                 {
-                    if (aluno[i].matricula == atoi(matricula))
+                    int i;
+                    for (i = 0; i < vAlunos_TAM; i++)
                     {
-                        iniResetaVetorAluno(i);
+                        if (aluno[i].matricula == atoi(matricula))
+                            iniResetaVetorAluno(i);
                     }
+                    printf ("\nCadastro excluído com sucesso.\n");
                 }
-                printf ("\nCadastro excluído com sucesso.\n");
-                menuCadastro();
+                else if(resposta == 2)
+                    menuCadastro();
+                else
+                    printf("\nOpção inválida.\n");
             }
             else
-            {
-                printf ("\nMatrícula não cadastrada no sistema.\n"); // CASO A MATRÍCULA NÃO EXISTA É EXIBIDO UMA MSG
-                menuCadastro();
-            }
+                printf ("\nMatrícula não cadastrada no sistema.\n");
         }
         else
-        {
             printf ("\nMatrícula inválida.\n");
-            menuCadastro();
-        }
     }
     else
-    {
         printf ("\nNenhum aluno cadastrado no sistema.\n");
-        menuCadastro();
-    }
+
+    menuCadastro();
 }
 
-// FUNÇÃO PARA INSERIR A FREQÙÊNCIA DE ALUNOS
-void insereFrequencia(int op)
+void inserirFrequencia(int op)
 {
     int i;
     char frequencia[3];
 
-    if (listaVazia(aluno) == 0)
+    if (isListaVazia(aluno) == 0)
     {
-        if (op == 1) // A FREQUÊNCIA É INSERIDA POR ALUNO QUANDO OP É IGUAL A 1
+        if (op == 1)
         {
             char matricula[sizeOfMatricula];
 
             printf ("\nMatrícula: ");
             scanf ("%s", matricula);
 
-            if (verificaMatriculaInt(matricula) == 0 && atoi(matricula) > 0) // VERIFICA SE A MATRÍCULA É UM NÚMERO INTEIRO E POSITIVO
+            if (isMatriculaInt(matricula) == 0 && atoi(matricula) > 0)
             {
-                if (verificaMatricula(atoi(matricula)) == 0) // SE A MATRÍCULA EXISTIR NO SISTEMA A FREQUÊNCIA SERÁ ALTERADA
+                if (isMatriculaExistente(atoi(matricula)) == 0)
                 {
                     for (i = 0; i < vAlunos_TAM; i++)
                     {
@@ -459,34 +428,24 @@ void insereFrequencia(int op)
                             printf ("\nDigite a quantidade total de faltas do aluno: ");
                             scanf ("%s", frequencia);
 
-                            if (validaDados(frequencia) == 0)
+                            if (isDadosValidos(frequencia) == 0)
                             {
                                 aluno[i].frequencia = atoi(frequencia);
-                                atualizaSituacao(i);
+                                atualizarSituacao(i);
                                 printf ("\nFrequência salva com sucesso.\n");
-                                menuFrequencia();
                             }
                             else
-                            {
                                 printf("\nEntrada inválida.\n");
-                                menuFrequencia();
-                            }
                         }
                     }
                 }
                 else
-                {
-                    printf ("\nMatrícula inexistente.\n"); // CASO A MATRÍCULA NÃO EXISTA É EXIBIDA UMA MSG NA TELA
-                    menuFrequencia();
-                }
+                    printf ("\nMatrícula inexistente.\n");
             }
             else
-            {
                 printf ("\nMatrícula inválida.\n");
-                menuFrequencia();
-            }
         }
-        else // A FREQUÊNCIA É INSERIDA PARA TODOS OS ALUNOS CADASTRADOS NO SISTEMA
+        else
         {
             for (i = 0; i < vAlunos_TAM; i++)
             {
@@ -497,46 +456,40 @@ void insereFrequencia(int op)
                     printf ("\nDigite a quantidade total de faltas do aluno: ");
                     scanf ("%s", frequencia);
 
-                    if (validaDados(frequencia) == 0)
+                    if (isDadosValidos(frequencia) == 0)
                     {
                         aluno[i].frequencia = atoi(frequencia);
-                        atualizaSituacao(i);
+                        atualizarSituacao(i);
+                        printf ("\nFrequência salva com sucesso.\n");
                     }
                     else
-                    {
                         printf("\nEntrada inválida.\n");
-                        menuFrequencia();
-                    }
                 }
             }
-            printf ("\nFrequência salva com sucesso.\n");
-            menuFrequencia();
         }
     }
     else
-    {
         printf ("\nNenhum aluno cadastrado no sistema.\n");
-        menuFrequencia();
-    }
+
+    menuPrincipal();
 }
 
-// FUNÇÃO PARA INSERIR AS NOTAS DE ALUNOS
-void insereNotas(int op)
+void inserirNotas(int op)
 {
     int i, x, teste[testProva_TAM], prova[testProva_TAM], ica[ica_TAM];
 
-    if (listaVazia(aluno) == 0)
+    if (isListaVazia(aluno) == 0)
     {
-        if (op == 1) // SE A OP FOR IGUAL A 1 AS NOTAS SERÃO INSERIDAS INDIVIDUALMENTE
+        if (op == 1)
         {
             char matricula[sizeOfMatricula];
 
             printf ("\nMatrícula: ");
             scanf ("%s", matricula);
 
-            if (verificaMatriculaInt(matricula) == 0 && atoi(matricula) > 0) // VERIFICA SE A MATRÍCULA É UM NÚMERO INTEIRO E POSITIVO
+            if (isMatriculaInt(matricula) == 0 && atoi(matricula) > 0)
             {
-                if (verificaMatricula(atoi(matricula)) == 0) // SE A MATRÍCULA EXISTIR NO SISTEMA A FREQUÊNCIA SERÁ ALTERADA
+                if (isMatriculaExistente(atoi(matricula)) == 0)
                 {
                     for (x = 0; x < vAlunos_TAM; x++)
                     {
@@ -552,7 +505,7 @@ void insereNotas(int op)
                                 printf ("Prova %d: ", i + 1);
                                 scanf ("%d", &prova[i]);
 
-                                if (validaNotas(teste[i], 1) == 0 && validaNotas(prova[i], 2) == 0)
+                                if (isNotasValidas(teste[i], 1) == 0 && isNotasValidas(prova[i], 2) == 0)
                                 {
                                     aluno[x].teste[i] = teste[i];
                                     aluno[x].prova[i] = prova[i];
@@ -560,8 +513,7 @@ void insereNotas(int op)
                                 else
                                 {
                                     printf ("\nDados inválidos.\n");
-                                    zeraNotas(i);
-                                    menuNotas();
+                                    zerarNotas(i);
                                 }
                             }
                             printf("\n");
@@ -570,35 +522,27 @@ void insereNotas(int op)
                                 printf ("ICA %d: ", i + 1);
                                 scanf ("%d", &ica[i]);
 
-                                if (validaNotas(ica[i], 3) == 0)
+                                if (isNotasValidas(ica[i], 3) == 0)
                                     aluno[x].ica[i] = ica[i];
                                 else
                                 {
                                     printf ("\nDados inválidos.\n");
-                                    zeraNotas(i);
-                                    menuNotas();
+                                    zerarNotas(i);
                                 }
                             }
-                            calculaMedias(x);
-                            atualizaSituacao(x);
+                            calcularMedias(x);
+                            atualizarSituacao(x);
                         }
                     }
                     printf ("\nNotas salvas com sucesso.\n");
-                    menuNotas();
                 }
                 else
-                {
-                    printf ("\nMatrícula inexistente.\n"); // CASO A MATRÍCULA NÃO EXISTA É EXIBIDA UMA MSG NA TELA
-                    menuNotas();
-                }
+                    printf ("\nMatrícula inexistente.\n");
             }
             else
-            {
                 printf ("\nMatrícula inválida.\n");
-                menuNotas();
-            }
         }
-        else // SE A OP FOR IGUAL A 2 AS NOTAS SÃO INSERIDAS PARA TODOS OS ALUNOS CADASTRADOS
+        else
         {
             for (x = 0; x < vAlunos_TAM; x++)
             {
@@ -615,7 +559,7 @@ void insereNotas(int op)
                         printf ("Prova %d: ", i + 1);
                         scanf ("%d", &prova[i]);
 
-                        if (validaNotas(teste[i], 1) == 0 && validaNotas(prova[i], 2) == 0)
+                        if (isNotasValidas(teste[i], 1) == 0 && isNotasValidas(prova[i], 2) == 0)
                         {
                             aluno[x].teste[i] = teste[i];
                             aluno[x].prova[i] = prova[i];
@@ -623,8 +567,7 @@ void insereNotas(int op)
                         else
                         {
                             printf ("\nDados inválidos.\n");
-                            zeraNotas(i);
-                            menuNotas();
+                            zerarNotas(i);
                         }
                     }
                     printf("\n");
@@ -633,40 +576,35 @@ void insereNotas(int op)
                         printf ("ICA %d: ", i + 1);
                         scanf ("%d", &ica[i]);
 
-                        if (validaNotas(ica[i], 3) == 0)
+                        if (isNotasValidas(ica[i], 3) == 0)
                             aluno[x].ica[i] = ica[i];
                         else
                         {
                             printf ("\nDados inválidos.\n");
-                            zeraNotas(i);
-                            menuNotas();
+                            zerarNotas(i);
                         }
                     }
-                    calculaMedias(x);
-                    atualizaSituacao(x);
+                    calcularMedias(x);
+                    atualizarSituacao(x);
                 }
             }
             printf ("\nNotas salvas com sucesso.\n");
-            menuNotas();
         }
     }
     else
-    {
         printf ("\nNenhum aluno cadastrado no sistema.\n");
-        menuNotas();
-    }
+
+    menuPrincipal();
 }
 
-// FUNÇÃO PARA CALCULAR AS MÉDIAS
-void calculaMedias(int x)
+void calcularMedias(int x)
 {
     aluno[x].medias[0] = ((aluno[x].ica[0] + aluno[x].ica[1]) + (2 * (aluno[x].teste[0] + aluno[x].prova[0]))) / 3;
     aluno[x].medias[1] = ((aluno[x].ica[2] + aluno[x].ica[3]) + (2 * (aluno[x].teste[1] + aluno[x].prova[1]))) / 3;
     aluno[x].medias[2] = (aluno[x].medias[0] + aluno[x].medias[1]) / 2;
 }
 
-// FUNÇÃO PARA ATUALIZAR A SITUAÇÃO DE UM ALUNO, SENDO APROVADO OU REPROVADO
-void atualizaSituacao(int x)
+void atualizarSituacao(int x)
 {
     if (aluno[x].frequencia > 20 || aluno[x].medias[2] < 60)
     {
@@ -681,10 +619,8 @@ void atualizaSituacao(int x)
         strcpy (aluno[x].situacao, "Aprovado.");
 }
 
-// FUNÇÃO PARA ZERAR AS NOTAS DE UM ALUNO
-void zeraNotas(int x)
+void zerarNotas(int x)
 {
-    // ESTA FUNÇÃO IRÁ ATRIBUIR ZERO A TODAS AS NOTAS DE TESTES, PROVAS E ICAS DE CADA ALUNO
     int i;
 
     for (i = 0; i < testProva_TAM; i++)
@@ -699,10 +635,9 @@ void zeraNotas(int x)
         aluno[x].medias[i] = 0;
 }
 
-// FUNÇÃO PARA EXIBIÇÃO DA LISTA DE ALUNOS CADASTRADOS NO SISTEMA
-void exibeAlunos()
+void exibirAlunos()
 {
-    if (listaVazia(aluno) == 0)
+    if (isListaVazia(aluno) == 0)
     {
         int i;
 
@@ -715,24 +650,20 @@ void exibeAlunos()
                 printf ("\n");
             }
         }
-        menuCadastro();
     }
     else
-    { // CASO NÃO HAJA ALUNO CADASTRADO NO SISTEMA É EXIBIDO UMA MSG
         printf ("\nNenhum aluno cadastrado no sistema.\n");
-        menuCadastro();
-    }
+
+    menuCadastro();
 }
 
-// FUNÇÃO PARA EXIBIR A SITUAÇÃO DE CADA ALUNO
-void exibeSituacaoAlunos(int x)
+void exibirSituacaoAlunos(int x)
 {
-    // SERÁ EXIBIDO ALUNOS REPROVADOS, APROVADOS, LISTAGEM DE TODOS OS ALUNOS E IRÁ EXIBIR A SITUAÇÃO POR ALUNO
     int i, y, cont = 0;
 
-    if (listaVazia(aluno) == 0)
+    if (isListaVazia(aluno) == 0)
     {
-        if (x == 1) // OPÇÃO 1 DO MENU RELATÓRIO, EXIBIÇÃO DE TODOS OS ALUNOS
+        if (x == 1)
         {
             for (i = 0; i < vAlunos_TAM; i++)
             {
@@ -753,9 +684,8 @@ void exibeSituacaoAlunos(int x)
                     cont++;
                 }
             }
-            menuRelatorio();
         }
-        else if (x == 2) // OPÇÃO 2 DO MENU RELATÓRIO, EXIBIÇÃO DE TODOS OS ALUNOS APROVADOS
+        else if (x == 2)
         {
             for (i = 0; i < vAlunos_TAM; i++)
             {
@@ -776,14 +706,9 @@ void exibeSituacaoAlunos(int x)
                 }
             }
             if (cont == 0)
-            {
                 printf ("\nNenhum aluno aprovado.\n");
-                menuRelatorio();
-            }
-            else
-                menuRelatorio();
         }
-        else if (x == 3) // OPÇÃO 3 DO MENU RELATÓRIO, EXIBIÇÃO DE TODOS OS ALUNOS REPROVADOS
+        else if (x == 3)
         {
             for (i = 0; i < vAlunos_TAM; i++)
             {
@@ -804,23 +729,17 @@ void exibeSituacaoAlunos(int x)
                 }
             }
             if (cont == 0)
-            {
                 printf ("\nNenhum aluno reprovado.\n");
-                menuRelatorio();
-            }
-            else
-                menuRelatorio();
         }
         else
         {
-            // OPÇÃO 4, É EXIBIDA A SITUAÇÃO DO ALUNO PELO NOME E SOBRENOME
             char name[nome_TAM], lastname[nome_TAM];
             int cont = 0;
 
             printf ("\nNome: ");
             scanf ("%s %s", name, lastname);
 
-            if (validaNome(name) == 0 && validaNome(lastname) == 0)
+            if (isNomeValido(name) == 0 && isNomeValido(lastname) == 0)
             {
                 for (i = 0; i < vAlunos_TAM; i++)
                 {
@@ -840,83 +759,64 @@ void exibeSituacaoAlunos(int x)
                         cont++;
                     }
                 }
-                if (cont == 0) // CONT É UTILIZADO PARA VERIFICAR SE HÁ REGISTRO NO SISTEMA DO ALUNO
-                {
-                    // CASO O ALUNO NÃO ESTEJA CADASTRADO NO SISTEMA É EXIBIDA UMA MENSAGEM
+                if (cont == 0)
                     printf ("\nAluno não cadastrado.\n");
-                    menuRelatorio();
-                }
-                else
-                    menuRelatorio();
             }
             else
-            {
                 printf ("\nDados inválidos.\n");
-                menuRelatorio();
-            }
         }
     }
     else
-    {
-        // CASO NÃO HAJA NENHUM ALUNO CADASTRADO NO SISTEMA É EXIBIDO UMA MENSAGEM
         printf ("\nNenhum aluno cadastrado no sistema.\n");
-        menuRelatorio();
-    }
+
+    menuRelatorio();
 }
 
-// FUNÇÃO PARA RESETAR OU INICIALIZAR OS VALORES DO VETOR DE ALUNOS
 void iniResetaVetorAluno(int x)
 {
-    aluno[x].matricula = 0; // INICIALIZA / RESETA A MATRÍCULA COM ZERO
-    aluno[x].nome[0] = '\0'; // INICIALIZA / RESETA O VETOR DE NOME E SOBRENOME VÁZIOS
+    aluno[x].matricula = 0;
+    aluno[x].nome[0] = '\0';
     aluno[x].sobrenome[0] = '\0';
-    zeraNotas(x);
+    zerarNotas(x);
 }
 
-// FUNÇÃO PARA BUSCAR A PRÓXIMA POSIÇÃO VAZIA DO VETOR DE ALUNOS
 int proximoVazio()
 {
     int i;
 
     for (i = 0; i < vAlunos_TAM; i++)
     {
-        if (aluno[i].matricula == 0) // CASO A MATRICULA SEJA IGUAL A ZERO
-            return i; // A FUNÇÃO RETORNA i, OU SEJA, A ṔOSIÇÃO LIVRE
+        if (aluno[i].matricula == 0)
+            return i;
     }
     return -1;
 }
 
-// FUNÇÃO PARA VERIFICAR SE A LISTA ESTÁ VAZIA
-int listaVazia()
+int isListaVazia()
 {
     int i, cont = 0;
 
     for (i = 0; i < vAlunos_TAM; i++)
     {
         if (aluno[i].matricula != 0)
-            cont++; // CONT IRÁ CONTAR A QUANTIDADE DE VEZES QUE UMA MATRÍCULA É DIFERENTE DE ZERO
+            cont++;
     }
-    if (cont > 0)
-        return 0; // CASO CONT SEJA MAIOR QUE ZERO, SIGNIFICA QUE EXISTE AO MENOS UM CADASTRO NO SISTEMA
-    else
-        return 1; // CASO NÃO, RETORNA 1
+    return (cont > 0) ? 0 : 1;
 }
 
-// FUNÇÃO PARA VERIFICAR SE UMA MATRÍCULA EXISTE OU NÃO NO SISTEMA
-int verificaMatricula(int matricula)
+int isMatriculaExistente(int matricula)
 {
     int i, x = 1;
 
     for (i = 0; i < vAlunos_TAM; i++)
     {
         if (aluno[i].matricula == matricula)
-            x = 0; // CASO A MATRÍCULA EXISTA, RETORNA ZERO
+            x = 0;
     }
-    return x; // CASO CONTRÁRIO RETORNA SEU VALOR ORIGINAL, 1
+    return x;
 }
 
-// FUNÇÃO PARA VERIFICAR SE A MATRÍCULA DIGITADA É UM NÚMERO INTEIRO E POSITIVO
-int verificaMatriculaInt(char matricula[])
+int isMatriculaInt(char matricula[])
 {
     char numerais[] = {'0','1','2','3','4','5','6','7','8','9'};
     int i, x, cont = 0;
@@ -929,17 +829,10 @@ int verificaMatriculaInt(char matricula[])
                 cont++;
         }
     }
-    if (cont == strlen(matricula))
-        return 0;
-    else
-        return 1;
+    return (cont == strlen(matricula)) ? 0 : 1;
 }
 
-/*
-    FUNÇÃO PARA VERIFICAR A INTEGRIDADE DOS DADOS INSERIDOS PELO USUÁRIO, TAL COMO A OPERAÇÃO SOLICITADA NOS MENUS,
-    FREQUÊNCIA, ETC.
-*/
-int validaDados(char dado[])
+int isDadosValidos(char dado[])
 {
     char numerais[] = {'0','1','2','3','4','5','6','7','8','9'};
     int i, x, cont = 0;
@@ -952,40 +845,24 @@ int validaDados(char dado[])
                 cont++;
         }
     }
-    if (cont == strlen(dado))
-        return 0;
-    else
-        return 1;
+    return (cont == strlen(dado)) ? 0 : 1;
 }
 
-// FUNÇÃO PARA VALIDAR AS NOTAS DE TESTES, PROVAS E ICAS
-int validaNotas(int x, int y)
+int isNotasValidas(int x, int y)
 {
-    if (y == 1)  // PARA Y = 1 A FUNÇÃO IRÁ VERIFICAR AS NOTAS DE TESTES
-    {
-        if (x >= 0 && x <= 30)
-            return 0;
-        else
-            return 1;
-    }
-    if (y == 2)  // PARA Y = 2 A FUNÇÃO IRÁ VERIFICAR AS NOTAS DE PROVAS
-    {
-        if (x >= 0 && x <= 70)
-            return 0;
-        else
-            return 1;
-    }
-    if (y == 3)  // PARA Y = 3 A FUNÇÃO IRÁ VERIFICAR AS NOTAS DE ICAS
-    {
-        if (x >= 0 && x <= 50)
-            return 0;
-        else
-            return 1;
-    }
+    if (y == 1)
+        return (x >= 0 && x <= 30) ? 0 : 1;
+
+    if (y == 2)
+        return (x >= 0 && x <= 70) ? 0 : 1;
+
+    if (y == 3)
+        return (x >= 0 && x <= 50) ? 0 : 1;
+
+    return -1;
 }
 
-// FUNÇÃO PARA VALIDAR NOME E SOBRENOME
-int validaNome(char nome[])
+int isNomeValido(char nome[])
 {
     int i, cont = 0;
 

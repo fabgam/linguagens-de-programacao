@@ -33,7 +33,7 @@ public class PessoaDAO implements IDAO {
         } catch (SQLException exception) {
             throw new RuntimeException(exception);
         } finally {
-            util.closeConnections(con);
+            util.closeConnections(con, ps, rs);
         }
     }
 

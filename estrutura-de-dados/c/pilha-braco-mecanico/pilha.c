@@ -172,15 +172,11 @@ Pilha *coloqueEm(Pilha *p[], int n1, int n2, int pilhaOrigem, int pilhaDestino)
     {
         Pilha *pAux = NULL;
         if(topo(p[pilhaOrigem])->dado == n1 && !topo(p[pilhaDestino])->dado == n2)
-        {
             pAux = desempilha(p[pilhaDestino], n2);
-        }
         else
         {
             if(topo(p[pilhaDestino])->dado == n2)
-            {
                 pAux = desempilha(p[pilhaOrigem], n1);
-            }
         }
         posicaoInicial(p, pAux);
         free(pAux);
