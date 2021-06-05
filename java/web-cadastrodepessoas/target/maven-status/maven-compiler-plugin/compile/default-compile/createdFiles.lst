@@ -1,0 +1,9 @@
+com/web/cadastrodepessoas/servlets/PessoaController.class
+com/web/cadastrodepessoas/modelo/Pessoa.class
+com/web/cadastrodepessoas2/SampleResource.class
+com/web/cadastrodepessoas/util/DBUtil.class
+com/web/cadastrodepessoas/dao/PessoaDAO.class
+com/web/cadastrodepessoas/factory/ConnectionFactory.class
+com/web/cadastrodepessoas/factory/Database.class
+com/web/cadastrodepessoas/dao/IDAO.class
+com/web/cadastrodepessoas2/JAXRSConfiguration.class

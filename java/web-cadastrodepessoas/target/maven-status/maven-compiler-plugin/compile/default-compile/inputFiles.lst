@@ -1,0 +1,9 @@
+/home/nomad/NetBeansProjects/web-cadastrodepessoas/src/main/java/com/web/cadastrodepessoas/factory/ConnectionFactory.java
+/home/nomad/NetBeansProjects/web-cadastrodepessoas/src/main/java/com/web/cadastrodepessoas/dao/IDAO.java
+/home/nomad/NetBeansProjects/web-cadastrodepessoas/src/main/java/com/web/cadastrodepessoas/servlets/PessoaController.java
+/home/nomad/NetBeansProjects/web-cadastrodepessoas/src/main/java/com/web/cadastrodepessoas/dao/PessoaDAO.java
+/home/nomad/NetBeansProjects/web-cadastrodepessoas/src/main/java/com/web/cadastrodepessoas/factory/Database.java
+/home/nomad/NetBeansProjects/web-cadastrodepessoas/src/main/java/com/web/cadastrodepessoas2/SampleResource.java
+/home/nomad/NetBeansProjects/web-cadastrodepessoas/src/main/java/com/web/cadastrodepessoas2/JAXRSConfiguration.java
+/home/nomad/NetBeansProjects/web-cadastrodepessoas/src/main/java/com/web/cadastrodepessoas/modelo/Pessoa.java
+/home/nomad/NetBeansProjects/web-cadastrodepessoas/src/main/java/com/web/cadastrodepessoas/util/DBUtil.java
